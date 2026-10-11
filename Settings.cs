@@ -17,7 +17,7 @@ public enum KeyAction
 }
 
 /// <summary>
-/// The user's options: chosen keys, window colour and playback choices. Stored in
+/// The user's options: chosen keys, window colour, playback and print choices. Stored in
 /// %APPDATA%\ReiksViewer\settings.json. Nothing about opened files is ever written.
 /// </summary>
 public sealed class Settings
@@ -41,6 +41,13 @@ public sealed class Settings
     public bool HideFromCapture { get; set; }
     /// <summary>Show "Reiks Viewer" instead of the file's name in the title bar and taskbar.</summary>
     public bool HideFileNames { get; set; }
+
+    /// <summary>The printer used last, or empty for the one Windows has as its default.</summary>
+    public string PrintPrinter { get; set; } = "";
+    /// <summary>Windows' number for the paper size used last, or 0 for the printer's own choice.</summary>
+    public int PrintPaper { get; set; }
+    /// <summary>Fill the page and cut off what hangs over, instead of showing the whole picture.</summary>
+    public bool PrintFill { get; set; }
 
     public static Dictionary<KeyAction, Key> DefaultKeys() => new()
     {
@@ -83,6 +90,7 @@ public sealed class Settings
         foreach (var (action, key) in DefaultKeys()) settings.Keys.TryAdd(action, key);
         settings.WindowColor ??= "#000000";
         settings.Language ??= "";
+        settings.PrintPrinter ??= "";
         return settings;
     }
 

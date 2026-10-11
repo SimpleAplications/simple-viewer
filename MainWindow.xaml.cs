@@ -204,7 +204,8 @@ public partial class MainWindow : Window
 
     void ShowCurrent()
     {
-        // Moving to another file ends quick hide.
+        // Moving to another file ends printing and quick hide.
+        ClosePrintView(evenWhileSending: true);
         _hidden = false;
         Cover.Visibility = Visibility.Collapsed;
         // Every picture gets the full interval, whenever it was opened.
@@ -656,6 +657,11 @@ public partial class MainWindow : Window
         bool ctrl = Keyboard.Modifiers.HasFlag(ModifierKeys.Control);
         e.Handled = true;
 
+        if (_printView != null)
+        {
+            PrintViewKey(e);
+            return;
+        }
         // A key box in Options is waiting for its new key: this press is the answer.
         if (_capturing != null)
         {

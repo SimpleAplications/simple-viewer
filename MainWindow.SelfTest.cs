@@ -142,6 +142,36 @@ public partial class MainWindow
             RefreshPlaybackBoxes();
             UpdateStatus();
 
+            // The print view: it takes the keys, and it closes on Escape, on the quick-hide key
+            // (which hides as well) and when another file is shown. Nothing is printed.
+            void Press(System.Windows.Input.Key key) => RaiseEvent(
+                new System.Windows.Input.KeyEventArgs(System.Windows.Input.Keyboard.PrimaryDevice, PresentationSource.FromVisual(this)!, 0, key)
+                {
+                    RoutedEvent = System.Windows.Input.Keyboard.PreviewKeyDownEvent,
+                });
+            PrintCurrent();
+            double angle = Rot.Angle;
+            Press(System.Windows.Input.Key.R);
+            log.Add($"print view: open={_printView != null} R key turned the picture={Rot.Angle != angle}");
+            for (int waited = 0; _printView is { Idle: false } && waited < 20000; waited += 50) await Task.Delay(50);
+            log.Add($"print view ready: can print={_printView?.CanSend} status=\"{_printView?.Status}\"");
+            ApplyTheme(ParseColor("#F4F4F4"));
+            await Task.Delay(300);
+            Snapshot(Path.Combine(outputFolder, "8-print-light.png"));
+            ApplyTheme(ParseColor(_settings.WindowColor));
+            Press(System.Windows.Input.Key.Escape);
+            log.Add($"print view after Escape: open={_printView != null}");
+            PrintCurrent();
+            Press(_settings.Keys[KeyAction.QuickHide]);
+            log.Add($"print view after hide key: open={_printView != null} hidden={_hidden}");
+            PrintCurrent();
+            log.Add($"print while hidden: open={_printView != null}");
+            ToggleQuickHide();
+            PrintCurrent();
+            Step(1);
+            log.Add($"print view after another file is shown: open={_printView != null}");
+            SetPlaying(false);
+
             string Frame() => FormattableString.Invariant(
                 $"{Left:0},{Top:0} {ActualWidth:0}x{ActualHeight:0} state={WindowState} bars={Bar.Visibility}/{TitleBar.Visibility}");
             log.Add($"screen {SystemParameters.PrimaryScreenWidth:0}x{SystemParameters.PrimaryScreenHeight:0}, window {Frame()}");
@@ -246,15 +276,25 @@ public partial class MainWindow
         }
     }
 
-    // "ReiksViewer.exe --printtest <file> <png> <seconds> <plain|changed>" saves a picture of the page
-    // that Print would send to a printer with upright A4 paper, without using a printer. "changed"
-    // turns and flips the picture and moves some image settings first.
+    // "ReiksViewer.exe --printtest <file> <pdf> <seconds> <options>" opens the print view and prints
+    // through "Microsoft Print to PDF" into the named file: Windows' print system from end to end,
+    // without paper and without a question on screen. Beside the PDF it saves a picture of the
+    // window with the preview (.png) and a log with timings (.log). Options, separated by commas:
+    // "plain", "changed" (turns and flips the picture and moves some image settings first), "fill",
+    // "upright", "landscape", "copies=N", "paper=NAME", "printer=NAME", "settings" (opens the
+    // driver's own window first and waits until it is closed), "small" (the window at its smallest),
+    // "nosend" (stops before printing) and "badfile" (prints into a folder that doesn't exist).
     async Task RunPrintTest(string file, string output, double seconds, string mode)
     {
+        var log = new List<string>();
+        var options = mode.Split(',');
+        string Option(string name, string fallback) =>
+            options.FirstOrDefault(option => option.StartsWith(name + "="))?[(name.Length + 1)..] ?? fallback;
         try
         {
             _settings.PlayFolder = _settings.RepeatFile = false;
             _slideTimer.Stop();
+            ApplyTheme(ParseColor("#000000"));
             OpenPath(file);
             await Task.Delay(1200);
             if (_player != null)
@@ -263,7 +303,7 @@ public partial class MainWindow
                 _player.Seek(seconds);
                 await Task.Delay(1200);
             }
-            if (mode == "changed")
+            if (options.Contains("changed"))
             {
                 ToggleImagePanel();
                 var sliders = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_imagePanel!.Child).Content).Children
@@ -276,27 +316,73 @@ public partial class MainWindow
                 ClosePanels();
                 await Task.Delay(300);
             }
-            if (Img.Source is not BitmapSource shown) return;
 
-            var picture = PrintablePicture(shown);
-            // A4 in 1/96 inch, with 5 mm at each edge that the printer cannot reach.
-            var paper = new Size(793.7, 1122.5);
-            var page = new Rect(19, 19, paper.Width - 38, paper.Height - 38);
-            var visual = new DrawingVisual();
-            using (var context = visual.RenderOpen())
+            if (options.Contains("small"))
             {
-                context.DrawRectangle(Brushes.White, null, new Rect(paper));
-                DrawOnPage(context, picture, page);
+                // The smallest the window can be made.
+                Width = MinWidth;
+                Height = MinHeight;
             }
-            var bitmap = new RenderTargetBitmap((int)Math.Ceiling(paper.Width), (int)Math.Ceiling(paper.Height), 96, 96, PixelFormats.Pbgra32);
-            bitmap.Render(visual);
-            var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(bitmap));
-            using var stream = File.Create(output);
-            encoder.Save(stream);
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            PrintCurrent();
+            if (_printView is not { } view)
+            {
+                log.Add("no print view");
+                return;
+            }
+            await Dispatcher.InvokeAsync(() => { }, System.Windows.Threading.DispatcherPriority.ContextIdle);
+            log.Add($"view on screen after {watch.ElapsedMilliseconds} ms");
+            async Task Settle()
+            {
+                await Task.Delay(100);
+                for (int waited = 0; !view.Idle && waited < 60000; waited += 50) await Task.Delay(50);
+            }
+            for (int waited = 0; !view.CanSend && waited < 60000; waited += 10) await Task.Delay(10);
+            log.Add($"Print can be pressed after {watch.ElapsedMilliseconds} ms");
+            await Settle();
+            log.Add($"printer answered after {watch.ElapsedMilliseconds} ms: {view.Printers.SelectedItem}, {view.Papers.SelectedItem}, status \"{view.Status}\"");
+            log.Add("printers: " + string.Join(" | ", view.Printers.Items.Cast<string>()));
+
+            watch.Restart();
+            view.Printers.SelectedItem = Option("printer", "Microsoft Print to PDF");
+            await Settle();
+            log.Add($"switched printer in {watch.ElapsedMilliseconds} ms; papers: " + string.Join(" | ", view.Papers.Items.Cast<string>()));
+            string paper = Option("paper", "A4");
+            if (view.Papers.Items.Contains(paper)) view.Papers.SelectedItem = paper;
+            if (options.Contains("upright")) view.Orientations.SelectedIndex = 1;
+            if (options.Contains("landscape")) view.Orientations.SelectedIndex = 2;
+            if (options.Contains("fill")) view.Sizes.SelectedIndex = 1;
+            for (int copies = int.Parse(Option("copies", "1")); copies > 1; copies--)
+                view.More.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+            await Settle();
+            if (options.Contains("settings"))
+            {
+                watch.Restart();
+                view.ShowDriverSettings();
+                await Settle();
+                log.Add($"driver settings closed after {watch.ElapsedMilliseconds} ms, status \"{view.Status}\"");
+            }
+            log.Add($"printing on {view.Printers.SelectedItem}, {view.Papers.SelectedItem}, "
+                    + $"orientation {view.Orientations.SelectedItem}, size {view.Sizes.SelectedItem}, status \"{view.Status}\"");
+            Snapshot(Path.ChangeExtension(output, ".png"));
+
+            if (options.Contains("nosend")) return;
+            // "badfile" names a folder that doesn't exist, to see a failure reported.
+            view.OutputFile = options.Contains("badfile") ? Path.Combine(Path.GetDirectoryName(output)!, "no such folder", "page.pdf") : output;
+            watch.Restart();
+            var sending = view.Send();
+            while (view.Sending) await Task.Delay(20);
+            log.Add($"sent after {watch.ElapsedMilliseconds} ms: status \"{view.Status}\"");
+            await sending;
+            log.Add(_printView == null ? "view closed" : "view still open");
+        }
+        catch (Exception ex)
+        {
+            log.Add("EXCEPTION: " + ex);
         }
         finally
         {
+            File.WriteAllLines(Path.ChangeExtension(output, ".log"), log);
             Close();
         }
     }
