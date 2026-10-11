@@ -672,13 +672,14 @@ public partial class MainWindow : Window
         {
             case Key.Left or Key.PageUp: Step(-1); break;
             case Key.Right or Key.PageDown: Step(1); break;
-            case Key.A: ToggleAdjustPanel(); break;
+            case Key.A: ToggleImagePanel(); break;
             case Key.Home: GoTo(0); break;
             case Key.End: GoTo(_files.Count - 1); break;
             case Key.Up when _isVideo: VolumeSlider.Value += 0.1; break;
             case Key.Down when _isVideo: VolumeSlider.Value -= 0.1; break;
             case Key.M when _isVideo: ToggleMute(); break;
             case Key.F or Key.F11: ToggleFullscreen(); break;
+            case Key.Escape when AnyPanelOpen: ClosePanels(); break;
             case Key.Escape when _fullscreen: ToggleFullscreen(); break;
             case Key.O: ShowOpenDialog(); break;
             case Key.F1: ShowFormats(); break;
@@ -699,7 +700,6 @@ public partial class MainWindow : Window
     void OnStepBackDown(object sender, MouseButtonEventArgs e) => StartScrub(Key.None, -1);
     void OnStepForwardDown(object sender, MouseButtonEventArgs e) => StartScrub(Key.None, 1);
     void OnFormatsClick(object sender, RoutedEventArgs e) => ShowFormats();
-    void OnAdjustClick(object sender, RoutedEventArgs e) => ToggleAdjustPanel();
 
     void ShowFormats()
     {
@@ -707,7 +707,7 @@ public partial class MainWindow : Window
         new FormatsWindow(this, ImageExtensions, VideoExtensions).ShowDialog();
         FormatsButton.Tag = null;
     }
-    void OnViewClick(object sender, RoutedEventArgs e) => ToggleViewPanel();
+    void OnImageClick(object sender, RoutedEventArgs e) => ToggleImagePanel();
     void OnOptionsClick(object sender, RoutedEventArgs e) => ToggleOptionsPanel();
     void OnSlideshowClick(object sender, RoutedEventArgs e) => ToggleSlideshow();
     void OnFullscreenClick(object sender, RoutedEventArgs e) => ToggleFullscreen();

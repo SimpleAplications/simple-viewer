@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Reiks Viewer" Width="1100" Height="750" MinWidth="480" MinHeight="320"
         Background="{DynamicResource WindowBrush}" WindowStartupLocation="CenterScreen"
-        AllowDrop="True" Drop="OnDrop" PreviewKeyDown="OnKeyDown" Loaded="OnLoaded">
+        AllowDrop="True" Drop="OnDrop" PreviewKeyDown="OnKeyDown" Loaded="OnLoaded"
+        PreviewMouseLeftButtonDown="OnPreviewMouseDown">
     <!-- Our own title bar (so the file name can sit in the middle); Windows still handles
          dragging, snapping and double-click-to-maximize on it. -->
     <WindowChrome.WindowChrome>
@@ -131,8 +132,7 @@
                        VerticalAlignment="Center" TextAlignment="Right"/>
 
             <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="4,2">
-                <Button x:Name="AdjustButton" Content="&#xE706;" ToolTip="Picture settings (A)" Click="OnAdjustClick"/>
-                <Button x:Name="ViewButton" ToolTip="View (R rotates)" Click="OnViewClick">
+                <Button x:Name="ImageButton" ToolTip="Image settings (A)" Click="OnImageClick">
                     <!-- A picture with a small gear in its corner. The picture is cut away
                          around the gear so the two don't run into each other. -->
                     <Grid Width="22" Height="20">

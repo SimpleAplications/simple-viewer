@@ -24,8 +24,7 @@ T = {
 "tip.back": ["Play backward ({0})", "Reproducir hacia atrás ({0})", "Spela bakåt ({0})", "Lecture arrière ({0})", "Rückwärts abspielen ({0})", "Reproduzir para trás ({0})", "Riproduci all'indietro ({0})"],
 "tip.forward": ["Play forward ({0})", "Reproducir hacia delante ({0})", "Spela framåt ({0})", "Lecture avant ({0})", "Vorwärts abspielen ({0})", "Reproduzir para a frente ({0})", "Riproduci in avanti ({0})"],
 "tip.mute": ["Mute (M)", "Silenciar (M)", "Ljud av (M)", "Muet (M)", "Stumm (M)", "Silenciar (M)", "Muto (M)"],
-"tip.picture": ["Picture settings (A)", "Ajustes de imagen (A)", "Bildinställningar (A)", "Réglages de l'image (A)", "Bildeinstellungen (A)", "Ajustes de imagem (A)", "Regolazioni immagine (A)"],
-"tip.view": ["View (R rotates)", "Vista (R gira)", "Vy (R roterar)", "Affichage (R pivote)", "Ansicht (R dreht)", "Vista (R roda)", "Vista (R ruota)"],
+"tip.image": ["Image settings (A)", "Ajustes de imagen (A)", "Bildinställningar (A)", "Réglages de l'image (A)", "Bildeinstellungen (A)", "Ajustes de imagem (A)", "Regolazioni immagine (A)"],
 "tip.options": ["Options", "Opciones", "Alternativ", "Options", "Optionen", "Opções", "Opzioni"],
 "tip.formats": ["Formats and credits (F1)", "Formatos y créditos (F1)", "Format och tack (F1)", "Formats et crédits (F1)", "Formate und Danksagungen (F1)", "Formatos e créditos (F1)", "Formati e riconoscimenti (F1)"],
 "tip.folder": ["Play the whole folder (S)", "Reproducir toda la carpeta (S)", "Spela hela mappen (S)", "Lire tout le dossier (S)", "Ganzen Ordner abspielen (S)", "Reproduzir a pasta inteira (S)", "Riproduci tutta la cartella (S)"],
@@ -52,7 +51,7 @@ T = {
 "status.folder": ["playing folder", "reproduciendo carpeta", "spelar mappen", "lecture du dossier", "Ordner wird abgespielt", "a reproduzir a pasta", "riproduzione della cartella"],
 "status.shuffled": ["playing folder, shuffled", "reproduciendo carpeta, aleatorio", "spelar mappen, blandat", "lecture du dossier, aléatoire", "Ordner wird abgespielt, zufällig", "a reproduzir a pasta, aleatório", "riproduzione della cartella, casuale"],
 
-"panel.picture": ["Picture", "Imagen", "Bild", "Image", "Bild", "Imagem", "Immagine"],
+"panel.light": ["Light and colour", "Luz y color", "Ljus och färg", "Lumière et couleur", "Licht und Farbe", "Luz e cor", "Luce e colore"],
 "adj.brightness": ["Brightness", "Brillo", "Ljusstyrka", "Luminosité", "Helligkeit", "Brilho", "Luminosità"],
 "adj.contrast": ["Contrast", "Contraste", "Kontrast", "Contraste", "Kontrast", "Contraste", "Contrasto"],
 "adj.saturation": ["Saturation", "Saturación", "Mättnad", "Saturation", "Sättigung", "Saturação", "Saturazione"],

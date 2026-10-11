@@ -44,8 +44,8 @@ public partial class MainWindow
             for (int i = 0; i < 3; i++) { _player.Step(-1); await Task.Delay(300); Log($"step -1 (#{i + 1})"); }
             Snapshot(Path.Combine(outputFolder, "3-seeked.png"));
 
-            ToggleAdjustPanel();
-            var sliders = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_adjustPanel!.Child).Content).Children
+            ToggleImagePanel();
+            var sliders = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_imagePanel!.Child).Content).Children
                 .OfType<System.Windows.Controls.Grid>()
                 .Select(row => row.Children.OfType<System.Windows.Controls.Slider>().First()).ToList();
             sliders[0].Value = 20;  // brightness
@@ -56,9 +56,7 @@ public partial class MainWindow
             Snapshot(Path.Combine(outputFolder, "4-adjusted.png"));
             _adjustResets.ForEach(reset => reset());
             log.Add($"adjust reset: effect on={Img.Effect != null}");
-            ToggleAdjustPanel();
 
-            ToggleViewPanel();
             RotateBy(90);
             FlipBy(-1, 1);
             await Task.Delay(300);
@@ -67,12 +65,24 @@ public partial class MainWindow
             ResetOrientation();
             log.Add($"orientation reset: angle={Rot.Angle} flip={Flip.ScaleX},{Flip.ScaleY}");
 
+            // A click inside the open menu leaves it open; a click on the picture closes it.
+            void ClickOn(UIElement target) => target.RaiseEvent(
+                new System.Windows.Input.MouseButtonEventArgs(System.Windows.Input.Mouse.PrimaryDevice, 0, System.Windows.Input.MouseButton.Left)
+                {
+                    RoutedEvent = System.Windows.Input.Mouse.PreviewMouseDownEvent,
+                });
+            ClickOn(sliders[0]);
+            log.Add($"click inside menu: open={AnyPanelOpen}");
+            ClickOn(Viewport);
+            log.Add($"click on picture: open={AnyPanelOpen}");
+
+            ToggleOptionsPanel();
             // Window colour through its own controls. The colour is put back and the save they
             // schedule is cancelled, so the user's options file is untouched.
             string savedColor = _settings.WindowColor;
             _colorSliders[0].Value = 200;
             log.Add($"colour slider: {_settings.WindowColor}");
-            var swatch = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_viewPanel!.Child).Content).Children
+            var swatch = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_optionsPanel!.Child).Content).Children
                 .OfType<System.Windows.Controls.WrapPanel>().First().Children.OfType<System.Windows.Controls.Border>().Last();
             swatch.RaiseEvent(new System.Windows.Input.MouseButtonEventArgs(System.Windows.Input.Mouse.PrimaryDevice, 0, System.Windows.Input.MouseButton.Left)
             {
@@ -84,7 +94,6 @@ public partial class MainWindow
             SetWindowColor(ParseColor(savedColor));
             _saveTimer.Stop();
 
-            ToggleOptionsPanel();
             ApplyTheme(ParseColor("#F4F4F4"));
             await Task.Delay(300);
             Snapshot(Path.Combine(outputFolder, "6-options-light.png"));
@@ -196,7 +205,7 @@ public partial class MainWindow
         Close();
     }
 
-    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|view|options|hide>" opens a file,
+    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|options|hide>" opens a file,
     // pauses a video at the given time, optionally opens a panel, and saves a picture of the window.
     async Task RunScreenshot(string file, string output, double seconds, string panel)
     {
@@ -217,16 +226,20 @@ public partial class MainWindow
             }
             if (panel == "picture")
             {
-                ToggleAdjustPanel();
-                var sliders = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_adjustPanel!.Child).Content).Children
+                ToggleImagePanel();
+                var sliders = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_imagePanel!.Child).Content).Children
                     .OfType<System.Windows.Controls.Grid>()
                     .Select(row => row.Children.OfType<System.Windows.Controls.Slider>().First()).ToList();
                 sliders[1].Value = 125;  // contrast
                 sliders[2].Value = 140;  // saturation
                 sliders[4].Value = 25;   // warmth
             }
-            else if (panel == "view") ToggleViewPanel();
-            else if (panel == "options") ToggleOptionsPanel();
+            else if (panel == "options")
+            {
+                // The whole menu, without its scroll bar.
+                Height = 960;
+                ToggleOptionsPanel();
+            }
             else if (panel == "hide") ToggleQuickHide();
             await Task.Delay(500);
             Snapshot(output);

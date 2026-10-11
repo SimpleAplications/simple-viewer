@@ -8,14 +8,14 @@ using System.Windows.Threading;
 
 namespace ReiksViewer;
 
-// The pop-up panels over the picture (Picture, View, Options) and what they control:
-// picture adjustments, orientation and window colour, and the app's own options.
+// The two pop-up menus over the picture and what they control: Image settings (light and
+// colour, rotate and flip) and Options (everything about the app itself).
 public partial class MainWindow
 {
     readonly Settings _settings = Settings.Load();
     readonly DispatcherTimer _saveTimer = new() { Interval = TimeSpan.FromMilliseconds(600) };
     readonly List<Border> _panels = new();
-    Border? _adjustPanel, _viewPanel, _optionsPanel;
+    Border? _imagePanel, _optionsPanel;
 
     // ---------- Window colour ----------
 
@@ -88,6 +88,39 @@ public partial class MainWindow
         UpdateButtonStates();
     }
 
+    bool AnyPanelOpen => _panels.Any(panel => panel.Visibility == Visibility.Visible);
+
+    void ClosePanels()
+    {
+        foreach (var panel in _panels) panel.Visibility = Visibility.Collapsed;
+        CancelKeyCapture();
+        UpdateButtonStates();
+    }
+
+    /// <summary>A click anywhere outside an open menu closes it.</summary>
+    void OnPreviewMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (!AnyPanelOpen || e.OriginalSource is not DependencyObject source) return;
+        bool onPicture = false;
+        DependencyObject? node = source;
+        for (; node != null && node != this; node = ParentOf(node))
+        {
+            // The menus look after their own clicks, and so do the two buttons that open them.
+            if (node is Border border && _panels.Contains(border)) return;
+            if (node == ImageButton || node == OptionsButton) return;
+            if (node == Viewport) onPicture = true;
+        }
+        // A drop-down list belonging to the menu lives in a window of its own.
+        if (node != this) return;
+        ClosePanels();
+        // On the picture the click only closes the menu; it doesn't start a drag as well.
+        if (onPicture) e.Handled = true;
+    }
+
+    static DependencyObject? ParentOf(DependencyObject node) => node is Visual
+        ? VisualTreeHelper.GetParent(node) ?? LogicalTreeHelper.GetParent(node)
+        : LogicalTreeHelper.GetParent(node);
+
     /// <summary>
     /// Keeps a button lit for as long as what it does is on: its menu is open, its mode is
     /// active, or (for play forward and backward) it is being held.
@@ -97,8 +130,7 @@ public partial class MainWindow
         static void Mark(Button button, bool active) => button.Tag = active ? "Active" : null;
         static bool Open(Border? panel) => panel?.Visibility == Visibility.Visible;
 
-        Mark(AdjustButton, Open(_adjustPanel));
-        Mark(ViewButton, Open(_viewPanel));
+        Mark(ImageButton, Open(_imagePanel));
         Mark(OptionsButton, Open(_optionsPanel));
         Mark(FolderButton, _settings.PlayFolder && !_settings.RepeatFile);
         Mark(MuteButton, _muted);
@@ -183,16 +215,21 @@ public partial class MainWindow
         return row;
     }
 
-    // ---------- Picture panel ----------
+    // ---------- Image settings panel: light and colour, rotate and flip ----------
 
     readonly AdjustEffect _adjust = new();
     readonly List<Action> _adjustResets = new();
+    // The orientation the file itself asks for (phone videos); Reset returns to it.
+    double _baseRotation;
 
-    void ToggleAdjustPanel() => TogglePanel(ref _adjustPanel, BuildAdjustPanel);
+    void ToggleImagePanel() => TogglePanel(ref _imagePanel, BuildImagePanel);
 
-    Border BuildAdjustPanel()
+    Border BuildImagePanel()
     {
-        var panel = CreatePanel(L.T("panel.picture"), out var rows);
+        var panel = CreatePanel(L.T("panel.light"), out var rows, 310);
+        // The buttons further down need more room in some languages; the panel grows with them.
+        rows.Width = double.NaN;
+        rows.MinWidth = 310;
         // Slider range, neutral value, how the number is shown, and what it sets on the effect.
         AddAdjustSlider(rows, L.T("adj.brightness"), -100, 100, 0, v => $"{v:+0;-0;0}", v => _adjust.Brightness = v / 200);
         AddAdjustSlider(rows, L.T("adj.contrast"), 0, 200, 100, v => $"{v:0}%", v => _adjust.Contrast = v / 100);
@@ -206,6 +243,22 @@ public partial class MainWindow
         reset.MinWidth = 80;
         reset.Margin = new Thickness(0, 8, 0, 0);
         rows.Children.Add(reset);
+
+        rows.Children.Add(Heading(L.T("panel.rotate")));
+        var rotate = ButtonRow(TextButton(L.T("rot.left"), () => RotateBy(-90)),
+                               TextButton(L.T("rot.right"), () => RotateBy(90)));
+        var flip = ButtonRow(TextButton(L.T("flip.h"), () => FlipBy(-1, 1)),
+                             TextButton(L.T("flip.v"), () => FlipBy(1, -1)));
+        // Each button carries a gap on its right; this lets the last one reach the edge the
+        // sliders and Reset buttons line up on.
+        rotate.Margin = flip.Margin = new Thickness(0, 0, -6, 0);
+        rows.Children.Add(rotate);
+        rows.Children.Add(flip);
+        var resetOrientation = TextButton(L.T("btn.reset"), ResetOrientation);
+        resetOrientation.HorizontalAlignment = HorizontalAlignment.Right;
+        resetOrientation.MinWidth = 80;
+        resetOrientation.Margin = new Thickness(0, 8, 0, 0);
+        rows.Children.Add(resetOrientation);
         return panel;
     }
 
@@ -256,65 +309,6 @@ public partial class MainWindow
         return slider;
     }
 
-    // ---------- View panel: rotate, flip and window colour ----------
-
-    // The orientation the file itself asks for (phone videos); Reset returns to it.
-    double _baseRotation;
-
-    static readonly string[] ColorPresets =
-    {
-        "#000000", "#1E1E1E", "#3A3A3A", "#0B1E33", "#10291B", "#2B1020", "#C8C8C8", "#F4F4F4",
-    };
-
-    readonly Slider[] _colorSliders = new Slider[3];
-    bool _syncingColor;
-
-    void ToggleViewPanel() => TogglePanel(ref _viewPanel, BuildViewPanel);
-
-    Border BuildViewPanel()
-    {
-        var panel = CreatePanel(L.T("panel.rotate"), out var rows, 310);
-        rows.Width = double.NaN;
-        rows.MinWidth = 310;
-        rows.Children.Add(ButtonRow(TextButton(L.T("rot.left"), () => RotateBy(-90)),
-                                    TextButton(L.T("rot.right"), () => RotateBy(90))));
-        rows.Children.Add(ButtonRow(TextButton(L.T("flip.h"), () => FlipBy(-1, 1)),
-                                    TextButton(L.T("flip.v"), () => FlipBy(1, -1))));
-        var reset = TextButton(L.T("btn.reset"), ResetOrientation);
-        reset.HorizontalAlignment = HorizontalAlignment.Right;
-        reset.MinWidth = 80;
-        reset.Margin = new Thickness(0, 8, 6, 0);
-        rows.Children.Add(reset);
-
-        rows.Children.Add(Heading(L.T("panel.colour")));
-        var swatches = new WrapPanel();
-        foreach (var preset in ColorPresets)
-        {
-            var color = ParseColor(preset);
-            var swatch = new Border
-            {
-                Width = 30,
-                Height = 30,
-                Margin = new Thickness(0, 0, 8, 8),
-                CornerRadius = new CornerRadius(4),
-                BorderThickness = new Thickness(1),
-                Background = Frozen(color),
-                Cursor = Cursors.Hand,
-                ToolTip = preset,
-            };
-            swatch.SetResourceReference(Border.BorderBrushProperty, "PanelBorderBrush");
-            swatch.MouseLeftButtonDown += (_, _) => SetWindowColor(color);
-            swatches.Children.Add(swatch);
-        }
-        rows.Children.Add(swatches);
-
-        var current = ParseColor(_settings.WindowColor);
-        _colorSliders[0] = AddSlider(rows, L.T("col.red"), 0, 255, current.R, v => $"{v:0}", _ => ColorSliderMoved());
-        _colorSliders[1] = AddSlider(rows, L.T("col.green"), 0, 255, current.G, v => $"{v:0}", _ => ColorSliderMoved());
-        _colorSliders[2] = AddSlider(rows, L.T("col.blue"), 0, 255, current.B, v => $"{v:0}", _ => ColorSliderMoved());
-        return panel;
-    }
-
     void RotateBy(double degrees)
     {
         if (Img.Source == null) return;
@@ -343,7 +337,7 @@ public partial class MainWindow
         UpdateStatus();
     }
 
-    // ---------- Options panel: playback, keys, privacy and language ----------
+    // ---------- Options panel: playback, keys, privacy, window colour and language ----------
 
     static readonly (KeyAction Action, string Name)[] KeyActions =
     {
@@ -355,9 +349,15 @@ public partial class MainWindow
         (KeyAction.QuickHide, "key.hide"),
     };
 
+    static readonly string[] ColorPresets =
+    {
+        "#000000", "#1E1E1E", "#3A3A3A", "#0B1E33", "#10291B", "#2B1020", "#C8C8C8", "#F4F4F4",
+    };
+
     readonly Dictionary<KeyAction, Button> _keyButtons = new();
+    readonly Slider[] _colorSliders = new Slider[3];
     KeyAction? _capturing;
-    bool _shuffleStarted;
+    bool _syncingColor, _shuffleStarted;
 
     void ToggleOptionsPanel() => TogglePanel(ref _optionsPanel, BuildOptionsPanel);
 
@@ -428,6 +428,33 @@ public partial class MainWindow
             UpdateStatus();
         }, L.T("priv.names.tip", L.T("app.name"))));
 
+        rows.Children.Add(Heading(L.T("panel.colour")));
+        var swatches = new WrapPanel();
+        foreach (var preset in ColorPresets)
+        {
+            var color = ParseColor(preset);
+            var swatch = new Border
+            {
+                Width = 30,
+                Height = 30,
+                Margin = new Thickness(0, 0, 8, 8),
+                CornerRadius = new CornerRadius(4),
+                BorderThickness = new Thickness(1),
+                Background = Frozen(color),
+                Cursor = Cursors.Hand,
+                ToolTip = preset,
+            };
+            swatch.SetResourceReference(Border.BorderBrushProperty, "PanelBorderBrush");
+            swatch.MouseLeftButtonDown += (_, _) => SetWindowColor(color);
+            swatches.Children.Add(swatch);
+        }
+        rows.Children.Add(swatches);
+
+        var current = ParseColor(_settings.WindowColor);
+        _colorSliders[0] = AddSlider(rows, L.T("col.red"), 0, 255, current.R, v => $"{v:0}", _ => ColorSliderMoved());
+        _colorSliders[1] = AddSlider(rows, L.T("col.green"), 0, 255, current.G, v => $"{v:0}", _ => ColorSliderMoved());
+        _colorSliders[2] = AddSlider(rows, L.T("col.blue"), 0, 255, current.B, v => $"{v:0}", _ => ColorSliderMoved());
+
         rows.Children.Add(Heading(L.T("panel.language")));
         var languages = new ComboBox { Focusable = false, HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 170 };
         languages.Items.Add(new ComboBoxItem { Content = L.T("lang.auto"), Tag = "" });
@@ -456,7 +483,7 @@ public partial class MainWindow
         _panels.Clear();
         _adjustResets.Clear();
         _keyButtons.Clear();
-        _adjustPanel = _viewPanel = _optionsPanel = null;
+        _imagePanel = _optionsPanel = null;
         _playFolderBox = _shuffleBox = _repeatFolderBox = _repeatFileBox = null;
         ApplyLanguage();
         ToggleOptionsPanel();
@@ -467,8 +494,7 @@ public partial class MainWindow
     {
         OpenButton.ToolTip = L.T("tip.open");
         MuteButton.ToolTip = L.T("tip.mute");
-        AdjustButton.ToolTip = L.T("tip.picture");
-        ViewButton.ToolTip = L.T("tip.view");
+        ImageButton.ToolTip = L.T("tip.image");
         OptionsButton.ToolTip = L.T("tip.options");
         FormatsButton.ToolTip = L.T("tip.formats");
         FolderButton.ToolTip = L.T("tip.folder");

@@ -33,7 +33,7 @@ Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that
 - **Frame stepping, both ways.** Tap `X` or `Z` to move exactly one frame forward or back; hold to keep going, faster the longer you hold. Each frame is fully decoded before it is shown.
 - **Pictures, GIFs and video in one window.** Open one file and move through the rest of the folder. Zoom, pan, rotate and flip.
 - **Private on screen too.** Optionally have Windows leave the window out of screenshots, recordings and screen sharing; hide file names; press `H` to blank the window at once.
-- **Picture controls.** Brightness, contrast, saturation, gamma and warmth, for display only.
+- **Image settings.** Brightness, contrast, saturation, gamma and warmth, for display only, with rotate and flip in the same menu.
 - **Your keys, your colour.** Choose the keys for the main actions and the colour of the window.
 - **Seven languages.** English, Spanish, Swedish, French, German, Portuguese and Italian; it follows Windows, or choose one in Options.
 - **Folder playback.** Move on when a video ends, in order or shuffled, once or on repeat; or repeat one file.
@@ -48,7 +48,7 @@ Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that
 | Jump 5 seconds | `Ctrl` + `Left` / `Right` |
 | Zoom | mouse wheel, `+` / `-`, `0` to reset |
 | Rotate right | `R` |
-| Picture settings | `A` |
+| Image settings | `A` |
 | Play the whole folder | `S` |
 | Fullscreen | `F11`, `F` or double-click |
 | Open a file | `O` |
