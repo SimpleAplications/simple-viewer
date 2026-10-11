@@ -90,9 +90,9 @@ T = {
  "Ljusstyrka, kontrast, mättnad, gamma och värme för allt på skärmen, även pausad video. Påverkar bara visningen: dina filer ändras aldrig."),
 "does.5h": ("Your keys, your colour", "Tus teclas, tu color", "Dina tangenter, din färg"),
 "does.5": (
- "Choose the keys for play, next, previous and frame stepping, and pick the window colour. Text switches between white and black to stay readable.",
- "Elige las teclas para reproducir, siguiente, anterior y avance por fotogramas, y el color de la ventana. El texto cambia entre blanco y negro para seguir siendo legible.",
- "Välj tangenter för spela, nästa, föregående och bildrutestegning, och välj fönstrets färg. Texten växlar mellan vitt och svart för att förbli läsbar."),
+ "Choose the keys for play, next, previous and frame stepping in Options, and pick the window colour in the View menu. Text switches between white and black to stay readable.",
+ "Elige en Opciones las teclas para reproducir, siguiente, anterior y avance por fotogramas, y en el menú Vista el color de la ventana. El texto cambia entre blanco y negro para seguir siendo legible.",
+ "Välj tangenter för spela, nästa, föregående och bildrutestegning under Alternativ, och fönstrets färg i menyn Vy. Texten växlar mellan vitt och svart för att förbli läsbar."),
 "does.6h": ("Play a whole folder", "Reproducir toda una carpeta", "Spela en hel mapp"),
 "does.6": (
  "Let it move to the next file when a video ends, in order or shuffled, once or on repeat. Or repeat a single video.",
@@ -105,10 +105,10 @@ T = {
  "Panelen Bild med reglage för ljusstyrka, kontrast, mättnad, gamma och värme"),
 "shot.picture.cap": ("Picture controls apply instantly and reset with one click.", "Los ajustes de imagen se aplican al instante y se restablecen con un clic.", "Bildreglagen verkar direkt och återställs med ett klick."),
 "shot.options.alt": (
- "The Options panel with playback choices, key assignments and window colour",
- "El panel Opciones con la reproducción, la asignación de teclas y el color de la ventana",
- "Panelen Alternativ med uppspelningsval, tangenttilldelning och fönsterfärg"),
-"shot.options.cap": ("Options: playback, keys and window colour.", "Opciones: reproducción, teclas y color de la ventana.", "Alternativ: uppspelning, tangenter och fönsterfärg."),
+ "The Options panel with playback choices, key assignments, privacy options and language",
+ "El panel Opciones con la reproducción, la asignación de teclas, la privacidad y el idioma",
+ "Panelen Alternativ med uppspelningsval, tangenttilldelning, integritetsval och språk"),
+"shot.options.cap": ("Options: playback, keys, privacy and language.", "Opciones: reproducción, teclas, privacidad e idioma.", "Alternativ: uppspelning, tangenter, integritet och språk."),
 "shot.note": ("", "Las capturas muestran la aplicación en inglés; también está disponible en español.", "Skärmbilderna visar appen på engelska; den finns också på svenska."),
 
 "formats.h": ("Formats", "Formatos", "Format"),

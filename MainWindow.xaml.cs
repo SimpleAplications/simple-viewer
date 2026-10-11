@@ -707,7 +707,7 @@ public partial class MainWindow : Window
         new FormatsWindow(this, ImageExtensions, VideoExtensions).ShowDialog();
         FormatsButton.Tag = null;
     }
-    void OnRotateClick(object sender, RoutedEventArgs e) => ToggleRotatePanel();
+    void OnViewClick(object sender, RoutedEventArgs e) => ToggleViewPanel();
     void OnOptionsClick(object sender, RoutedEventArgs e) => ToggleOptionsPanel();
     void OnSlideshowClick(object sender, RoutedEventArgs e) => ToggleSlideshow();
     void OnFullscreenClick(object sender, RoutedEventArgs e) => ToggleFullscreen();

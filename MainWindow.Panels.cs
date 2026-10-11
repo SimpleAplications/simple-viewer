@@ -8,14 +8,14 @@ using System.Windows.Threading;
 
 namespace ReiksViewer;
 
-// The pop-up panels over the picture (Picture, Rotate, Options) and what they control:
-// picture adjustments, orientation, the user's keys and the window colour.
+// The pop-up panels over the picture (Picture, View, Options) and what they control:
+// picture adjustments, orientation and window colour, and the app's own options.
 public partial class MainWindow
 {
     readonly Settings _settings = Settings.Load();
     readonly DispatcherTimer _saveTimer = new() { Interval = TimeSpan.FromMilliseconds(600) };
     readonly List<Border> _panels = new();
-    Border? _adjustPanel, _rotatePanel, _optionsPanel;
+    Border? _adjustPanel, _viewPanel, _optionsPanel;
 
     // ---------- Window colour ----------
 
@@ -98,7 +98,7 @@ public partial class MainWindow
         static bool Open(Border? panel) => panel?.Visibility == Visibility.Visible;
 
         Mark(AdjustButton, Open(_adjustPanel));
-        Mark(RotateButton, Open(_rotatePanel));
+        Mark(ViewButton, Open(_viewPanel));
         Mark(OptionsButton, Open(_optionsPanel));
         Mark(FolderButton, _settings.PlayFolder && !_settings.RepeatFile);
         Mark(MuteButton, _muted);
@@ -256,18 +256,26 @@ public partial class MainWindow
         return slider;
     }
 
-    // ---------- Rotate panel ----------
+    // ---------- View panel: rotate, flip and window colour ----------
 
     // The orientation the file itself asks for (phone videos); Reset returns to it.
     double _baseRotation;
 
-    void ToggleRotatePanel() => TogglePanel(ref _rotatePanel, BuildRotatePanel);
-
-    Border BuildRotatePanel()
+    static readonly string[] ColorPresets =
     {
-        var panel = CreatePanel(L.T("panel.rotate"), out var rows, 280);
+        "#000000", "#1E1E1E", "#3A3A3A", "#0B1E33", "#10291B", "#2B1020", "#C8C8C8", "#F4F4F4",
+    };
+
+    readonly Slider[] _colorSliders = new Slider[3];
+    bool _syncingColor;
+
+    void ToggleViewPanel() => TogglePanel(ref _viewPanel, BuildViewPanel);
+
+    Border BuildViewPanel()
+    {
+        var panel = CreatePanel(L.T("panel.rotate"), out var rows, 310);
         rows.Width = double.NaN;
-        rows.MinWidth = 280;
+        rows.MinWidth = 310;
         rows.Children.Add(ButtonRow(TextButton(L.T("rot.left"), () => RotateBy(-90)),
                                     TextButton(L.T("rot.right"), () => RotateBy(90))));
         rows.Children.Add(ButtonRow(TextButton(L.T("flip.h"), () => FlipBy(-1, 1)),
@@ -277,6 +285,33 @@ public partial class MainWindow
         reset.MinWidth = 80;
         reset.Margin = new Thickness(0, 8, 6, 0);
         rows.Children.Add(reset);
+
+        rows.Children.Add(Heading(L.T("panel.colour")));
+        var swatches = new WrapPanel();
+        foreach (var preset in ColorPresets)
+        {
+            var color = ParseColor(preset);
+            var swatch = new Border
+            {
+                Width = 30,
+                Height = 30,
+                Margin = new Thickness(0, 0, 8, 8),
+                CornerRadius = new CornerRadius(4),
+                BorderThickness = new Thickness(1),
+                Background = Frozen(color),
+                Cursor = Cursors.Hand,
+                ToolTip = preset,
+            };
+            swatch.SetResourceReference(Border.BorderBrushProperty, "PanelBorderBrush");
+            swatch.MouseLeftButtonDown += (_, _) => SetWindowColor(color);
+            swatches.Children.Add(swatch);
+        }
+        rows.Children.Add(swatches);
+
+        var current = ParseColor(_settings.WindowColor);
+        _colorSliders[0] = AddSlider(rows, L.T("col.red"), 0, 255, current.R, v => $"{v:0}", _ => ColorSliderMoved());
+        _colorSliders[1] = AddSlider(rows, L.T("col.green"), 0, 255, current.G, v => $"{v:0}", _ => ColorSliderMoved());
+        _colorSliders[2] = AddSlider(rows, L.T("col.blue"), 0, 255, current.B, v => $"{v:0}", _ => ColorSliderMoved());
         return panel;
     }
 
@@ -308,7 +343,7 @@ public partial class MainWindow
         UpdateStatus();
     }
 
-    // ---------- Options panel: keys and window colour ----------
+    // ---------- Options panel: playback, keys, privacy and language ----------
 
     static readonly (KeyAction Action, string Name)[] KeyActions =
     {
@@ -320,15 +355,9 @@ public partial class MainWindow
         (KeyAction.QuickHide, "key.hide"),
     };
 
-    static readonly string[] ColorPresets =
-    {
-        "#000000", "#1E1E1E", "#3A3A3A", "#0B1E33", "#10291B", "#2B1020", "#C8C8C8", "#F4F4F4",
-    };
-
     readonly Dictionary<KeyAction, Button> _keyButtons = new();
-    readonly Slider[] _colorSliders = new Slider[3];
     KeyAction? _capturing;
-    bool _syncingColor, _shuffleStarted;
+    bool _shuffleStarted;
 
     void ToggleOptionsPanel() => TogglePanel(ref _optionsPanel, BuildOptionsPanel);
 
@@ -399,33 +428,6 @@ public partial class MainWindow
             UpdateStatus();
         }, L.T("priv.names.tip", L.T("app.name"))));
 
-        rows.Children.Add(Heading(L.T("panel.colour")));
-        var swatches = new WrapPanel();
-        foreach (var preset in ColorPresets)
-        {
-            var color = ParseColor(preset);
-            var swatch = new Border
-            {
-                Width = 30,
-                Height = 30,
-                Margin = new Thickness(0, 0, 8, 8),
-                CornerRadius = new CornerRadius(4),
-                BorderThickness = new Thickness(1),
-                Background = Frozen(color),
-                Cursor = Cursors.Hand,
-                ToolTip = preset,
-            };
-            swatch.SetResourceReference(Border.BorderBrushProperty, "PanelBorderBrush");
-            swatch.MouseLeftButtonDown += (_, _) => SetWindowColor(color);
-            swatches.Children.Add(swatch);
-        }
-        rows.Children.Add(swatches);
-
-        var current = ParseColor(_settings.WindowColor);
-        _colorSliders[0] = AddSlider(rows, L.T("col.red"), 0, 255, current.R, v => $"{v:0}", _ => ColorSliderMoved());
-        _colorSliders[1] = AddSlider(rows, L.T("col.green"), 0, 255, current.G, v => $"{v:0}", _ => ColorSliderMoved());
-        _colorSliders[2] = AddSlider(rows, L.T("col.blue"), 0, 255, current.B, v => $"{v:0}", _ => ColorSliderMoved());
-
         rows.Children.Add(Heading(L.T("panel.language")));
         var languages = new ComboBox { Focusable = false, HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 170 };
         languages.Items.Add(new ComboBoxItem { Content = L.T("lang.auto"), Tag = "" });
@@ -454,7 +456,7 @@ public partial class MainWindow
         _panels.Clear();
         _adjustResets.Clear();
         _keyButtons.Clear();
-        _adjustPanel = _rotatePanel = _optionsPanel = null;
+        _adjustPanel = _viewPanel = _optionsPanel = null;
         _playFolderBox = _shuffleBox = _repeatFolderBox = _repeatFileBox = null;
         ApplyLanguage();
         ToggleOptionsPanel();
@@ -466,7 +468,7 @@ public partial class MainWindow
         OpenButton.ToolTip = L.T("tip.open");
         MuteButton.ToolTip = L.T("tip.mute");
         AdjustButton.ToolTip = L.T("tip.picture");
-        RotateButton.ToolTip = L.T("tip.rotate");
+        ViewButton.ToolTip = L.T("tip.view");
         OptionsButton.ToolTip = L.T("tip.options");
         FormatsButton.ToolTip = L.T("tip.formats");
         FolderButton.ToolTip = L.T("tip.folder");

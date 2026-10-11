@@ -58,7 +58,7 @@ public partial class MainWindow
             log.Add($"adjust reset: effect on={Img.Effect != null}");
             ToggleAdjustPanel();
 
-            ToggleRotatePanel();
+            ToggleViewPanel();
             RotateBy(90);
             FlipBy(-1, 1);
             await Task.Delay(300);
@@ -179,7 +179,7 @@ public partial class MainWindow
         Close();
     }
 
-    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|rotate|options>" opens a file,
+    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|view|options|hide>" opens a file,
     // pauses a video at the given time, optionally opens a panel, and saves a picture of the window.
     async Task RunScreenshot(string file, string output, double seconds, string panel)
     {
@@ -208,12 +208,8 @@ public partial class MainWindow
                 sliders[2].Value = 140;  // saturation
                 sliders[4].Value = 25;   // warmth
             }
-            else if (panel == "rotate") ToggleRotatePanel();
-            else if (panel == "options")
-            {
-                Height = 960;
-                ToggleOptionsPanel();
-            }
+            else if (panel == "view") ToggleViewPanel();
+            else if (panel == "options") ToggleOptionsPanel();
             else if (panel == "hide") ToggleQuickHide();
             await Task.Delay(500);
             Snapshot(output);

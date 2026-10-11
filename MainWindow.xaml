@@ -132,7 +132,7 @@
 
             <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="4,2">
                 <Button x:Name="AdjustButton" Content="&#xE706;" ToolTip="Picture settings (A)" Click="OnAdjustClick"/>
-                <Button x:Name="RotateButton" Content="&#xE7AD;" ToolTip="Rotate and flip (R rotates)" Click="OnRotateClick"/>
+                <Button x:Name="ViewButton" Content="&#xE8B9;" ToolTip="View (R rotates)" Click="OnViewClick"/>
                 <Button x:Name="OptionsButton" Content="&#xE713;" ToolTip="Options" Click="OnOptionsClick"/>
                 <Button x:Name="FormatsButton" Content="&#xE946;" ToolTip="Formats and credits (F1)" Click="OnFormatsClick"/>
                 <Button x:Name="FolderButton" Content="&#xE786;" ToolTip="Play the whole folder (S)" Click="OnSlideshowClick"/>
