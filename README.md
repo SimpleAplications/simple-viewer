@@ -1,6 +1,6 @@
 # Simple
 
-A simple picture and video viewer for Windows, made for private use. Your pictures and videos stay yours: Simple opens them, and that is all it does.
+A simple picture and video viewer for Windows, made for private use. Your pictures and videos stay yours: Simple shows them only to you, and that is all it does.
 
 **[Download for Windows](https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-Setup.exe)**
  · [Portable zip](https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-portable.zip)
