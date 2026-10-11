@@ -71,6 +71,7 @@
   ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 10px; }
   .langs { text-align: right; padding-top: 14px; font-size: 14px; color: var(--soft); }
   .langs a { text-underline-offset: 3px; }
+  .tablenote { color: var(--soft); font-size: 14px; margin: 12px 0 0; }
   .shotnote { color: var(--soft); font-size: 14px; margin: 0; }
   .shotnote:empty { display: none; }
   footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 20px; }
@@ -147,6 +148,7 @@
       <tr><td>{{formats.decoding}}</td><td>{{formats.decoding.v}}</td></tr>
       <tr><td>{{formats.languages}}</td><td>{{formats.languages.v}}</td></tr>
     </table>
+    <p class="tablenote">{{formats.note}}</p>
   </section>
 
   <section>
@@ -161,6 +163,8 @@
   <section>
     <h2>{{limits.h}}</h2>
     <p>{{limits.1}}</p>
+    <p>{{limits.3}}</p>
+    <p>{{limits.4}}</p>
     <p>{{limits.2}}</p>
   </section>
 
@@ -170,6 +174,7 @@
       <p>{{install.1}}</p>
       <p>{{install.2}}</p>
       <p>{{install.3}}</p>
+      <p>{{install.4}}</p>
     </div>
   </section>
 

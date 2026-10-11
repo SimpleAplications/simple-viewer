@@ -80,7 +80,7 @@
  "formats.updates.tip": "Ouvre la page de téléchargement dans votre navigateur. {0} ne se connecte jamais à Internet.",
  "f.intro": "{0} ne se connecte jamais à Internet et ne garde aucune trace de ce que vous ouvrez.\n« Rechercher des mises à jour », ci-dessous, ouvre la page de téléchargement dans votre navigateur.",
  "f.decoders": "DÉCODEURS",
- "f.decoders.body": "Les images, animations et vidéos sont toutes décodées par FFmpeg. Rien n'est envoyé nulle part : l'application n'a aucun code réseau.",
+ "f.decoders.body": "Les images, animations et vidéos sont toutes décodées par FFmpeg, limité à la lecture de fichiers locaux. Rien n'est envoyé nulle part : le code propre à l'application ne contient aucune fonction réseau.",
  "f.loaded": "FFmpeg {0} est chargé depuis :\n{1}\nLicence de la compilation : {2}",
  "f.missing": "FFmpeg est introuvable, rien ne peut donc être ouvert.\n({0})\n\nPour l'ajouter : téléchargez une compilation LGPL « shared » de FFmpeg 8.1 pour Windows depuis l'un des sites indiqués sur https://ffmpeg.org/download.html, puis copiez les fichiers DLL de son dossier « bin » dans :\n{1}",
  "f.pictures": "IMAGES ET ANIMATIONS",

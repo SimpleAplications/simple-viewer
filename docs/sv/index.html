@@ -73,6 +73,7 @@
   ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 10px; }
   .langs { text-align: right; padding-top: 14px; font-size: 14px; color: var(--soft); }
   .langs a { text-underline-offset: 3px; }
+  .tablenote { color: var(--soft); font-size: 14px; margin: 12px 0 0; }
   .shotnote { color: var(--soft); font-size: 14px; margin: 0; }
   .shotnote:empty { display: none; }
   footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 20px; }
@@ -105,23 +106,23 @@
 
   <section>
     <h2>Det Reiks Visare aldrig gör</h2>
-    <p class="lead">De flesta visare och spelare gör i tysthet mer än att visa dina filer. Reiks Visare är byggd så att den inte kan det.</p>
+    <p class="lead">Vissa visare och spelare gör mer än att visa dina filer: de söker efter uppdateringar, samlar användningsstatistik, sparar historik eller bygger ett bibliotek. Reiks Visare gör inget av det.</p>
     <ul class="never">
-      <li><strong>Ansluta till internet</strong><span>Ingen telemetri, ingen användningsstatistik, inga kraschrapporter, inga uppdateringskontroller, inga uppslagningar på nätet. Dess avkodare är begränsade till lokala filer, så inte ens en särskilt utformad fil kan få den att ansluta.</span></li>
+      <li><strong>Ansluta till internet</strong><span>Ingen telemetri, ingen användningsstatistik, inga kraschrapporter, inga uppdateringskontroller, inga uppslagningar på nätet. Dess egen kod har inga nätverksfunktioner alls. Dess avkodare är begränsade till lokala filer och avvisar spellistor och strömningsformat, för att en särskilt utformad fil inte ska kunna styra den till en webbadress.</span></li>
       <li><strong>Spara vad du öppnar</strong><span>Ingen historik, ingen lista över senaste filer, ingen miniatyrcache, inget bibliotek eller index över dina mappar.</span></li>
-      <li><strong>Titta in i dina bilder</strong><span>Ingen ansiktsigenkänning, ingen taggning, ingen AI, ingen &rdquo;förbättring&rdquo; i molnet. Ingenting från dina filer delas någonsin med någon: allt stannar på din dator.</span></li>
+      <li><strong>Titta in i dina bilder</strong><span>Ingen ansiktsigenkänning, ingen taggning, ingen AI, ingen &rdquo;förbättring&rdquo; i molnet. Reiks Visare skickar ingenting från dina filer till någon.</span></li>
       <li><strong>Ändra dina filer</strong><span>Den skriver aldrig till dina bilder, videor eller deras mappar: inga betyg, inga taggar, inga dolda sidofiler.</span></li>
       <li><strong>Köra i bakgrunden</strong><span>Ingen tjänst, ingen autostart, ingen ikon i meddelandefältet. När du stänger den är den borta.</span></li>
-      <li><strong>Be om någonting</strong><span>Inget konto, ingen inloggning, ingen reklam, inga medföljande extraprogram, inga administratörsrättigheter.</span></li>
+      <li><strong>Be om någonting</strong><span>Inget konto, ingen inloggning, ingen reklam, inga medföljande extraprogram. Att installera den bara för dig själv kräver inga administratörsrättigheter.</span></li>
     </ul>
   </section>
 
   <section>
     <h2>Vad den gör</h2>
     <div class="grid">
-      <div class="card"><h3>En bildruta i taget, åt båda håll</h3><p>Tryck på <kbd>X</kbd> eller <kbd>Z</kbd> för att gå exakt en bildruta framåt eller bakåt. Håll nere för att fortsätta, snabbare ju längre du håller. Varje bildruta visas hel, utan utsmetad bild efter ett hopp.</p></div>
+      <div class="card"><h3>En bildruta i taget, åt båda håll</h3><p>Tryck på <kbd>X</kbd> eller <kbd>Z</kbd> för att gå exakt en bildruta framåt eller bakåt. Håll nere för att fortsätta, snabbare ju längre du håller. Varje bildruta avkodas helt innan den visas, så ett hopp lämnar ingen utsmetad bild.</p></div>
       <div class="card"><h3>Bilder, GIF:ar och video tillsammans</h3><p>Öppna en fil och bläddra genom allt annat i mappen med piltangenterna. Zooma med mushjulet, dra för att panorera, rotera och spegla.</p></div>
-      <div class="card"><h3>Privat även på skärmen</h3><p>Håll fönstret utanför skärmbilder, inspelningar och skärmdelning: de visar det som finns bakom i stället. Dölj filnamn i namnlisten. Tryck på <kbd>H</kbd> för att tömma fönstret direkt.</p></div>
+      <div class="card"><h3>Privat även på skärmen</h3><p>Låt Windows hålla fönstret utanför skärmbilder, inspelningar och skärmdelning, som då visar det som finns bakom. Dölj filnamn i namnlisten och aktivitetsfältet. Tryck på <kbd>H</kbd> för att tömma fönstret direkt.</p></div>
       <div class="card"><h3>Bildreglage</h3><p>Ljusstyrka, kontrast, mättnad, gamma och värme för allt på skärmen, även pausad video. Påverkar bara visningen: dina filer ändras aldrig.</p></div>
       <div class="card"><h3>Dina tangenter, din färg</h3><p>Välj tangenter för spela, nästa, föregående och bildrutestegning, och välj fönstrets färg. Texten växlar mellan vitt och svart för att förbli läsbar.</p></div>
       <div class="card"><h3>Spela en hel mapp</h3><p>Låt den gå vidare till nästa fil när en video tar slut, i ordning eller blandat, en gång eller om och om igen. Eller upprepa en enda video.</p></div>
@@ -149,29 +150,33 @@
       <tr><td>Avkodning</td><td>På grafikkortet när det stöder formatet, annars på processorn</td></tr>
       <tr><td>Språk</td><td>Engelska, spanska, svenska, franska, tyska, portugisiska, italienska</td></tr>
     </table>
+    <p class="tablenote">Om en viss fil går att öppna beror på vad den innehåller. HEIC-bilder tagna med en iPhone är ännu lite testade. Om en fil inte går att öppna får du gärna <a href="https://github.com/reiks-apps/reiks-viewer/issues">rapportera det</a>.</p>
   </section>
 
   <section>
     <h2>Lita inte bara på vårt ord</h2>
     <ol class="steps">
-      <li><strong>Blockera den och se själv.</strong> Neka Reiks Visare all nätverksåtkomst i Windows-brandväggen, eller kryssa i det alternativet i installationsprogrammet när du installerar för alla användare. Allt fungerar som förut, eftersom den aldrig behövde någon anslutning.</li>
-      <li><strong>Läs koden.</strong> Reiks Visare har <a href="https://github.com/reiks-apps/reiks-viewer">öppen källkod</a>. Nedladdningarna byggs från den koden på GitHubs egna servrar, öppet. GitHub signerar ett intyg för varje fil som anger vilken kod den byggdes från, så att vem som helst kan kontrollera att en nedladdning verkligen kommer från den publicerade koden.</li>
+      <li><strong>Blockera den och se själv.</strong> Neka Reiks Visare all nätverksåtkomst i Windows-brandväggen; när du installerar för alla användare erbjuder installationsprogrammet att lägga till den regeln åt dig. Allt fungerar som förut, eftersom den aldrig behövde någon anslutning.</li>
+      <li><strong>Läs koden.</strong> Reiks Visare har <a href="https://github.com/reiks-apps/reiks-viewer">öppen källkod</a>. Installationsprogrammet och zip-filen byggs från den koden på GitHubs egna servrar, öppet. GitHub signerar för var och en ett intyg som anger vilken kod den byggdes från, så att vem som helst kan kontrollera att en nedladdning verkligen kommer från den publicerade koden. FFmpeg-biblioteken som följer med byggs inte där: de är ett oförändrat offentligt bygge, angivet med sin kontrollsumma i upplysningarna.</li>
       <li><strong>Kontrollera din nedladdning.</strong> Varje version anger SHA-256-kontrollsumman för varje fil.</li>
     </ol>
   </section>
 
   <section>
     <h2>Det Reiks Visare inte kan styra över</h2>
-    <p>Windows sparar själv vissa uppgifter som ingen app kan stänga av åt dig. När du öppnar en fil genom att dubbelklicka på den i Utforskaren kan Windows lägga till den i sin egen lista över senaste filer (Inställningar &rarr; Anpassning &rarr; Start &rarr; &rdquo;Visa nyligen öppnade objekt&rdquo;). Windows diagnostikdata och Recall är också Windows-inställningar, under Sekretess och säkerhet. Reiks Visares egen Öppna-dialog lägger inte till något i listan, och alternativet att dölja sig från skärmbilder håller fönstret utanför dem.</p>
-    <p><strong>Den enda fil Reiks Visare skriver</strong> är dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings- och integritetsval, i <code>%APPDATA%\ReiksViewer\settings.json</code>. Den innehåller ingenting om dina filer, och avinstallationen tar bort den.</p>
+    <p>Windows sparar vissa uppgifter på egen hand, och dem kan Reiks Visare inte påverka. När du öppnar en fil genom att dubbelklicka på den i Utforskaren kan Windows lägga till den i sin lista över senaste filer (Inställningar &rarr; Anpassning &rarr; Start &rarr; &rdquo;Visa nyligen öppnade objekt&rdquo;). Reiks Visare ber Windows att inte lägga till filer som öppnas via dess egen Öppna-dialog i den listan, men Windows kan ändå komma ihåg vilken mapp dialogen senast visade. Om Reiks Visare skulle krascha kan Windows felrapportering registrera kraschen, precis som för andra appar. Windows diagnostikdata och Recall är också Windows-inställningar, under Sekretess och säkerhet.</p>
+    <p><strong>&rdquo;Dölj från skärmbilder&rdquo; bygger på en funktion i Windows.</strong> Windows tillämpar den på de vanliga sätten att fånga skärmen: Print Screen, Skärmklippverktyget, skärminspelare och skärmdelning i mötesappar. Den kan inte hindra en kamera som riktas mot skärmen eller program som är gjorda för att kringgå den, och vi har inte testat den mot Windows Recall.</p>
+    <p>Om du öppnar en fil från en nätverksenhet eller en molnsynkad mapp är det Windows eller ditt synkprogram som flyttar datan över nätverket, precis som för andra appar. Och som alla mediespelare måste Reiks Visare avkoda det en fil innehåller: en avsiktligt skadad fil kan få den att krascha eller bete sig oväntat, så håll den uppdaterad och var försiktig med filer från källor du inte litar på.</p>
+    <p><strong>Vid normal användning är den enda fil Reiks Visare skriver</strong> dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings- och integritetsval, i <code>%APPDATA%\ReiksViewer\settings.json</code>. Den innehåller ingenting om dina filer. Avinstallationen tar bort den; om du använder den portabla zip-filen tar du själv bort den mappen.</p>
   </section>
 
   <section id="verify">
     <h2>Installation</h2>
     <div class="note">
       <p><strong>Windows kan varna dig första gången.</strong> Installationsprogrammet är ännu inte digitalt signerat, så Windows kan visa &rdquo;Windows skyddade datorn&rdquo;. Välj <em>Mer information</em> och sedan <em>Kör ändå</em>.</p>
-      <p>För att kontrollera att din nedladdning är äkta, jämför dess SHA-256-kontrollsumma med <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code></p>
-      <p>Installationsprogrammet kräver inga administratörsrättigheter och kan lägga till Reiks Visare i Utforskarens lista &rdquo;Öppna med&rdquo;. För att uppdatera kör du ett nyare installationsprogram över det gamla; &rdquo;Sök efter uppdateringar&rdquo; i appen (F1) öppnar nedladdningssidan i din webbläsare, och själva appen förblir offline.</p>
+      <p>För att kontrollera att din nedladdning är hel och stämmer med den publicerade filen, jämför dess SHA-256-kontrollsumma med <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code></p>
+      <p>Att installera bara för dig själv kräver inga administratörsrättigheter; att installera för alla användare gör det. Installationsprogrammet kan lägga till Reiks Visare i Utforskarens lista &rdquo;Öppna med&rdquo;. För att uppdatera kör du ett nyare installationsprogram över det gamla; &rdquo;Sök efter uppdateringar&rdquo; i appen (F1) öppnar nedladdningssidan i din webbläsare, och själva appen förblir offline.</p>
+      <p>Reiks Visare är testad på Windows 11. Den bör även fungera på Windows 10, men det har ännu inte testats.</p>
     </div>
   </section>
 
@@ -183,7 +188,7 @@
 </main>
 
 <footer class="wrap">
-  <p>Skärmbilderna visar trailern till <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; Carinanebulosan &rdquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA och STScI; samt Blue Marble 2012, NASA Goddard Space Flight Center.</p>
+  <p>Skärmbilderna visar trailern till <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; Carinanebulosan &rdquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA och STScI; samt Blue Marble 2012, NASA Goddard Space Flight Center. Att de används här innebär inte att upphovsmännen står bakom Reiks Visare.</p>
   <p>Reiks Visare tillhandahålls i befintligt skick, utan garanti.</p>
 </footer>
 

@@ -80,7 +80,7 @@
  "formats.updates.tip": "Öffnet die Download-Seite in Ihrem Browser. {0} selbst verbindet sich nie mit dem Internet.",
  "f.intro": "{0} verbindet sich nie mit dem Internet und speichert nicht, was Sie öffnen.\n„Nach Updates suchen“ unten öffnet die Download-Seite in Ihrem Browser.",
  "f.decoders": "DECODER",
- "f.decoders.body": "Bilder, Animationen und Videos werden alle von FFmpeg dekodiert. Nichts wird irgendwohin gesendet: Die App enthält keinen Netzwerkcode.",
+ "f.decoders.body": "Bilder, Animationen und Videos werden alle von FFmpeg dekodiert, das auf das Lesen lokaler Dateien beschränkt ist. Nichts wird irgendwohin gesendet: Der eigene Code der App enthält keine Netzwerkfunktionen.",
  "f.loaded": "FFmpeg {0} wurde geladen aus:\n{1}\nLizenz des Builds: {2}",
  "f.missing": "FFmpeg wurde nicht gefunden, daher kann nichts geöffnet werden.\n({0})\n\nSo fügen Sie es hinzu: Laden Sie einen LGPL-„shared“-Build von FFmpeg 8.1 für Windows von einer der auf https://ffmpeg.org/download.html verlinkten Seiten herunter und kopieren Sie die DLL-Dateien aus dessen „bin“-Ordner nach:\n{1}",
  "f.pictures": "BILDER UND ANIMATIONEN",

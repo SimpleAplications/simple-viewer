@@ -80,7 +80,7 @@
  "formats.updates.tip": "Öppnar nedladdningssidan i din webbläsare. {0} ansluter aldrig själv till internet.",
  "f.intro": "{0} ansluter aldrig till internet och sparar ingen historik över vad du öppnar.\n\"Sök efter uppdateringar\" nedan öppnar nedladdningssidan i din webbläsare.",
  "f.decoders": "AVKODARE",
- "f.decoders.body": "Bilder, animationer och videor avkodas alla av FFmpeg. Ingenting skickas någonstans: appen har ingen nätverkskod.",
+ "f.decoders.body": "Bilder, animationer och videor avkodas alla av FFmpeg, som är begränsat till att läsa lokala filer. Ingenting skickas någonstans: appens egen kod har inga nätverksfunktioner.",
  "f.loaded": "FFmpeg {0} är inläst från:\n{1}\nByggets licens: {2}",
  "f.missing": "FFmpeg hittades inte, så ingenting kan öppnas.\n({0})\n\nSå lägger du till det: ladda ner ett LGPL-bygge (\"shared\") av FFmpeg 8.1 för Windows från någon av byggsidorna som länkas på https://ffmpeg.org/download.html och kopiera DLL-filerna från dess \"bin\"-mapp till:\n{1}",
  "f.pictures": "BILDER OCH ANIMATIONER",

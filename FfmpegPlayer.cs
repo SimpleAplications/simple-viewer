@@ -642,8 +642,11 @@ public sealed unsafe class FfmpegPlayer : IDisposable
         for (double backoff = 0.5; ; backoff *= 2)
         {
             bool complete = SeekDecodeFrom(from, target, out double firstPts);
-            if (!complete || firstPts <= target + Epsilon || from <= 0) return complete;
-            from = Math.Max(Math.Min(from, firstPts) - backoff, 0);
+            // Formats without a keyframe index (MPEG-TS) can also be entered after the last
+            // keyframe, and then nothing is decoded at all. That needs the same cure.
+            bool nothing = double.IsNegativeInfinity(firstPts);
+            if (!complete || from <= 0 || (!nothing && firstPts <= target + Epsilon)) return complete;
+            from = Math.Max((nothing ? from : Math.Min(from, firstPts)) - backoff, 0);
         }
     }
 

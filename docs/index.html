@@ -73,6 +73,7 @@
   ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 10px; }
   .langs { text-align: right; padding-top: 14px; font-size: 14px; color: var(--soft); }
   .langs a { text-underline-offset: 3px; }
+  .tablenote { color: var(--soft); font-size: 14px; margin: 12px 0 0; }
   .shotnote { color: var(--soft); font-size: 14px; margin: 0; }
   .shotnote:empty { display: none; }
   footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 20px; }
@@ -105,23 +106,23 @@
 
   <section>
     <h2>What Reiks Viewer never does</h2>
-    <p class="lead">Most viewers and players quietly do more than show your files. Reiks Viewer is built so that it can&rsquo;t.</p>
+    <p class="lead">Some viewers and players do more than show your files: they check for updates, collect usage statistics, keep a history or build a library. Reiks Viewer does none of that.</p>
     <ul class="never">
-      <li><strong>Connect to the internet</strong><span>No telemetry, no usage statistics, no crash reports, no update checks, no online lookups. Its decoders are restricted to local files, so not even a specially made file can make it reach out.</span></li>
+      <li><strong>Connect to the internet</strong><span>No telemetry, no usage statistics, no crash reports, no update checks, no online lookups. Its own code has no networking at all. Its decoders are limited to local files and refuse playlist and streaming formats, to keep a specially made file from pointing it at a web address.</span></li>
       <li><strong>Keep a record of what you open</strong><span>No history, no recent list, no thumbnail cache, no library or index of your folders.</span></li>
-      <li><strong>Look inside your pictures</strong><span>No face recognition, no tagging, no AI, no &ldquo;enhancing&rdquo; in the cloud. Nothing from your files is ever shared with anyone: it all stays on your PC.</span></li>
+      <li><strong>Look inside your pictures</strong><span>No face recognition, no tagging, no AI, no &ldquo;enhancing&rdquo; in the cloud. Reiks Viewer sends nothing from your files to anyone.</span></li>
       <li><strong>Change your files</strong><span>It never writes to your pictures, videos or their folders: no ratings, no tags, no hidden side files.</span></li>
       <li><strong>Run in the background</strong><span>No service, no startup entry, no tray icon. When you close it, it is gone.</span></li>
-      <li><strong>Ask for anything</strong><span>No account, no sign-in, no ads, no bundled extras, no administrator rights.</span></li>
+      <li><strong>Ask for anything</strong><span>No account, no sign-in, no ads, no bundled extras. Installing it for yourself needs no administrator rights.</span></li>
     </ul>
   </section>
 
   <section>
     <h2>What it does</h2>
     <div class="grid">
-      <div class="card"><h3>One frame at a time, both ways</h3><p>Tap <kbd>X</kbd> or <kbd>Z</kbd> to move exactly one frame forward or back. Hold to keep going, faster the longer you hold. Every frame is shown complete, with no smearing after a jump.</p></div>
+      <div class="card"><h3>One frame at a time, both ways</h3><p>Tap <kbd>X</kbd> or <kbd>Z</kbd> to move exactly one frame forward or back. Hold to keep going, faster the longer you hold. Each frame is fully decoded before it is shown, so a jump does not leave a smeared picture.</p></div>
       <div class="card"><h3>Pictures, GIFs and video together</h3><p>Open one file and move through everything else in the folder with the arrow keys. Zoom with the mouse wheel, drag to pan, rotate and flip.</p></div>
-      <div class="card"><h3>Private on screen too</h3><p>Leave the window out of screenshots, recordings and screen sharing: they show whatever is behind it instead. Hide file names from the title bar. Press <kbd>H</kbd> to blank the window at once.</p></div>
+      <div class="card"><h3>Private on screen too</h3><p>Have Windows leave the window out of screenshots, recordings and screen sharing, which then show whatever is behind it. Hide file names from the title bar and taskbar. Press <kbd>H</kbd> to blank the window at once.</p></div>
       <div class="card"><h3>Picture controls</h3><p>Brightness, contrast, saturation, gamma and warmth for anything on screen, including paused video. Display only: your files are never changed.</p></div>
       <div class="card"><h3>Your keys, your colour</h3><p>Choose the keys for play, next, previous and frame stepping, and pick the window colour. Text switches between white and black to stay readable.</p></div>
       <div class="card"><h3>Play a whole folder</h3><p>Let it move to the next file when a video ends, in order or shuffled, once or on repeat. Or repeat a single video.</p></div>
@@ -149,29 +150,33 @@
       <tr><td>Decoding</td><td>On the graphics card where it supports the format, otherwise on the processor</td></tr>
       <tr><td>Languages</td><td>English, Spanish, Swedish, French, German, Portuguese, Italian</td></tr>
     </table>
+    <p class="tablenote">Whether a particular file opens depends on what is inside it. HEIC photos taken with an iPhone have had little testing so far. If a file does not open, please <a href="https://github.com/reiks-apps/reiks-viewer/issues">report it</a>.</p>
   </section>
 
   <section>
     <h2>Don&rsquo;t take our word for it</h2>
     <ol class="steps">
-      <li><strong>Block it and see.</strong> Deny Reiks Viewer all network access in Windows Firewall, or tick that option in the installer when installing for all users. Everything keeps working, because it never needed a connection.</li>
-      <li><strong>Read the code.</strong> Reiks Viewer is <a href="https://github.com/reiks-apps/reiks-viewer">open source</a>. The downloads are built from that code on GitHub&rsquo;s own servers, in public. GitHub signs a statement for each file saying which code it was built from, so anyone can check that a download really came from the published code.</li>
+      <li><strong>Block it and see.</strong> Deny Reiks Viewer all network access in Windows Firewall; when you install for all users, the installer offers to add that rule for you. Everything keeps working, because it never needed a connection.</li>
+      <li><strong>Read the code.</strong> Reiks Viewer is <a href="https://github.com/reiks-apps/reiks-viewer">open source</a>. The installer and the zip are built from that code on GitHub&rsquo;s own servers, in public. GitHub signs a statement for each of them saying which code it was built from, so anyone can check that a download really came from the published code. The FFmpeg libraries inside are not built there: they are an unmodified public build, identified by its checksum in the notices.</li>
       <li><strong>Check your download.</strong> Every release lists the SHA-256 checksum of each file.</li>
     </ol>
   </section>
 
   <section>
     <h2>What Reiks Viewer can&rsquo;t control</h2>
-    <p>Windows itself keeps some records that no app can switch off for you. When you open a file by double-clicking it in Explorer, Windows may add it to its own recent files list (Settings &rarr; Personalization &rarr; Start &rarr; &ldquo;Show recently opened items&rdquo;). Windows&rsquo; diagnostic data and Recall are also Windows settings, under Privacy &amp; security. Reiks Viewer&rsquo;s own Open dialog does not add to the recent list, and its &ldquo;hide from screenshots&rdquo; option keeps its window out of screen captures.</p>
-    <p><strong>The one file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback and privacy choices, in <code>%APPDATA%\ReiksViewer\settings.json</code>. It contains nothing about your files, and the uninstaller removes it.</p>
+    <p>Windows keeps some records of its own, and Reiks Viewer has no say over them. When you open a file by double-clicking it in Explorer, Windows may add it to its recent files list (Settings &rarr; Personalization &rarr; Start &rarr; &ldquo;Show recently opened items&rdquo;). Reiks Viewer asks Windows to keep files opened through its own Open dialog off that list, but Windows may still remember which folder that dialog was last in. If Reiks Viewer ever crashes, Windows Error Reporting may record the crash, as it does for any app. Windows&rsquo; diagnostic data and Recall are Windows settings too, under Privacy &amp; security.</p>
+    <p><strong>&ldquo;Hide from screenshots&rdquo; relies on a Windows feature.</strong> Windows applies it to the usual ways of capturing a screen: Print Screen, the Snipping Tool, screen recorders and screen sharing in meeting apps. It cannot stop a camera pointed at your screen or software made to get around it, and we have not tested it against Windows Recall.</p>
+    <p>If you open a file from a network drive or a cloud-synced folder, Windows or your sync program carries that data over the network, as with any app. And like every media player, Reiks Viewer has to decode whatever a file contains: a deliberately damaged file could make it crash or misbehave, so keep it up to date and take care with files from sources you don&rsquo;t trust.</p>
+    <p><strong>In normal use, the only file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback and privacy choices, in <code>%APPDATA%\ReiksViewer\settings.json</code>. It contains nothing about your files. Uninstalling removes it; if you use the portable zip, delete that folder yourself.</p>
   </section>
 
   <section id="verify">
     <h2>Installing</h2>
     <div class="note">
       <p><strong>Windows may warn you the first time.</strong> The installer is not digitally signed yet, so Windows can show &ldquo;Windows protected your PC&rdquo;. Choose <em>More info</em>, then <em>Run anyway</em>.</p>
-      <p>To check that your download is genuine, compare its SHA-256 checksum with <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code></p>
-      <p>The installer needs no administrator rights and can add Reiks Viewer to Explorer&rsquo;s &ldquo;Open with&rdquo; list. To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.</p>
+      <p>To check that your download is complete and matches the published file, compare its SHA-256 checksum with <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code></p>
+      <p>Installing for yourself needs no administrator rights; installing for all users does. The installer can add Reiks Viewer to Explorer&rsquo;s &ldquo;Open with&rdquo; list. To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.</p>
+      <p>Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that has not been tested yet.</p>
     </div>
   </section>
 
@@ -183,7 +188,7 @@
 </main>
 
 <footer class="wrap">
-  <p>Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center.</p>
+  <p>Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center. Their use here does not imply any endorsement.</p>
   <p>Reiks Viewer is provided as is, without warranty.</p>
 </footer>
 

@@ -80,7 +80,7 @@
  "formats.updates.tip": "Apre la pagina di download nel browser. {0} non si connette mai a Internet.",
  "f.intro": "{0} non si connette mai a Internet e non tiene traccia di ciò che apri.\n\"Cerca aggiornamenti\", qui sotto, apre la pagina di download nel browser.",
  "f.decoders": "DECODIFICATORI",
- "f.decoders.body": "Immagini, animazioni e video sono tutti decodificati da FFmpeg. Nulla viene inviato altrove: l'app non contiene codice di rete.",
+ "f.decoders.body": "Immagini, animazioni e video sono tutti decodificati da FFmpeg, limitato alla lettura di file locali. Nulla viene inviato altrove: il codice proprio dell'app non contiene funzioni di rete.",
  "f.loaded": "FFmpeg {0} è caricato da:\n{1}\nLicenza della build: {2}",
  "f.missing": "FFmpeg non è stato trovato, quindi non è possibile aprire nulla.\n({0})\n\nPer aggiungerlo: scarica una build LGPL \"shared\" di FFmpeg 8.1 per Windows da uno dei siti indicati su https://ffmpeg.org/download.html e copia i file DLL dalla sua cartella \"bin\" in:\n{1}",
  "f.pictures": "IMMAGINI E ANIMAZIONI",

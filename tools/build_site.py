@@ -33,14 +33,14 @@ T = {
 
 "never.h": ("What Reiks Viewer never does", "Lo que Reiks Visor nunca hace", "Det Reiks Visare aldrig gör"),
 "never.lead": (
- "Most viewers and players quietly do more than show your files. Reiks Viewer is built so that it can&rsquo;t.",
- "La mayoría de visores y reproductores hacen, sin decirlo, algo más que mostrar tus archivos. Reiks Visor está hecho para que no pueda.",
- "De flesta visare och spelare gör i tysthet mer än att visa dina filer. Reiks Visare är byggd så att den inte kan det."),
+ "Some viewers and players do more than show your files: they check for updates, collect usage statistics, keep a history or build a library. Reiks Viewer does none of that.",
+ "Algunos visores y reproductores hacen algo más que mostrar tus archivos: buscan actualizaciones, recogen estadísticas de uso, guardan un historial o crean una biblioteca. Reiks Visor no hace nada de eso.",
+ "Vissa visare och spelare gör mer än att visa dina filer: de söker efter uppdateringar, samlar användningsstatistik, sparar historik eller bygger ett bibliotek. Reiks Visare gör inget av det."),
 "never.1h": ("Connect to the internet", "Conectarse a internet", "Ansluta till internet"),
 "never.1": (
- "No telemetry, no usage statistics, no crash reports, no update checks, no online lookups. Its decoders are restricted to local files, so not even a specially made file can make it reach out.",
- "Sin telemetría, sin estadísticas de uso, sin informes de errores, sin comprobación de actualizaciones, sin consultas en línea. Sus decodificadores están limitados a archivos locales, así que ni un archivo preparado a propósito puede hacer que se conecte.",
- "Ingen telemetri, ingen användningsstatistik, inga kraschrapporter, inga uppdateringskontroller, inga uppslagningar på nätet. Dess avkodare är begränsade till lokala filer, så inte ens en särskilt utformad fil kan få den att ansluta."),
+ "No telemetry, no usage statistics, no crash reports, no update checks, no online lookups. Its own code has no networking at all. Its decoders are limited to local files and refuse playlist and streaming formats, to keep a specially made file from pointing it at a web address.",
+ "Sin telemetría, sin estadísticas de uso, sin informes de errores, sin comprobación de actualizaciones, sin consultas en línea. Su propio código no tiene ninguna función de red. Sus decodificadores están limitados a archivos locales y rechazan los formatos de lista de reproducción y de streaming, para evitar que un archivo preparado a propósito lo dirija a una dirección web.",
+ "Ingen telemetri, ingen användningsstatistik, inga kraschrapporter, inga uppdateringskontroller, inga uppslagningar på nätet. Dess egen kod har inga nätverksfunktioner alls. Dess avkodare är begränsade till lokala filer och avvisar spellistor och strömningsformat, för att en särskilt utformad fil inte ska kunna styra den till en webbadress."),
 "never.2h": ("Keep a record of what you open", "Guardar registro de lo que abres", "Spara vad du öppnar"),
 "never.2": (
  "No history, no recent list, no thumbnail cache, no library or index of your folders.",
@@ -48,9 +48,9 @@ T = {
  "Ingen historik, ingen lista över senaste filer, ingen miniatyrcache, inget bibliotek eller index över dina mappar."),
 "never.3h": ("Look inside your pictures", "Mirar dentro de tus imágenes", "Titta in i dina bilder"),
 "never.3": (
- "No face recognition, no tagging, no AI, no &ldquo;enhancing&rdquo; in the cloud. Nothing from your files is ever shared with anyone: it all stays on your PC.",
- "Sin reconocimiento facial, sin etiquetado, sin IA, sin &laquo;mejoras&raquo; en la nube. Nada de tus archivos se comparte jamás con nadie: todo se queda en tu PC.",
- "Ingen ansiktsigenkänning, ingen taggning, ingen AI, ingen &rdquo;förbättring&rdquo; i molnet. Ingenting från dina filer delas någonsin med någon: allt stannar på din dator."),
+ "No face recognition, no tagging, no AI, no &ldquo;enhancing&rdquo; in the cloud. Reiks Viewer sends nothing from your files to anyone.",
+ "Sin reconocimiento facial, sin etiquetado, sin IA, sin &laquo;mejoras&raquo; en la nube. Reiks Visor no envía nada de tus archivos a nadie.",
+ "Ingen ansiktsigenkänning, ingen taggning, ingen AI, ingen &rdquo;förbättring&rdquo; i molnet. Reiks Visare skickar ingenting från dina filer till någon."),
 "never.4h": ("Change your files", "Modificar tus archivos", "Ändra dina filer"),
 "never.4": (
  "It never writes to your pictures, videos or their folders: no ratings, no tags, no hidden side files.",
@@ -63,16 +63,16 @@ T = {
  "Ingen tjänst, ingen autostart, ingen ikon i meddelandefältet. När du stänger den är den borta."),
 "never.6h": ("Ask for anything", "Pedirte nada", "Be om någonting"),
 "never.6": (
- "No account, no sign-in, no ads, no bundled extras, no administrator rights.",
- "Sin cuenta, sin inicio de sesión, sin anuncios, sin extras incluidos, sin permisos de administrador.",
- "Inget konto, ingen inloggning, ingen reklam, inga medföljande extraprogram, inga administratörsrättigheter."),
+ "No account, no sign-in, no ads, no bundled extras. Installing it for yourself needs no administrator rights.",
+ "Sin cuenta, sin inicio de sesión, sin anuncios, sin extras incluidos. Instalarlo solo para ti no requiere permisos de administrador.",
+ "Inget konto, ingen inloggning, ingen reklam, inga medföljande extraprogram. Att installera den bara för dig själv kräver inga administratörsrättigheter."),
 
 "does.h": ("What it does", "Lo que hace", "Vad den gör"),
 "does.1h": ("One frame at a time, both ways", "Fotograma a fotograma, en ambos sentidos", "En bildruta i taget, åt båda håll"),
 "does.1": (
- "Tap <kbd>X</kbd> or <kbd>Z</kbd> to move exactly one frame forward or back. Hold to keep going, faster the longer you hold. Every frame is shown complete, with no smearing after a jump.",
- "Pulsa <kbd>X</kbd> o <kbd>Z</kbd> para avanzar o retroceder exactamente un fotograma. Mantén pulsado para continuar, más rápido cuanto más tiempo. Cada fotograma se muestra completo, sin imagen corrupta tras un salto.",
- "Tryck på <kbd>X</kbd> eller <kbd>Z</kbd> för att gå exakt en bildruta framåt eller bakåt. Håll nere för att fortsätta, snabbare ju längre du håller. Varje bildruta visas hel, utan utsmetad bild efter ett hopp."),
+ "Tap <kbd>X</kbd> or <kbd>Z</kbd> to move exactly one frame forward or back. Hold to keep going, faster the longer you hold. Each frame is fully decoded before it is shown, so a jump does not leave a smeared picture.",
+ "Pulsa <kbd>X</kbd> o <kbd>Z</kbd> para avanzar o retroceder exactamente un fotograma. Mantén pulsado para continuar, más rápido cuanto más tiempo. Cada fotograma se decodifica por completo antes de mostrarse, así que un salto no deja la imagen corrupta.",
+ "Tryck på <kbd>X</kbd> eller <kbd>Z</kbd> för att gå exakt en bildruta framåt eller bakåt. Håll nere för att fortsätta, snabbare ju längre du håller. Varje bildruta avkodas helt innan den visas, så ett hopp lämnar ingen utsmetad bild."),
 "does.2h": ("Pictures, GIFs and video together", "Imágenes, GIF y vídeo juntos", "Bilder, GIF:ar och video tillsammans"),
 "does.2": (
  "Open one file and move through everything else in the folder with the arrow keys. Zoom with the mouse wheel, drag to pan, rotate and flip.",
@@ -80,9 +80,9 @@ T = {
  "Öppna en fil och bläddra genom allt annat i mappen med piltangenterna. Zooma med mushjulet, dra för att panorera, rotera och spegla."),
 "does.3h": ("Private on screen too", "Privado también en pantalla", "Privat även på skärmen"),
 "does.3": (
- "Leave the window out of screenshots, recordings and screen sharing: they show whatever is behind it instead. Hide file names from the title bar. Press <kbd>H</kbd> to blank the window at once.",
- "Deja la ventana fuera de capturas, grabaciones y pantalla compartida: en su lugar se ve lo que hay detrás. Oculta los nombres de archivo de la barra de título. Pulsa <kbd>H</kbd> para dejar la ventana en blanco al instante.",
- "Håll fönstret utanför skärmbilder, inspelningar och skärmdelning: de visar det som finns bakom i stället. Dölj filnamn i namnlisten. Tryck på <kbd>H</kbd> för att tömma fönstret direkt."),
+ "Have Windows leave the window out of screenshots, recordings and screen sharing, which then show whatever is behind it. Hide file names from the title bar and taskbar. Press <kbd>H</kbd> to blank the window at once.",
+ "Haz que Windows deje la ventana fuera de capturas, grabaciones y pantalla compartida, que muestran entonces lo que hay detrás. Oculta los nombres de archivo de la barra de título y la barra de tareas. Pulsa <kbd>H</kbd> para dejar la ventana en blanco al instante.",
+ "Låt Windows hålla fönstret utanför skärmbilder, inspelningar och skärmdelning, som då visar det som finns bakom. Dölj filnamn i namnlisten och aktivitetsfältet. Tryck på <kbd>H</kbd> för att tömma fönstret direkt."),
 "does.4h": ("Picture controls", "Ajustes de imagen", "Bildreglage"),
 "does.4": (
  "Brightness, contrast, saturation, gamma and warmth for anything on screen, including paused video. Display only: your files are never changed.",
@@ -127,16 +127,20 @@ T = {
  "På grafikkortet när det stöder formatet, annars på processorn"),
 "formats.languages": ("Languages", "Idiomas", "Språk"),
 "formats.languages.v": ("English, Spanish, Swedish, French, German, Portuguese, Italian", "Inglés, español, sueco, francés, alemán, portugués, italiano", "Engelska, spanska, svenska, franska, tyska, portugisiska, italienska"),
+"formats.note": (
+ "Whether a particular file opens depends on what is inside it. HEIC photos taken with an iPhone have had little testing so far. If a file does not open, please <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">report it</a>.",
+ "Que un archivo concreto se abra depende de su contenido. Las fotos HEIC hechas con un iPhone se han probado poco hasta ahora. Si un archivo no se abre, <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">avísanos</a>.",
+ "Om en viss fil går att öppna beror på vad den innehåller. HEIC-bilder tagna med en iPhone är ännu lite testade. Om en fil inte går att öppna får du gärna <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">rapportera det</a>."),
 
 "verify.h": ("Don&rsquo;t take our word for it", "No hace falta que nos creas", "Lita inte bara på vårt ord"),
 "verify.1": (
- "<strong>Block it and see.</strong> Deny Reiks Viewer all network access in Windows Firewall, or tick that option in the installer when installing for all users. Everything keeps working, because it never needed a connection.",
- "<strong>Bloquéalo y compruébalo.</strong> Deniega a Reiks Visor todo acceso a la red en el Firewall de Windows, o marca esa opción en el instalador al instalar para todos los usuarios. Todo sigue funcionando, porque nunca necesitó conexión.",
- "<strong>Blockera den och se själv.</strong> Neka Reiks Visare all nätverksåtkomst i Windows-brandväggen, eller kryssa i det alternativet i installationsprogrammet när du installerar för alla användare. Allt fungerar som förut, eftersom den aldrig behövde någon anslutning."),
+ "<strong>Block it and see.</strong> Deny Reiks Viewer all network access in Windows Firewall; when you install for all users, the installer offers to add that rule for you. Everything keeps working, because it never needed a connection.",
+ "<strong>Bloquéalo y compruébalo.</strong> Deniega a Reiks Visor todo acceso a la red en el Firewall de Windows; si instalas para todos los usuarios, el instalador te ofrece añadir esa regla. Todo sigue funcionando, porque nunca necesitó conexión.",
+ "<strong>Blockera den och se själv.</strong> Neka Reiks Visare all nätverksåtkomst i Windows-brandväggen; när du installerar för alla användare erbjuder installationsprogrammet att lägga till den regeln åt dig. Allt fungerar som förut, eftersom den aldrig behövde någon anslutning."),
 "verify.2": (
- "<strong>Read the code.</strong> Reiks Viewer is <a href=\"https://github.com/reiks-apps/reiks-viewer\">open source</a>. The downloads are built from that code on GitHub&rsquo;s own servers, in public. GitHub signs a statement for each file saying which code it was built from, so anyone can check that a download really came from the published code.",
- "<strong>Lee el código.</strong> Reiks Visor es de <a href=\"https://github.com/reiks-apps/reiks-viewer\">código abierto</a>. Las descargas se compilan a partir de ese código en los servidores de GitHub, en público. GitHub firma una declaración para cada archivo que indica a partir de qué código se compiló, así cualquiera puede comprobar que una descarga procede realmente del código publicado.",
- "<strong>Läs koden.</strong> Reiks Visare har <a href=\"https://github.com/reiks-apps/reiks-viewer\">öppen källkod</a>. Nedladdningarna byggs från den koden på GitHubs egna servrar, öppet. GitHub signerar ett intyg för varje fil som anger vilken kod den byggdes från, så att vem som helst kan kontrollera att en nedladdning verkligen kommer från den publicerade koden."),
+ "<strong>Read the code.</strong> Reiks Viewer is <a href=\"https://github.com/reiks-apps/reiks-viewer\">open source</a>. The installer and the zip are built from that code on GitHub&rsquo;s own servers, in public. GitHub signs a statement for each of them saying which code it was built from, so anyone can check that a download really came from the published code. The FFmpeg libraries inside are not built there: they are an unmodified public build, identified by its checksum in the notices.",
+ "<strong>Lee el código.</strong> Reiks Visor es de <a href=\"https://github.com/reiks-apps/reiks-viewer\">código abierto</a>. El instalador y el zip se compilan a partir de ese código en los servidores de GitHub, en público. GitHub firma para cada uno una declaración que indica a partir de qué código se compiló, así cualquiera puede comprobar que una descarga procede realmente del código publicado. Las bibliotecas FFmpeg que incluye no se compilan allí: son una compilación pública sin modificar, identificada por su suma de comprobación en los avisos.",
+ "<strong>Läs koden.</strong> Reiks Visare har <a href=\"https://github.com/reiks-apps/reiks-viewer\">öppen källkod</a>. Installationsprogrammet och zip-filen byggs från den koden på GitHubs egna servrar, öppet. GitHub signerar för var och en ett intyg som anger vilken kod den byggdes från, så att vem som helst kan kontrollera att en nedladdning verkligen kommer från den publicerade koden. FFmpeg-biblioteken som följer med byggs inte där: de är ett oförändrat offentligt bygge, angivet med sin kontrollsumma i upplysningarna."),
 "verify.3": (
  "<strong>Check your download.</strong> Every release lists the SHA-256 checksum of each file.",
  "<strong>Comprueba tu descarga.</strong> Cada versión publica la suma SHA-256 de cada archivo.",
@@ -144,13 +148,21 @@ T = {
 
 "limits.h": ("What Reiks Viewer can&rsquo;t control", "Lo que Reiks Visor no puede controlar", "Det Reiks Visare inte kan styra över"),
 "limits.1": (
- "Windows itself keeps some records that no app can switch off for you. When you open a file by double-clicking it in Explorer, Windows may add it to its own recent files list (Settings &rarr; Personalization &rarr; Start &rarr; &ldquo;Show recently opened items&rdquo;). Windows&rsquo; diagnostic data and Recall are also Windows settings, under Privacy &amp; security. Reiks Viewer&rsquo;s own Open dialog does not add to the recent list, and its &ldquo;hide from screenshots&rdquo; option keeps its window out of screen captures.",
- "El propio Windows guarda algunos registros que ninguna aplicación puede desactivar por ti. Cuando abres un archivo con doble clic en el Explorador, Windows puede añadirlo a su lista de archivos recientes (Configuración &rarr; Personalización &rarr; Inicio &rarr; &laquo;Mostrar elementos abiertos recientemente&raquo;). Los datos de diagnóstico de Windows y Recall también son ajustes de Windows, en Privacidad y seguridad. El cuadro Abrir de Reiks Visor no añade nada a la lista de recientes, y su opción de ocultarse en las capturas mantiene la ventana fuera de ellas.",
- "Windows sparar själv vissa uppgifter som ingen app kan stänga av åt dig. När du öppnar en fil genom att dubbelklicka på den i Utforskaren kan Windows lägga till den i sin egen lista över senaste filer (Inställningar &rarr; Anpassning &rarr; Start &rarr; &rdquo;Visa nyligen öppnade objekt&rdquo;). Windows diagnostikdata och Recall är också Windows-inställningar, under Sekretess och säkerhet. Reiks Visares egen Öppna-dialog lägger inte till något i listan, och alternativet att dölja sig från skärmbilder håller fönstret utanför dem."),
+ "Windows keeps some records of its own, and Reiks Viewer has no say over them. When you open a file by double-clicking it in Explorer, Windows may add it to its recent files list (Settings &rarr; Personalization &rarr; Start &rarr; &ldquo;Show recently opened items&rdquo;). Reiks Viewer asks Windows to keep files opened through its own Open dialog off that list, but Windows may still remember which folder that dialog was last in. If Reiks Viewer ever crashes, Windows Error Reporting may record the crash, as it does for any app. Windows&rsquo; diagnostic data and Recall are Windows settings too, under Privacy &amp; security.",
+ "Windows guarda algunos registros por su cuenta, y Reiks Visor no tiene control sobre ellos. Cuando abres un archivo con doble clic en el Explorador, Windows puede añadirlo a su lista de archivos recientes (Configuración &rarr; Personalización &rarr; Inicio &rarr; &laquo;Mostrar elementos abiertos recientemente&raquo;). Reiks Visor pide a Windows que no añada a esa lista los archivos abiertos desde su propio cuadro Abrir, pero Windows puede seguir recordando en qué carpeta estuvo ese cuadro por última vez. Si Reiks Visor llegara a fallar, el Informe de errores de Windows puede registrar el fallo, como con cualquier aplicación. Los datos de diagnóstico de Windows y Recall también son ajustes de Windows, en Privacidad y seguridad.",
+ "Windows sparar vissa uppgifter på egen hand, och dem kan Reiks Visare inte påverka. När du öppnar en fil genom att dubbelklicka på den i Utforskaren kan Windows lägga till den i sin lista över senaste filer (Inställningar &rarr; Anpassning &rarr; Start &rarr; &rdquo;Visa nyligen öppnade objekt&rdquo;). Reiks Visare ber Windows att inte lägga till filer som öppnas via dess egen Öppna-dialog i den listan, men Windows kan ändå komma ihåg vilken mapp dialogen senast visade. Om Reiks Visare skulle krascha kan Windows felrapportering registrera kraschen, precis som för andra appar. Windows diagnostikdata och Recall är också Windows-inställningar, under Sekretess och säkerhet."),
+"limits.3": (
+ "<strong>&ldquo;Hide from screenshots&rdquo; relies on a Windows feature.</strong> Windows applies it to the usual ways of capturing a screen: Print Screen, the Snipping Tool, screen recorders and screen sharing in meeting apps. It cannot stop a camera pointed at your screen or software made to get around it, and we have not tested it against Windows Recall.",
+ "<strong>&laquo;Ocultar en capturas&raquo; se apoya en una función de Windows.</strong> Windows la aplica a las formas habituales de capturar la pantalla: Impr Pant, la Herramienta Recortes, los grabadores de pantalla y la pantalla compartida de las aplicaciones de reuniones. No puede impedir que una cámara apunte a tu pantalla ni detener un programa hecho para saltársela, y no la hemos probado con Windows Recall.",
+ "<strong>&rdquo;Dölj från skärmbilder&rdquo; bygger på en funktion i Windows.</strong> Windows tillämpar den på de vanliga sätten att fånga skärmen: Print Screen, Skärmklippverktyget, skärminspelare och skärmdelning i mötesappar. Den kan inte hindra en kamera som riktas mot skärmen eller program som är gjorda för att kringgå den, och vi har inte testat den mot Windows Recall."),
+"limits.4": (
+ "If you open a file from a network drive or a cloud-synced folder, Windows or your sync program carries that data over the network, as with any app. And like every media player, Reiks Viewer has to decode whatever a file contains: a deliberately damaged file could make it crash or misbehave, so keep it up to date and take care with files from sources you don&rsquo;t trust.",
+ "Si abres un archivo desde una unidad de red o una carpeta sincronizada con la nube, es Windows o tu programa de sincronización quien mueve esos datos por la red, como con cualquier aplicación. Y, como todo reproductor, Reiks Visor tiene que decodificar lo que contenga un archivo: un archivo dañado a propósito podría hacer que falle o se comporte de forma inesperada, así que mantenlo actualizado y ten cuidado con los archivos de origen dudoso.",
+ "Om du öppnar en fil från en nätverksenhet eller en molnsynkad mapp är det Windows eller ditt synkprogram som flyttar datan över nätverket, precis som för andra appar. Och som alla mediespelare måste Reiks Visare avkoda det en fil innehåller: en avsiktligt skadad fil kan få den att krascha eller bete sig oväntat, så håll den uppdaterad och var försiktig med filer från källor du inte litar på."),
 "limits.2": (
- "<strong>The one file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback and privacy choices, in <code>%APPDATA%\\ReiksViewer\\settings.json</code>. It contains nothing about your files, and the uninstaller removes it.",
- "<strong>El único archivo que escribe Reiks Visor</strong> son tus opciones: tus teclas, el color de la ventana, el idioma y tus preferencias de reproducción y privacidad, en <code>%APPDATA%\\ReiksViewer\\settings.json</code>. No contiene nada sobre tus archivos, y el desinstalador lo elimina.",
- "<strong>Den enda fil Reiks Visare skriver</strong> är dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings- och integritetsval, i <code>%APPDATA%\\ReiksViewer\\settings.json</code>. Den innehåller ingenting om dina filer, och avinstallationen tar bort den."),
+ "<strong>In normal use, the only file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback and privacy choices, in <code>%APPDATA%\\ReiksViewer\\settings.json</code>. It contains nothing about your files. Uninstalling removes it; if you use the portable zip, delete that folder yourself.",
+ "<strong>En el uso normal, el único archivo que escribe Reiks Visor</strong> son tus opciones: tus teclas, el color de la ventana, el idioma y tus preferencias de reproducción y privacidad, en <code>%APPDATA%\\ReiksViewer\\settings.json</code>. No contiene nada sobre tus archivos. Al desinstalar se elimina; si usas el zip portátil, borra tú esa carpeta.",
+ "<strong>Vid normal användning är den enda fil Reiks Visare skriver</strong> dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings- och integritetsval, i <code>%APPDATA%\\ReiksViewer\\settings.json</code>. Den innehåller ingenting om dina filer. Avinstallationen tar bort den; om du använder den portabla zip-filen tar du själv bort den mappen."),
 
 "install.h": ("Installing", "Instalación", "Installation"),
 "install.1": (
@@ -158,13 +170,17 @@ T = {
  "<strong>Windows puede avisarte la primera vez.</strong> El instalador aún no está firmado digitalmente, así que Windows puede mostrar &laquo;Windows protegió su PC&raquo;. Elige <em>Más información</em> y luego <em>Ejecutar de todas formas</em>.",
  "<strong>Windows kan varna dig första gången.</strong> Installationsprogrammet är ännu inte digitalt signerat, så Windows kan visa &rdquo;Windows skyddade datorn&rdquo;. Välj <em>Mer information</em> och sedan <em>Kör ändå</em>."),
 "install.2": (
- "To check that your download is genuine, compare its SHA-256 checksum with <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>",
- "Para comprobar que tu descarga es auténtica, compara su suma SHA-256 con <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. En PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>",
- "För att kontrollera att din nedladdning är äkta, jämför dess SHA-256-kontrollsumma med <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>"),
+ "To check that your download is complete and matches the published file, compare its SHA-256 checksum with <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>",
+ "Para comprobar que tu descarga está completa y coincide con el archivo publicado, compara su suma SHA-256 con <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. En PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>",
+ "För att kontrollera att din nedladdning är hel och stämmer med den publicerade filen, jämför dess SHA-256-kontrollsumma med <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>"),
 "install.3": (
- "The installer needs no administrator rights and can add Reiks Viewer to Explorer&rsquo;s &ldquo;Open with&rdquo; list. To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.",
- "El instalador no necesita permisos de administrador y puede añadir Reiks Visor a la lista &laquo;Abrir con&raquo; del Explorador. Para actualizar, ejecuta un instalador más reciente sobre el anterior; &laquo;Buscar actualizaciones&raquo; en la aplicación (F1) abre la página de descarga en tu navegador, y la aplicación en sí sigue sin conexión.",
- "Installationsprogrammet kräver inga administratörsrättigheter och kan lägga till Reiks Visare i Utforskarens lista &rdquo;Öppna med&rdquo;. För att uppdatera kör du ett nyare installationsprogram över det gamla; &rdquo;Sök efter uppdateringar&rdquo; i appen (F1) öppnar nedladdningssidan i din webbläsare, och själva appen förblir offline."),
+ "Installing for yourself needs no administrator rights; installing for all users does. The installer can add Reiks Viewer to Explorer&rsquo;s &ldquo;Open with&rdquo; list. To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.",
+ "Instalar solo para ti no requiere permisos de administrador; instalar para todos los usuarios, sí. El instalador puede añadir Reiks Visor a la lista &laquo;Abrir con&raquo; del Explorador. Para actualizar, ejecuta un instalador más reciente sobre el anterior; &laquo;Buscar actualizaciones&raquo; en la aplicación (F1) abre la página de descarga en tu navegador, y la aplicación en sí sigue sin conexión.",
+ "Att installera bara för dig själv kräver inga administratörsrättigheter; att installera för alla användare gör det. Installationsprogrammet kan lägga till Reiks Visare i Utforskarens lista &rdquo;Öppna med&rdquo;. För att uppdatera kör du ett nyare installationsprogram över det gamla; &rdquo;Sök efter uppdateringar&rdquo; i appen (F1) öppnar nedladdningssidan i din webbläsare, och själva appen förblir offline."),
+"install.4": (
+ "Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that has not been tested yet.",
+ "Reiks Visor está probado en Windows 11. También debería funcionar en Windows 10, pero eso aún no se ha probado.",
+ "Reiks Visare är testad på Windows 11. Den bör även fungera på Windows 10, men det har ännu inte testats."),
 
 "oss.h": ("Open source inside", "Código abierto por dentro", "Öppen källkod inuti"),
 "oss.1": (
@@ -177,9 +193,9 @@ T = {
  "Reiks Visare är inte knuten till eller godkänd av FFmpeg-projektet. FFmpeg är ett varumärke som tillhör Fabrice Bellard."),
 
 "footer.credits": (
- "Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center.",
- "Las capturas muestran el tráiler de <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; la nebulosa de Carina &laquo;Cosmic Cliffs&raquo;, NASA, ESA, CSA y STScI; y Blue Marble 2012, NASA Goddard Space Flight Center.",
- "Skärmbilderna visar trailern till <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; Carinanebulosan &rdquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA och STScI; samt Blue Marble 2012, NASA Goddard Space Flight Center."),
+ "Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center. Their use here does not imply any endorsement.",
+ "Las capturas muestran el tráiler de <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; la nebulosa de Carina &laquo;Cosmic Cliffs&raquo;, NASA, ESA, CSA y STScI; y Blue Marble 2012, NASA Goddard Space Flight Center. Su uso aquí no implica ningún respaldo.",
+ "Skärmbilderna visar trailern till <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; Carinanebulosan &rdquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA och STScI; samt Blue Marble 2012, NASA Goddard Space Flight Center. Att de används här innebär inte att upphovsmännen står bakom Reiks Visare."),
 "footer.warranty": ("Reiks Viewer is provided as is, without warranty.", "Reiks Visor se ofrece tal cual, sin garantía.", "Reiks Visare tillhandahålls i befintligt skick, utan garanti."),
 }
 

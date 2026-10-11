@@ -29,9 +29,10 @@ OpenCL headers, opencore-amr, OpenH264, OpenJPEG, Opus, libplacebo, rav1e,
 librist, librsvg, SDL2, shaderc, Snappy, soxr, libsrt, libssh, SVT-AV1,
 libtheora, TwoLAME, uavs3d, VapourSynth, libvmaf, libvorbis, libvpl, libvpx,
 VVenC, Vulkan loader, libwebp, libxml2, XZ Utils (lzma), ZeroMQ, zimg, zlib
-and libzvbi. Each is under its own licence, all compatible with distribution
-under the LGPL version 3; their sources and licences are referenced by the
-build scripts named above.
+and libzvbi. Each is under its own licence; their sources and licences are
+referenced by the build scripts named above. FFmpeg itself reports the
+licence of this build as "LGPL version 3 or later" (shown in the app under
+F1).
 
 FFmpeg is linked dynamically and has not been modified. You may replace the
 DLLs in the codecs folder with your own build of FFmpeg 8.x, and you may
@@ -41,7 +42,8 @@ FFmpeg is a trademark of Fabrice Bellard, originator of the FFmpeg project.
 This app is not affiliated with or endorsed by the FFmpeg project.
 
 Some formats FFmpeg can decode (for example H.264 and H.265) may be covered
-by patents in some countries. The FFmpeg licence does not grant patent rights.
+by patents in some countries. Neither FFmpeg's licence nor this app's licence
+gives you rights to patents held by third parties.
 
 
 FFmpeg.AutoGen

@@ -10,22 +10,29 @@ A simple picture and video viewer for Windows, made for private use. Your pictur
 
 ## What it never does
 
-- **Connect to the internet.** No telemetry, crash reports, update checks or online lookups. FFmpeg is restricted to the `file` protocol and to a fixed list of formats, so a crafted file can't make it open a network address.
+- **Connect to the internet.** No telemetry, crash reports, update checks or online lookups. Its own code has no networking. FFmpeg is restricted to the `file` protocol and to a fixed list of formats that leaves out playlists and streaming, to keep a crafted file from pointing it at a network address.
 - **Keep a record of what you open.** No history, recent list, thumbnail cache or library.
-- **Look inside your pictures.** No face recognition, tagging or AI. Nothing from your files is ever shared with anyone: it all stays on your PC.
+- **Look inside your pictures.** No face recognition, tagging or AI. Reiks Viewer sends nothing from your files to anyone.
 - **Change your files.** It never writes to your media or their folders.
 - **Run in the background.** No service, startup entry or tray icon.
-- **Ask for anything.** No account, ads, bundled extras or administrator rights.
+- **Ask for anything.** No account, ads or bundled extras. Installing it for yourself needs no administrator rights.
 
-The only file it writes is your own options, `%APPDATA%\ReiksViewer\settings.json`.
+In normal use the only file it writes is your own options, `%APPDATA%\ReiksViewer\settings.json`.
 
-What it can't control: Windows may list files you open from Explorer among its recent items, and diagnostic data and Recall are Windows settings.
+### What it can't control
+
+- **Windows' own records.** Windows may list files you open from Explorer among its recent items. Reiks Viewer asks Windows to keep files opened through its own Open dialog off that list, but Windows may still remember the folder that dialog was last in. If the app crashes, Windows Error Reporting may record it. Diagnostic data and Recall are Windows settings.
+- **Capture by other means.** "Hide from screenshots" relies on a Windows feature (`WDA_EXCLUDEFROMCAPTURE`). It can't stop a camera pointed at the screen or software made to get around it, and it has not been tested against Windows Recall.
+- **Network drives and synced folders.** If you open a file from one, Windows or your sync program carries that data over the network, as with any app.
+- **Hostile files.** Like every media player, Reiks Viewer has to decode whatever a file contains. A deliberately damaged file could make it crash or misbehave; see [SECURITY.md](SECURITY.md).
+
+Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that has not been tested yet. HEIC photos taken with an iPhone have had little testing.
 
 ## What it does
 
-- **Frame stepping, both ways.** Tap `X` or `Z` to move exactly one frame forward or back; hold to keep going, faster the longer you hold. Every frame is shown complete.
+- **Frame stepping, both ways.** Tap `X` or `Z` to move exactly one frame forward or back; hold to keep going, faster the longer you hold. Each frame is fully decoded before it is shown.
 - **Pictures, GIFs and video in one window.** Open one file and move through the rest of the folder. Zoom, pan, rotate and flip.
-- **Private on screen too.** Optionally leave the window out of screenshots, recordings and screen sharing; hide file names; press `H` to blank the window at once.
+- **Private on screen too.** Optionally have Windows leave the window out of screenshots, recordings and screen sharing; hide file names; press `H` to blank the window at once.
 - **Picture controls.** Brightness, contrast, saturation, gamma and warmth, for display only.
 - **Your keys, your colour.** Choose the keys for the main actions and the colour of the window.
 - **Seven languages.** English, Spanish, Swedish, French, German, Portuguese and Italian; it follows Windows, or choose one in Options.
@@ -66,7 +73,9 @@ You need Windows and the [.NET 10 SDK](https://dotnet.microsoft.com/download).
    bin\Release\net10.0-windows\ReiksViewer.exe
    ```
 
-The published releases are built from this repository by GitHub Actions (`.github/workflows/release.yml`), and each file carries a build provenance attestation you can check with `gh attestation verify <file> --repo reiks-apps/reiks-viewer`.
+The published installer and zip are built from this repository by GitHub Actions (`.github/workflows/release.yml`), and each carries a build provenance attestation you can check with `gh attestation verify <file> --repo reiks-apps/reiks-viewer`. The FFmpeg DLLs inside are not built here: the workflow takes the unmodified BtbN build kept in this repository's `ffmpeg-n8.1.3` release and checks its SHA-256 before using it.
+
+The program has checks for developers built in (`--selftest`, `--imagetest`, `--screenshot`, `--capturetest`; see `MainWindow.SelfTest.cs`). They write a log and pictures to the folder you name on the command line.
 
 `release.ps1` builds the installer (it needs [Inno Setup 6](https://jrsoftware.org/isinfo.php)) and the portable zip into `dist`.
 
