@@ -67,6 +67,23 @@ public partial class MainWindow
             ResetOrientation();
             log.Add($"orientation reset: angle={Rot.Angle} flip={Flip.ScaleX},{Flip.ScaleY}");
 
+            // Window colour through its own controls. The colour is put back and the save they
+            // schedule is cancelled, so the user's options file is untouched.
+            string savedColor = _settings.WindowColor;
+            _colorSliders[0].Value = 200;
+            log.Add($"colour slider: {_settings.WindowColor}");
+            var swatch = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_viewPanel!.Child).Content).Children
+                .OfType<System.Windows.Controls.WrapPanel>().First().Children.OfType<System.Windows.Controls.Border>().Last();
+            swatch.RaiseEvent(new System.Windows.Input.MouseButtonEventArgs(System.Windows.Input.Mouse.PrimaryDevice, 0, System.Windows.Input.MouseButton.Left)
+            {
+                RoutedEvent = MouseLeftButtonDownEvent,
+            });
+            log.Add($"colour swatch: {_settings.WindowColor} sliders={_colorSliders[0].Value},{_colorSliders[1].Value},{_colorSliders[2].Value}");
+            await Task.Delay(200);
+            Snapshot(Path.Combine(outputFolder, "5b-colour.png"));
+            SetWindowColor(ParseColor(savedColor));
+            _saveTimer.Stop();
+
             ToggleOptionsPanel();
             ApplyTheme(ParseColor("#F4F4F4"));
             await Task.Delay(300);
