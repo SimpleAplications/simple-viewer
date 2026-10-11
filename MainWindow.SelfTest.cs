@@ -132,12 +132,12 @@ public partial class MainWindow
             SetPlaying(false);
             // Shown with "repeat the current file" ticked, in memory only.
             _settings.PlayFolder = _settings.RepeatFile = true;
-            ToggleOptionsPanel();
+            ToggleMorePanel();
             RefreshPlaybackBoxes();
             UpdateStatus();
             await Task.Delay(300);
-            Snapshot(Path.Combine(outputFolder, "7-options.png"));
-            ToggleOptionsPanel();
+            Snapshot(Path.Combine(outputFolder, "7-playback.png"));
+            ToggleMorePanel();
             _settings.PlayFolder = _settings.RepeatFile = false;
             RefreshPlaybackBoxes();
             UpdateStatus();
@@ -205,7 +205,7 @@ public partial class MainWindow
         Close();
     }
 
-    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|options|hide>" opens a file,
+    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|more|options|hide>" opens a file,
     // pauses a video at the given time, optionally opens a panel, and saves a picture of the window.
     async Task RunScreenshot(string file, string output, double seconds, string panel)
     {
@@ -234,15 +234,66 @@ public partial class MainWindow
                 sliders[2].Value = 140;  // saturation
                 sliders[4].Value = 25;   // warmth
             }
-            else if (panel == "options")
-            {
-                // The whole menu, without its scroll bar.
-                Height = 960;
-                ToggleOptionsPanel();
-            }
+            else if (panel == "options") ToggleOptionsPanel();
+            else if (panel == "more") ToggleMorePanel();
             else if (panel == "hide") ToggleQuickHide();
             await Task.Delay(500);
             Snapshot(output);
+        }
+        finally
+        {
+            Close();
+        }
+    }
+
+    // "ReiksViewer.exe --printtest <file> <png> <seconds> <plain|changed>" saves a picture of the page
+    // that Print would send to a printer with upright A4 paper, without using a printer. "changed"
+    // turns and flips the picture and moves some image settings first.
+    async Task RunPrintTest(string file, string output, double seconds, string mode)
+    {
+        try
+        {
+            _settings.PlayFolder = _settings.RepeatFile = false;
+            _slideTimer.Stop();
+            OpenPath(file);
+            await Task.Delay(1200);
+            if (_player != null)
+            {
+                SetPlaying(false);
+                _player.Seek(seconds);
+                await Task.Delay(1200);
+            }
+            if (mode == "changed")
+            {
+                ToggleImagePanel();
+                var sliders = ((System.Windows.Controls.Panel)((System.Windows.Controls.ScrollViewer)_imagePanel!.Child).Content).Children
+                    .OfType<System.Windows.Controls.Grid>()
+                    .Select(row => row.Children.OfType<System.Windows.Controls.Slider>().First()).ToList();
+                sliders[2].Value = 0;    // saturation: black and white
+                sliders[4].Value = 80;   // warmth
+                RotateBy(90);
+                FlipBy(-1, 1);
+                ClosePanels();
+                await Task.Delay(300);
+            }
+            if (Img.Source is not BitmapSource shown) return;
+
+            var picture = PrintablePicture(shown);
+            // A4 in 1/96 inch, with 5 mm at each edge that the printer cannot reach.
+            var paper = new Size(793.7, 1122.5);
+            var page = new Rect(19, 19, paper.Width - 38, paper.Height - 38);
+            var visual = new DrawingVisual();
+            using (var context = visual.RenderOpen())
+            {
+                context.DrawRectangle(Brushes.White, null, new Rect(paper));
+                DrawOnPage(context, picture, page);
+            }
+            var bitmap = new RenderTargetBitmap((int)Math.Ceiling(paper.Width), (int)Math.Ceiling(paper.Height), 96, 96, PixelFormats.Pbgra32);
+            bitmap.Render(visual);
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            using var stream = File.Create(output);
+            encoder.Save(stream);
         }
         finally
         {

@@ -24,6 +24,7 @@ In normal use the only file it writes is your own options, `%APPDATA%\ReiksViewe
 - **Windows' own records.** Windows may list files you open from Explorer among its recent items. Reiks Viewer asks Windows to keep files opened through its own Open dialog off that list, but Windows may still remember the folder that dialog was last in. If the app crashes, Windows Error Reporting may record it. Diagnostic data and Recall are Windows settings.
 - **Capture by other means.** "Hide from screenshots" relies on a Windows feature (`WDA_EXCLUDEFROMCAPTURE`). It can't stop a camera pointed at the screen or software made to get around it, and it has not been tested against Windows Recall.
 - **Network drives and synced folders.** If you open a file from one, Windows or your sync program carries that data over the network, as with any app.
+- **Printing.** It goes through Windows' own print system: Windows and the printer's driver talk to the printer, over your network if it is a network printer, and they may keep a record of the job.
 - **Hostile files.** Like every media player, Reiks Viewer has to decode whatever a file contains. A deliberately damaged file could make it crash or misbehave; see [SECURITY.md](SECURITY.md).
 
 Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that has not been tested yet. HEIC photos taken with an iPhone have had little testing.
@@ -31,7 +32,7 @@ Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that
 ## What it does
 
 - **Frame stepping, both ways.** Tap `X` or `Z` to move exactly one frame forward or back; hold to keep going, faster the longer you hold. Each frame is fully decoded before it is shown.
-- **Pictures, GIFs and video in one window.** Open one file and move through the rest of the folder. Zoom, pan, rotate and flip.
+- **Pictures, GIFs and video in one window.** Open one file and move through the rest of the folder. Zoom, pan, rotate and flip. Print a picture or the frame of a paused video.
 - **Private on screen too.** Optionally have Windows leave the window out of screenshots, recordings and screen sharing; hide file names; press `H` to blank the window at once.
 - **Image settings.** Brightness, contrast, saturation, gamma and warmth, for display only, with rotate and flip in the same menu.
 - **Your keys, your colour.** Choose the keys for the main actions and the colour of the window.
@@ -50,6 +51,7 @@ Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that
 | Rotate right | `R` |
 | Image settings | `A` |
 | Play the whole folder | `S` |
+| Print | `Ctrl` + `P` |
 | Fullscreen | `F11`, `F` or double-click |
 | Open a file | `O` |
 | Formats and credits | `F1` |
@@ -75,7 +77,7 @@ You need Windows and the [.NET 10 SDK](https://dotnet.microsoft.com/download).
 
 The published installer and zip are built from this repository by GitHub Actions (`.github/workflows/release.yml`), and each carries a build provenance attestation you can check with `gh attestation verify <file> --repo reiks-apps/reiks-viewer`. The FFmpeg DLLs inside are not built here: the workflow takes the unmodified BtbN build kept in this repository's `ffmpeg-n8.1.3` release and checks its SHA-256 before using it.
 
-The program has checks for developers built in (`--selftest`, `--imagetest`, `--screenshot`, `--capturetest`; see `MainWindow.SelfTest.cs`). They write a log and pictures to the folder you name on the command line.
+The program has checks for developers built in (`--selftest`, `--imagetest`, `--screenshot`, `--printtest`, `--capturetest`; see `MainWindow.SelfTest.cs`). They write a log and pictures to the folder you name on the command line.
 
 `release.ps1` builds the installer (it needs [Inno Setup 6](https://jrsoftware.org/isinfo.php)) and the portable zip into `dist`.
 

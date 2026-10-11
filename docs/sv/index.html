@@ -92,11 +92,11 @@
   <img class="icon" src="../img/icon.png" alt="Ikon för Reiks Visare" width="96" height="96">
   <h1>Reiks Visare</h1>
   <p class="tagline">Dina bilder och videor förblir dina. Reiks Visare visar dem bara för dig, och det är allt den gör.</p>
-  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.3.0/ReiksViewer-Setup-1.3.0.exe">Ladda ner för Windows</a>
+  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/ReiksViewer-Setup-1.4.0.exe">Ladda ner för Windows</a>
   <p class="under">
-    <strong>Version 1.3.0</strong> &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases/tag/v1.3.0">Nyheter</a><br>
+    <strong>Version 1.4.0</strong> &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases/tag/v1.4.0">Nyheter</a><br>
     Gratis &middot; öppen källkod &middot; ansluter aldrig till internet &middot; Windows 10 eller 11, 64-bitars<br>
-    <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.3.0/ReiksViewer-1.3.0-portable.zip">Portabel zip (ingen installation)</a>
+    <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/ReiksViewer-1.4.0-portable.zip">Portabel zip (ingen installation)</a>
     &middot; <a href="#verify">Kontrollsummor</a>
     &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases">Alla versioner</a>
   </p>
@@ -122,7 +122,7 @@
     <h2>Vad den gör</h2>
     <div class="grid">
       <div class="card"><h3>En bildruta i taget, åt båda håll</h3><p>Tryck på <kbd>X</kbd> eller <kbd>Z</kbd> för att gå exakt en bildruta framåt eller bakåt. Håll nere för att fortsätta, snabbare ju längre du håller. Varje bildruta avkodas helt innan den visas, så ett hopp lämnar ingen utsmetad bild.</p></div>
-      <div class="card"><h3>Bilder, GIF:ar och video tillsammans</h3><p>Öppna en fil och bläddra genom allt annat i mappen med piltangenterna. Zooma med mushjulet, dra för att panorera, rotera och spegla.</p></div>
+      <div class="card"><h3>Bilder, GIF:ar och video tillsammans</h3><p>Öppna en fil och bläddra genom allt annat i mappen med piltangenterna. Zooma med mushjulet, dra för att panorera, rotera och spegla. Skriv ut en bild, eller bildrutan i en pausad video, med <kbd>Ctrl</kbd>+<kbd>P</kbd>.</p></div>
       <div class="card"><h3>Privat även på skärmen</h3><p>Låt Windows hålla fönstret utanför skärmbilder, inspelningar och skärmdelning, som då visar det som finns bakom. Dölj filnamn i namnlisten och aktivitetsfältet. Tryck på <kbd>H</kbd> för att tömma fönstret direkt.</p></div>
       <div class="card"><h3>Bildinställningar</h3><p>Ljusstyrka, kontrast, mättnad, gamma och värme för allt på skärmen, även pausad video. Påverkar bara visningen: dina filer ändras aldrig.</p></div>
       <div class="card"><h3>Dina tangenter, din färg</h3><p>Välj tangenter för spela, nästa, föregående och bildrutestegning, och välj fönstrets färg. Texten växlar mellan vitt och svart för att förbli läsbar.</p></div>
@@ -136,8 +136,8 @@
       <figcaption>Bildinställningar: ljus, färg, rotera och spegla. De verkar direkt och återställs med ett klick.</figcaption>
     </figure>
     <figure>
-      <img class="shot" src="../img/options.png" width="1100" height="960" alt="Menyn Alternativ med uppspelningsval, tangenttilldelning, integritetsval, fönsterfärg och språk">
-      <figcaption>Alternativ: uppspelning, tangenter, integritet, fönsterfärg och språk.</figcaption>
+      <img class="shot" src="../img/options.png" width="1100" height="750" alt="Menyn Alternativ med tangenttilldelning, integritetsval, fönsterfärg och språk">
+      <figcaption>Alternativ: tangenter, integritet, fönsterfärg och språk.</figcaption>
     </figure>
     <p class="shotnote">Skärmbilderna visar appen på engelska; den finns också på svenska.</p>
   </section>
@@ -167,7 +167,7 @@
     <h2>Det Reiks Visare inte kan styra över</h2>
     <p>Windows sparar vissa uppgifter på egen hand, och dem kan Reiks Visare inte påverka. När du öppnar en fil genom att dubbelklicka på den i Utforskaren kan Windows lägga till den i sin lista över senaste filer (Inställningar &rarr; Anpassning &rarr; Start &rarr; &rdquo;Visa nyligen öppnade objekt&rdquo;). Reiks Visare ber Windows att inte lägga till filer som öppnas via dess egen Öppna-dialog i den listan, men Windows kan ändå komma ihåg vilken mapp dialogen senast visade. Om Reiks Visare skulle krascha kan Windows felrapportering registrera kraschen, precis som för andra appar. Windows diagnostikdata och Recall är också Windows-inställningar, under Sekretess och säkerhet.</p>
     <p><strong>&rdquo;Dölj från skärmbilder&rdquo; bygger på en funktion i Windows.</strong> Windows tillämpar den på de vanliga sätten att fånga skärmen: Print Screen, Skärmklippverktyget, skärminspelare och skärmdelning i mötesappar. Den kan inte hindra en kamera som riktas mot skärmen eller program som är gjorda för att kringgå den, och vi har inte testat den mot Windows Recall.</p>
-    <p>Om du öppnar en fil från en nätverksenhet eller en molnsynkad mapp är det Windows eller ditt synkprogram som flyttar datan över nätverket, precis som för andra appar. Och som alla mediespelare måste Reiks Visare avkoda det en fil innehåller: en avsiktligt skadad fil kan få den att krascha eller bete sig oväntat, så håll den uppdaterad och var försiktig med filer från källor du inte litar på.</p>
+    <p>Om du öppnar en fil från en nätverksenhet eller en molnsynkad mapp är det Windows eller ditt synkprogram som flyttar datan över nätverket, precis som för andra appar. Utskrifter går via Windows eget utskriftssystem: det är Windows och skrivarens drivrutin som talar med skrivaren, över ditt nätverk om det är en nätverksskrivare, och de kan spara uppgifter om utskriften. Och som alla mediespelare måste Reiks Visare avkoda det en fil innehåller: en avsiktligt skadad fil kan få den att krascha eller bete sig oväntat, så håll den uppdaterad och var försiktig med filer från källor du inte litar på.</p>
     <p><strong>Vid normal användning är den enda fil Reiks Visare skriver</strong> dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings- och integritetsval, i <code>%APPDATA%\ReiksViewer\settings.json</code>. Den innehåller ingenting om dina filer. Avinstallationen tar bort den; om du använder den portabla zip-filen tar du själv bort den mappen.</p>
   </section>
 
@@ -175,7 +175,7 @@
     <h2>Installation</h2>
     <div class="note">
       <p><strong>Windows kan varna dig första gången.</strong> Installationsprogrammet är ännu inte digitalt signerat, så Windows kan visa &rdquo;Windows skyddade datorn&rdquo;. Välj <em>Mer information</em> och sedan <em>Kör ändå</em>.</p>
-      <p>För att kontrollera att din nedladdning är hel och stämmer med den publicerade filen, jämför dess SHA-256-kontrollsumma med <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.3.0/SHA256SUMS.txt">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup-1.3.0.exe</code></p>
+      <p>För att kontrollera att din nedladdning är hel och stämmer med den publicerade filen, jämför dess SHA-256-kontrollsumma med <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/SHA256SUMS.txt">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup-1.4.0.exe</code></p>
       <p>Att installera bara för dig själv kräver inga administratörsrättigheter; att installera för alla användare gör det. Installationsprogrammet kan lägga till Reiks Visare i Utforskarens lista &rdquo;Öppna med&rdquo;. För att uppdatera kör du ett nyare installationsprogram över det gamla; &rdquo;Sök efter uppdateringar&rdquo; i appen (F1) öppnar nedladdningssidan i din webbläsare, och själva appen förblir offline.</p>
       <p>Reiks Visare är testad på Windows 11. Den bör även fungera på Windows 10, men det har ännu inte testats.</p>
     </div>

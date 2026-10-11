@@ -117,6 +117,8 @@ public partial class MainWindow : Window
         else if (args.Length == 5 && args[1] == "--capturetest") _ = RunCaptureTest(args[2], args[3], args[4] == "on");
         else if (args.Length == 6 && args[1] == "--screenshot")
             _ = RunScreenshot(args[2], args[3], double.Parse(args[4], System.Globalization.CultureInfo.InvariantCulture), args[5]);
+        else if (args.Length == 6 && args[1] == "--printtest")
+            _ = RunPrintTest(args[2], args[3], double.Parse(args[4], System.Globalization.CultureInfo.InvariantCulture), args[5]);
         else if (args.Length > 1) OpenPath(args[1]);
     }
 
@@ -665,6 +667,11 @@ public partial class MainWindow : Window
             SeekBy(e.Key == Key.Left ? -5 : 5);
             return;
         }
+        if (ctrl && e.Key == Key.P)
+        {
+            PrintCurrent();
+            return;
+        }
         // Keys chosen in Options win over the fixed ones below.
         if (RunKeyAction(e)) return;
 
@@ -709,6 +716,6 @@ public partial class MainWindow : Window
     }
     void OnImageClick(object sender, RoutedEventArgs e) => ToggleImagePanel();
     void OnOptionsClick(object sender, RoutedEventArgs e) => ToggleOptionsPanel();
-    void OnSlideshowClick(object sender, RoutedEventArgs e) => ToggleSlideshow();
+    void OnMoreClick(object sender, RoutedEventArgs e) => ToggleMorePanel();
     void OnFullscreenClick(object sender, RoutedEventArgs e) => ToggleFullscreen();
 }

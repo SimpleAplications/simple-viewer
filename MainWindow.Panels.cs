@@ -8,14 +8,14 @@ using System.Windows.Threading;
 
 namespace ReiksViewer;
 
-// The two pop-up menus over the picture and what they control: Image settings (light and
-// colour, rotate and flip) and Options (everything about the app itself).
+// The pop-up menus over the picture and what they control: Image settings (light and colour,
+// rotate and flip), Playback and print, and Options (everything about the app itself).
 public partial class MainWindow
 {
     readonly Settings _settings = Settings.Load();
     readonly DispatcherTimer _saveTimer = new() { Interval = TimeSpan.FromMilliseconds(600) };
     readonly List<Border> _panels = new();
-    Border? _imagePanel, _optionsPanel;
+    Border? _imagePanel, _morePanel, _optionsPanel;
 
     // ---------- Window colour ----------
 
@@ -105,9 +105,9 @@ public partial class MainWindow
         DependencyObject? node = source;
         for (; node != null && node != this; node = ParentOf(node))
         {
-            // The menus look after their own clicks, and so do the two buttons that open them.
+            // The menus look after their own clicks, and so do the buttons that open them.
             if (node is Border border && _panels.Contains(border)) return;
-            if (node == ImageButton || node == OptionsButton) return;
+            if (node == ImageButton || node == MoreButton || node == OptionsButton) return;
             if (node == Viewport) onPicture = true;
         }
         // A drop-down list belonging to the menu lives in a window of its own.
@@ -132,7 +132,8 @@ public partial class MainWindow
 
         Mark(ImageButton, Open(_imagePanel));
         Mark(OptionsButton, Open(_optionsPanel));
-        Mark(FolderButton, _settings.PlayFolder && !_settings.RepeatFile);
+        // Also lit while the folder is being played, which is switched on in this menu.
+        Mark(MoreButton, Open(_morePanel) || (_settings.PlayFolder && !_settings.RepeatFile));
         Mark(MuteButton, _muted);
         Mark(StepBackButton, _scrubbing && _scrubDirection < 0);
         Mark(StepForwardButton, _scrubbing && _scrubDirection > 0);
@@ -337,7 +338,50 @@ public partial class MainWindow
         UpdateStatus();
     }
 
-    // ---------- Options panel: playback, keys, privacy, window colour and language ----------
+    // ---------- Playback and print panel ----------
+
+    void ToggleMorePanel() => TogglePanel(ref _morePanel, BuildMorePanel);
+
+    Border BuildMorePanel()
+    {
+        var panel = CreatePanel(L.T("panel.playback"), out var rows, 340);
+        _playFolderBox = Check(L.T("play.folder"), _settings.PlayFolder, SetPlayFolder, L.T("play.folder.tip"));
+        _shuffleBox = Check(L.T("play.random"), _settings.Shuffle, on =>
+        {
+            _settings.Shuffle = on;
+            PlaybackChanged();
+        }, indent: 22);
+        _repeatFolderBox = Check(L.T("play.again"), _settings.RepeatFolder, on =>
+        {
+            _settings.RepeatFolder = on;
+            PlaybackChanged();
+        }, indent: 22);
+        _repeatFileBox = Check(L.T("play.repeat"), _settings.RepeatFile, on =>
+        {
+            _settings.RepeatFile = on;
+            PlaybackChanged();
+        }, L.T("play.repeat.tip"));
+        rows.Children.Add(_playFolderBox);
+        rows.Children.Add(_shuffleBox);
+        rows.Children.Add(_repeatFolderBox);
+        rows.Children.Add(_repeatFileBox);
+        RefreshPlaybackBoxes();
+
+        rows.Children.Add(Heading(L.T("panel.print")));
+        var print = TextButton(L.T("print.button"), PrintCurrent);
+        print.HorizontalAlignment = HorizontalAlignment.Left;
+        print.MinWidth = 140;
+        print.Margin = new Thickness(0);
+        rows.Children.Add(print);
+        var hint = Label(L.T("print.hint"));
+        hint.FontSize = 11;
+        hint.Opacity = 0.75;
+        hint.Margin = new Thickness(0, 6, 0, 0);
+        rows.Children.Add(hint);
+        return panel;
+    }
+
+    // ---------- Options panel: keys, privacy, window colour and language ----------
 
     static readonly (KeyAction Action, string Name)[] KeyActions =
     {
@@ -363,30 +407,7 @@ public partial class MainWindow
 
     Border BuildOptionsPanel()
     {
-        var panel = CreatePanel(L.T("panel.playback"), out var rows, 340);
-        _playFolderBox = Check(L.T("play.folder"), _settings.PlayFolder, SetPlayFolder, L.T("play.folder.tip"));
-        _shuffleBox = Check(L.T("play.random"), _settings.Shuffle, on =>
-        {
-            _settings.Shuffle = on;
-            PlaybackChanged();
-        }, indent: 22);
-        _repeatFolderBox = Check(L.T("play.again"), _settings.RepeatFolder, on =>
-        {
-            _settings.RepeatFolder = on;
-            PlaybackChanged();
-        }, indent: 22);
-        _repeatFileBox = Check(L.T("play.repeat"), _settings.RepeatFile, on =>
-        {
-            _settings.RepeatFile = on;
-            PlaybackChanged();
-        }, L.T("play.repeat.tip"));
-        rows.Children.Add(_playFolderBox);
-        rows.Children.Add(_shuffleBox);
-        rows.Children.Add(_repeatFolderBox);
-        rows.Children.Add(_repeatFileBox);
-        RefreshPlaybackBoxes();
-
-        rows.Children.Add(Heading(L.T("panel.keys")));
+        var panel = CreatePanel(L.T("panel.keys"), out var rows, 340);
         foreach (var (action, name) in KeyActions)
         {
             var button = TextButton("", () => BeginKeyCapture(action), 120);
@@ -483,7 +504,7 @@ public partial class MainWindow
         _panels.Clear();
         _adjustResets.Clear();
         _keyButtons.Clear();
-        _imagePanel = _optionsPanel = null;
+        _imagePanel = _morePanel = _optionsPanel = null;
         _playFolderBox = _shuffleBox = _repeatFolderBox = _repeatFileBox = null;
         ApplyLanguage();
         ToggleOptionsPanel();
@@ -497,7 +518,7 @@ public partial class MainWindow
         ImageButton.ToolTip = L.T("tip.image");
         OptionsButton.ToolTip = L.T("tip.options");
         FormatsButton.ToolTip = L.T("tip.formats");
-        FolderButton.ToolTip = L.T("tip.folder");
+        MoreButton.ToolTip = L.T("tip.more");
         FullscreenButton.ToolTip = L.T("tip.fullscreen");
         MinimizeButton.ToolTip = L.T("tip.minimize");
         CloseButton.ToolTip = L.T("tip.close");

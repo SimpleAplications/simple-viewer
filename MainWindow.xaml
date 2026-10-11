@@ -151,9 +151,9 @@
                         <TextBlock Text="&#xE713;" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                     </Grid>
                 </Button>
+                <Button x:Name="MoreButton" Content="&#xE712;" ToolTip="Playback and print" Click="OnMoreClick"/>
                 <Button x:Name="OptionsButton" Content="&#xE713;" ToolTip="Options" Click="OnOptionsClick"/>
                 <Button x:Name="FormatsButton" Content="&#xE946;" ToolTip="Formats and credits (F1)" Click="OnFormatsClick"/>
-                <Button x:Name="FolderButton" Content="&#xE786;" ToolTip="Play the whole folder (S)" Click="OnSlideshowClick"/>
                 <Button x:Name="FullscreenButton" Content="&#xE740;" ToolTip="Fullscreen (F11, double-click)" Click="OnFullscreenClick"/>
             </StackPanel>
         </Grid>
