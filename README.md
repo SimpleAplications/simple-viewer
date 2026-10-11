@@ -25,7 +25,7 @@ What it can't control: Windows may list files you open from Explorer among its r
 
 - **Frame stepping, both ways.** Tap `X` or `Z` to move exactly one frame forward or back; hold to keep going, faster the longer you hold. Every frame is shown complete.
 - **Pictures, GIFs and video in one window.** Open one file and move through the rest of the folder. Zoom, pan, rotate and flip.
-- **Private on screen too.** Optionally hide the window from screenshots, recordings, screen sharing and Windows Recall; hide file names; press `H` to blank the window at once.
+- **Private on screen too.** Optionally leave the window out of screenshots, recordings and screen sharing; hide file names; press `H` to blank the window at once.
 - **Picture controls.** Brightness, contrast, saturation, gamma and warmth, for display only.
 - **Your keys, your colour.** Choose the keys for the main actions and the colour of the window.
 - **Folder playback.** Move on when a video ends, in order or shuffled, once or on repeat; or repeat one file.

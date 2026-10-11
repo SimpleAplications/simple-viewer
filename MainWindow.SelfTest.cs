@@ -223,6 +223,39 @@ public partial class MainWindow
         }
     }
 
+    [System.Runtime.InteropServices.DllImport("user32.dll")]
+    static extern bool GetWindowRect(IntPtr hwnd, out ScreenRect rect);
+
+    // "Simple.exe --capturetest <file> <rect file> <on|off>" shows a file in a window kept on top,
+    // with capture protection on or off, and writes the window's screen rectangle to a file so
+    // that a separate screen grab can check what a capture of that area contains.
+    async Task RunCaptureTest(string file, string rectFile, bool protect)
+    {
+        try
+        {
+            _settings.PlayFolder = _settings.RepeatFile = false;
+            _slideTimer.Stop();
+            _settings.HideFromCapture = protect;
+            ApplyTheme(ParseColor("#000000"));
+            WindowState = WindowState.Normal;
+            Left = 80;
+            Top = 80;
+            Width = 800;
+            Height = 600;
+            Topmost = true;
+            ApplyCaptureProtection();
+            OpenPath(file);
+            await Task.Delay(1500);
+            GetWindowRect(new System.Windows.Interop.WindowInteropHelper(this).Handle, out var rect);
+            File.WriteAllText(rectFile, $"{rect.Left} {rect.Top} {rect.Right} {rect.Bottom}");
+            await Task.Delay(6000);
+        }
+        finally
+        {
+            Close();
+        }
+    }
+
     void Snapshot(string path)
     {
         // The window itself, so that its background colour is part of the picture.
