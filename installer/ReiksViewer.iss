@@ -255,3 +255,81 @@ begin
             ChoseSimpleFor('.webp') or ChoseSimpleFor('.mp4') or ChoseSimpleFor('.mkv') or
             ChoseSimpleFor('.mov') or ChoseSimpleFor('.avi') or ChoseSimpleFor('.webm');
 end;
+
+// ---------- Replacing Simple, the app's earlier name ----------
+// Simple had its own installer identity, so installing Reiks Viewer would leave it sitting
+// beside the new version. It is removed here with its own uninstaller.
+
+const
+  SimpleUninstallKey = 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{6C1B0E5E-3B0F-4D5B-9C36-5A1F0A7B51E0}_is1';
+
+// Only a folder that really holds Simple is touched: its program, its uninstaller and the
+// FFmpeg licence file it shipped with.
+function IsSimpleFolder(Folder: String): Boolean;
+begin
+  Result := FileExists(Folder + '\Simple.exe') and FileExists(Folder + '\unins000.exe') and
+            FileExists(Folder + '\codecs\FFmpeg-LICENSE.txt');
+end;
+
+// "Simple" is a common name, so the options file is checked to be this app's before it is used.
+function IsSimpleOptions(FileName: String): Boolean;
+var
+  Content: AnsiString;
+begin
+  Result := LoadStringFromFile(FileName, Content) and (Pos('"WindowColor"', Content) > 0);
+end;
+
+procedure RemoveSimpleFrom(Folder: String);
+var
+  ResultCode, Tries: Integer;
+begin
+  Folder := RemoveBackslashUnlessRoot(Folder);
+  if (Folder = '') or not IsSimpleFolder(Folder) then Exit;
+  Log('Removing Simple from ' + Folder);
+  Exec(Folder + '\unins000.exe', '/VERYSILENT /SUPPRESSMSGBOXES /NORESTART', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+  // The uninstaller finishes its work from a temporary copy; give that a moment.
+  Tries := 0;
+  while FileExists(Folder + '\Simple.exe') and (Tries < 20) do
+  begin
+    Sleep(250);
+    Tries := Tries + 1;
+  end;
+end;
+
+procedure RemoveSimple;
+var
+  Folder, OldOptions, NewOptions: String;
+begin
+  // Reiks Viewer takes over Simple's options file, then the old one is cleared away.
+  OldOptions := ExpandConstant('{userappdata}\Simple\settings.json');
+  NewOptions := ExpandConstant('{userappdata}\{#AppKey}\settings.json');
+  if FileExists(OldOptions) and IsSimpleOptions(OldOptions) then
+  begin
+    if not FileExists(NewOptions) then
+    begin
+      ForceDirectories(ExtractFileDir(NewOptions));
+      CopyFile(OldOptions, NewOptions, True);
+    end;
+    if FileExists(NewOptions) then
+    begin
+      DeleteFile(OldOptions);
+      // Only goes if nothing else is in it.
+      RemoveDir(ExtractFileDir(OldOptions));
+    end;
+  end;
+
+  if RegQueryStringValue(HKCU, SimpleUninstallKey, 'InstallLocation', Folder) then RemoveSimpleFrom(Folder);
+  RemoveSimpleFrom(ExpandConstant('{localappdata}\Programs\Simple'));
+  // A copy installed for all users can only be removed with administrator rights.
+  if IsAdminInstallMode then
+  begin
+    if RegQueryStringValue(HKLM, SimpleUninstallKey, 'InstallLocation', Folder) then RemoveSimpleFrom(Folder);
+    RemoveSimpleFrom(ExpandConstant('{commonpf}\Simple'));
+  end;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  // Before any file or registry entry of the new version is written.
+  if CurStep = ssInstall then RemoveSimple;
+end;
