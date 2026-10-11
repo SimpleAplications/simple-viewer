@@ -2,7 +2,7 @@
 # The page layout is in site_template.html; every text is in the table below.
 # To add a language: add a column to every entry and a line to LANGUAGES, then run
 #   python tools/build_site.py
-import io, os
+import io, os, re
 
 LANGUAGES = [("en", "English", ""), ("es", "Español", "es/"), ("sv", "Svenska", "sv/")]
 
@@ -18,6 +18,8 @@ T = {
  "Your pictures and videos stay yours. Reiks Viewer shows them only to you, and that is all it does.",
  "Tus imágenes y vídeos siguen siendo tuyos. Reiks Visor te los muestra solo a ti, y eso es todo lo que hace.",
  "Dina bilder och videor förblir dina. Reiks Visare visar dem bara för dig, och det är allt den gör."),
+"version": ("Version {v}", "Versión {v}", "Version {v}"),
+"whatsnew": ("What&rsquo;s new", "Novedades", "Nyheter"),
 "download": ("Download for Windows", "Descargar para Windows", "Ladda ner för Windows"),
 "under": (
  "Free &middot; open source &middot; never connects to the internet &middot; Windows 10 or 11, 64-bit",
@@ -170,9 +172,9 @@ T = {
  "<strong>Windows puede avisarte la primera vez.</strong> El instalador aún no está firmado digitalmente, así que Windows puede mostrar &laquo;Windows protegió su PC&raquo;. Elige <em>Más información</em> y luego <em>Ejecutar de todas formas</em>.",
  "<strong>Windows kan varna dig första gången.</strong> Installationsprogrammet är ännu inte digitalt signerat, så Windows kan visa &rdquo;Windows skyddade datorn&rdquo;. Välj <em>Mer information</em> och sedan <em>Kör ändå</em>."),
 "install.2": (
- "To check that your download is complete and matches the published file, compare its SHA-256 checksum with <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>",
- "Para comprobar que tu descarga está completa y coincide con el archivo publicado, compara su suma SHA-256 con <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. En PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>",
- "För att kontrollera att din nedladdning är hel och stämmer med den publicerade filen, jämför dess SHA-256-kontrollsumma med <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt\">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code>"),
+ "To check that your download is complete and matches the published file, compare its SHA-256 checksum with <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/download/v{v}/SHA256SUMS.txt\">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup-{v}.exe</code>",
+ "Para comprobar que tu descarga está completa y coincide con el archivo publicado, compara su suma SHA-256 con <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/download/v{v}/SHA256SUMS.txt\">SHA256SUMS.txt</a>. En PowerShell: <code>Get-FileHash ReiksViewer-Setup-{v}.exe</code>",
+ "För att kontrollera att din nedladdning är hel och stämmer med den publicerade filen, jämför dess SHA-256-kontrollsumma med <a href=\"https://github.com/reiks-apps/reiks-viewer/releases/download/v{v}/SHA256SUMS.txt\">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup-{v}.exe</code>"),
 "install.3": (
  "Installing for yourself needs no administrator rights; installing for all users does. The installer can add Reiks Viewer to Explorer&rsquo;s &ldquo;Open with&rdquo; list. To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.",
  "Instalar solo para ti no requiere permisos de administrador; instalar para todos los usuarios, sí. El instalador puede añadir Reiks Visor a la lista &laquo;Abrir con&raquo; del Explorador. Para actualizar, ejecuta un instalador más reciente sobre el anterior; &laquo;Buscar actualizaciones&raquo; en la aplicación (F1) abre la página de descarga en tu navegador, y la aplicación en sí sigue sin conexión.",
@@ -202,6 +204,10 @@ T = {
 here = os.path.dirname(os.path.abspath(__file__))
 docs = os.path.join(here, "..", "docs")
 template = io.open(os.path.join(here, "site_template.html"), encoding="utf-8").read()
+# The version comes from the project file, so it is set in one place. The page links to that
+# version's own files: publish the release before the website, or the links lead nowhere.
+project = io.open(os.path.join(here, "..", "ReiksViewer.csproj"), encoding="utf-8").read()
+version = re.search(r"<Version>([^<]+)</Version>", project).group(1)
 
 for index, (code, _, folder) in enumerate(LANGUAGES):
     page = template
@@ -218,6 +224,7 @@ for index, (code, _, folder) in enumerate(LANGUAGES):
         assert "{{" + key + "}}" in template, "unused text: " + key
         page = page.replace("{{" + key + "}}", values[index])
     assert "{{" not in page, page[page.index("{{"):][:60]
+    page = page.replace("{v}", version)
     target = os.path.join(docs, folder)
     os.makedirs(target, exist_ok=True)
     io.open(os.path.join(target, "index.html"), "w", encoding="utf-8", newline="\n").write(page)

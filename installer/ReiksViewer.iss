@@ -13,6 +13,12 @@ AppId={{2F4A9C61-8D3E-4B7A-A5C2-91E6D0B3F7A4}
 AppName={#AppName}
 AppVersion={#AppVersion}
 AppPublisher=Reiks Apps
+; What Windows shows for the installer file itself (Properties, Details).
+VersionInfoVersion={#AppVersion}
+VersionInfoProductVersion={#AppVersion}
+VersionInfoProductName={#AppName}
+VersionInfoCompany=Reiks Apps
+VersionInfoDescription={#AppName} {#AppVersion} Setup
 AppPublisherURL=https://reiks-apps.github.io/reiks-viewer/
 DefaultDirName={autopf}\{#AppName}
 DefaultGroupName={#AppName}
