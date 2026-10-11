@@ -1,6 +1,6 @@
 # Simple
 
-A picture, GIF and video viewer for Windows that steps through video one clean frame at a time.
+A simple picture and video viewer for Windows, made for private use. It never connects to the internet: no telemetry, no account, no ads.
 
 **[Download for Windows](https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-Setup.exe)**
  · [Portable zip](https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-portable.zip)
