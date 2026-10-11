@@ -186,6 +186,7 @@ public partial class MainWindow
         try
         {
             _settings.PlayFolder = _settings.Shuffle = _settings.RepeatFolder = _settings.RepeatFile = false;
+            _settings.HideFromCapture = _settings.HideFileNames = false;
             _slideTimer.Stop();
             ApplyTheme(ParseColor("#000000"));
             OpenPath(file);
@@ -210,7 +211,7 @@ public partial class MainWindow
             else if (panel == "rotate") ToggleRotatePanel();
             else if (panel == "options")
             {
-                Height = 900;
+                Height = 960;
                 ToggleOptionsPanel();
             }
             else if (panel == "hide") ToggleQuickHide();

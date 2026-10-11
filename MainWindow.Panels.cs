@@ -109,6 +109,7 @@ public partial class MainWindow
     Border CreatePanel(string title, out StackPanel rows, double width = 300)
     {
         rows = new StackPanel { Width = width };
+        Grid.SetIsSharedSizeScope(rows, true);
         rows.Children.Add(Heading(title, first: true));
         var panel = new Border
         {
@@ -159,7 +160,9 @@ public partial class MainWindow
     {
         var button = new Button
         {
-            Content = text,
+            // The text carries its own side margins, so a button without a fixed width
+            // grows with longer words in other languages.
+            Content = new TextBlock { Text = text, Margin = new Thickness(12, 0, 12, 0) },
             FontFamily = SystemFonts.MessageFontFamily,
             FontSize = 13,
             Width = width,
@@ -189,17 +192,18 @@ public partial class MainWindow
 
     Border BuildAdjustPanel()
     {
-        var panel = CreatePanel("Picture", out var rows);
+        var panel = CreatePanel(L.T("panel.picture"), out var rows);
         // Slider range, neutral value, how the number is shown, and what it sets on the effect.
-        AddAdjustSlider(rows, "Brightness", -100, 100, 0, v => $"{v:+0;-0;0}", v => _adjust.Brightness = v / 200);
-        AddAdjustSlider(rows, "Contrast", 0, 200, 100, v => $"{v:0}%", v => _adjust.Contrast = v / 100);
-        AddAdjustSlider(rows, "Saturation", 0, 200, 100, v => $"{v:0}%", v => _adjust.Saturation = v / 100);
+        AddAdjustSlider(rows, L.T("adj.brightness"), -100, 100, 0, v => $"{v:+0;-0;0}", v => _adjust.Brightness = v / 200);
+        AddAdjustSlider(rows, L.T("adj.contrast"), 0, 200, 100, v => $"{v:0}%", v => _adjust.Contrast = v / 100);
+        AddAdjustSlider(rows, L.T("adj.saturation"), 0, 200, 100, v => $"{v:0}%", v => _adjust.Saturation = v / 100);
         // Gamma runs from about 0.4 to 2.5 on a doubling scale, so that 1.0 sits in the middle.
-        AddAdjustSlider(rows, "Gamma", -100, 100, 0, v => $"{Math.Pow(2, v / 75):0.00}", v => _adjust.Gamma = Math.Pow(2, v / 75));
-        AddAdjustSlider(rows, "Warmth", -100, 100, 0, v => $"{v:+0;-0;0}", v => _adjust.Warmth = v / 100);
+        AddAdjustSlider(rows, L.T("adj.gamma"), -100, 100, 0, v => $"{Math.Pow(2, v / 75):0.00}", v => _adjust.Gamma = Math.Pow(2, v / 75));
+        AddAdjustSlider(rows, L.T("adj.warmth"), -100, 100, 0, v => $"{v:+0;-0;0}", v => _adjust.Warmth = v / 100);
 
-        var reset = TextButton("Reset", () => _adjustResets.ForEach(r => r()), 80);
+        var reset = TextButton(L.T("btn.reset"), () => _adjustResets.ForEach(r => r()));
         reset.HorizontalAlignment = HorizontalAlignment.Right;
+        reset.MinWidth = 80;
         reset.Margin = new Thickness(0, 8, 0, 0);
         rows.Children.Add(reset);
         return panel;
@@ -240,7 +244,7 @@ public partial class MainWindow
         };
 
         var row = new Grid { Margin = new Thickness(0, 3, 0, 3) };
-        row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(72) });
+        row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto, MinWidth = 72, SharedSizeGroup = "SliderLabel" });
         row.ColumnDefinitions.Add(new ColumnDefinition());
         row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(40) });
         Grid.SetColumn(slider, 1);
@@ -261,13 +265,16 @@ public partial class MainWindow
 
     Border BuildRotatePanel()
     {
-        var panel = CreatePanel("Rotate and flip", out var rows, 280);
-        rows.Children.Add(ButtonRow(TextButton("Rotate left", () => RotateBy(-90)),
-                                    TextButton("Rotate right", () => RotateBy(90))));
-        rows.Children.Add(ButtonRow(TextButton("Flip horizontally", () => FlipBy(-1, 1)),
-                                    TextButton("Flip vertically", () => FlipBy(1, -1))));
-        var reset = TextButton("Reset", ResetOrientation, 80);
+        var panel = CreatePanel(L.T("panel.rotate"), out var rows, 280);
+        rows.Width = double.NaN;
+        rows.MinWidth = 280;
+        rows.Children.Add(ButtonRow(TextButton(L.T("rot.left"), () => RotateBy(-90)),
+                                    TextButton(L.T("rot.right"), () => RotateBy(90))));
+        rows.Children.Add(ButtonRow(TextButton(L.T("flip.h"), () => FlipBy(-1, 1)),
+                                    TextButton(L.T("flip.v"), () => FlipBy(1, -1))));
+        var reset = TextButton(L.T("btn.reset"), ResetOrientation);
         reset.HorizontalAlignment = HorizontalAlignment.Right;
+        reset.MinWidth = 80;
         reset.Margin = new Thickness(0, 8, 6, 0);
         rows.Children.Add(reset);
         return panel;
@@ -305,12 +312,12 @@ public partial class MainWindow
 
     static readonly (KeyAction Action, string Name)[] KeyActions =
     {
-        (KeyAction.PlayPause, "Play / pause"),
-        (KeyAction.NextFile, "Next file"),
-        (KeyAction.PreviousFile, "Previous file"),
-        (KeyAction.PlayForward, "Play forward"),
-        (KeyAction.PlayBackward, "Play backward"),
-        (KeyAction.QuickHide, "Hide the picture"),
+        (KeyAction.PlayPause, "key.playpause"),
+        (KeyAction.NextFile, "key.next"),
+        (KeyAction.PreviousFile, "key.prev"),
+        (KeyAction.PlayForward, "key.forward"),
+        (KeyAction.PlayBackward, "key.backward"),
+        (KeyAction.QuickHide, "key.hide"),
     };
 
     static readonly string[] ColorPresets =
@@ -327,31 +334,30 @@ public partial class MainWindow
 
     Border BuildOptionsPanel()
     {
-        var panel = CreatePanel("Playback", out var rows, 320);
-        _playFolderBox = Check("Play the whole folder", _settings.PlayFolder, SetPlayFolder,
-                               "Opens the next file when a video ends, or after 4 seconds on a picture (S)");
-        _shuffleBox = Check("In random order", _settings.Shuffle, on =>
+        var panel = CreatePanel(L.T("panel.playback"), out var rows, 340);
+        _playFolderBox = Check(L.T("play.folder"), _settings.PlayFolder, SetPlayFolder, L.T("play.folder.tip"));
+        _shuffleBox = Check(L.T("play.random"), _settings.Shuffle, on =>
         {
             _settings.Shuffle = on;
             PlaybackChanged();
         }, indent: 22);
-        _repeatFolderBox = Check("Start again after the last file", _settings.RepeatFolder, on =>
+        _repeatFolderBox = Check(L.T("play.again"), _settings.RepeatFolder, on =>
         {
             _settings.RepeatFolder = on;
             PlaybackChanged();
         }, indent: 22);
-        _repeatFileBox = Check("Repeat the current file", _settings.RepeatFile, on =>
+        _repeatFileBox = Check(L.T("play.repeat"), _settings.RepeatFile, on =>
         {
             _settings.RepeatFile = on;
             PlaybackChanged();
-        }, "Plays the same video again when it ends, and stays on this file");
+        }, L.T("play.repeat.tip"));
         rows.Children.Add(_playFolderBox);
         rows.Children.Add(_shuffleBox);
         rows.Children.Add(_repeatFolderBox);
         rows.Children.Add(_repeatFileBox);
         RefreshPlaybackBoxes();
 
-        rows.Children.Add(Heading("Keys"));
+        rows.Children.Add(Heading(L.T("panel.keys")));
         foreach (var (action, name) in KeyActions)
         {
             var button = TextButton("", () => BeginKeyCapture(action), 120);
@@ -360,39 +366,40 @@ public partial class MainWindow
             _keyButtons[action] = button;
 
             var row = new Grid();
-            row.Children.Add(Label(name));
+            row.Children.Add(Label(L.T(name)));
             row.Children.Add(button);
             rows.Children.Add(row);
         }
-        var hint = Label("Click a key, then press the new one. Esc cancels. The arrow keys always move between files.");
+        var hint = Label(L.T("keys.hint"));
         hint.FontSize = 11;
         hint.Opacity = 0.75;
         hint.Margin = new Thickness(0, 6, 0, 6);
         rows.Children.Add(hint);
-        var resetKeys = TextButton("Reset keys", () =>
+        var resetKeys = TextButton(L.T("keys.reset"), () =>
         {
             _settings.Keys = Settings.DefaultKeys();
             KeysChanged();
-        }, 100);
+        });
+        resetKeys.MinWidth = 100;
         resetKeys.HorizontalAlignment = HorizontalAlignment.Right;
         resetKeys.Margin = new Thickness(0);
         rows.Children.Add(resetKeys);
 
-        rows.Children.Add(Heading("Privacy"));
-        rows.Children.Add(Check("Hide from screenshots and screen sharing", _settings.HideFromCapture, on =>
+        rows.Children.Add(Heading(L.T("panel.privacy")));
+        rows.Children.Add(Check(L.T("priv.capture"), _settings.HideFromCapture, on =>
         {
             _settings.HideFromCapture = on;
             _settings.Save();
             ApplyCaptureProtection();
-        }, "Leaves this window out of screenshots, recordings and screen sharing; they show what is behind it"));
-        rows.Children.Add(Check("Hide file names", _settings.HideFileNames, on =>
+        }, L.T("priv.capture.tip")));
+        rows.Children.Add(Check(L.T("priv.names"), _settings.HideFileNames, on =>
         {
             _settings.HideFileNames = on;
             _settings.Save();
             UpdateStatus();
-        }, "Shows \"Reiks Viewer\" instead of the file's name in the title bar and taskbar"));
+        }, L.T("priv.names.tip", L.T("app.name"))));
 
-        rows.Children.Add(Heading("Window colour"));
+        rows.Children.Add(Heading(L.T("panel.colour")));
         var swatches = new WrapPanel();
         foreach (var preset in ColorPresets)
         {
@@ -415,12 +422,61 @@ public partial class MainWindow
         rows.Children.Add(swatches);
 
         var current = ParseColor(_settings.WindowColor);
-        _colorSliders[0] = AddSlider(rows, "Red", 0, 255, current.R, v => $"{v:0}", _ => ColorSliderMoved());
-        _colorSliders[1] = AddSlider(rows, "Green", 0, 255, current.G, v => $"{v:0}", _ => ColorSliderMoved());
-        _colorSliders[2] = AddSlider(rows, "Blue", 0, 255, current.B, v => $"{v:0}", _ => ColorSliderMoved());
+        _colorSliders[0] = AddSlider(rows, L.T("col.red"), 0, 255, current.R, v => $"{v:0}", _ => ColorSliderMoved());
+        _colorSliders[1] = AddSlider(rows, L.T("col.green"), 0, 255, current.G, v => $"{v:0}", _ => ColorSliderMoved());
+        _colorSliders[2] = AddSlider(rows, L.T("col.blue"), 0, 255, current.B, v => $"{v:0}", _ => ColorSliderMoved());
+
+        rows.Children.Add(Heading(L.T("panel.language")));
+        var languages = new ComboBox { Focusable = false, HorizontalAlignment = HorizontalAlignment.Left, MinWidth = 170 };
+        languages.Items.Add(new ComboBoxItem { Content = L.T("lang.auto"), Tag = "" });
+        foreach (var (code, name) in L.Languages) languages.Items.Add(new ComboBoxItem { Content = name, Tag = code });
+        languages.SelectedIndex = Math.Max(0, 1 + Array.FindIndex(L.Languages, language => language.Code == _settings.Language));
+        languages.SelectionChanged += (_, _) => SetLanguage((string)((ComboBoxItem)languages.SelectedItem).Tag);
+        rows.Children.Add(languages);
 
         RefreshKeyButtons();
         return panel;
+    }
+
+    // ---------- Language ----------
+
+    bool _hintIsWelcome = true;
+
+    void SetLanguage(string code)
+    {
+        _settings.Language = code;
+        _settings.Save();
+        L.Use(code);
+        // The panels are built with their texts in place, so they are thrown away and rebuilt.
+        // The picture adjustments go back to neutral with their panel.
+        _adjustResets.ForEach(reset => reset());
+        foreach (var panel in _panels) Viewport.Children.Remove(panel);
+        _panels.Clear();
+        _adjustResets.Clear();
+        _keyButtons.Clear();
+        _adjustPanel = _rotatePanel = _optionsPanel = null;
+        _playFolderBox = _shuffleBox = _repeatFolderBox = _repeatFileBox = null;
+        ApplyLanguage();
+        ToggleOptionsPanel();
+    }
+
+    /// <summary>Puts the current language's texts on everything that is defined in the window's markup.</summary>
+    void ApplyLanguage()
+    {
+        OpenButton.ToolTip = L.T("tip.open");
+        MuteButton.ToolTip = L.T("tip.mute");
+        AdjustButton.ToolTip = L.T("tip.picture");
+        RotateButton.ToolTip = L.T("tip.rotate");
+        OptionsButton.ToolTip = L.T("tip.options");
+        FormatsButton.ToolTip = L.T("tip.formats");
+        FolderButton.ToolTip = L.T("tip.folder");
+        FullscreenButton.ToolTip = L.T("tip.fullscreen");
+        MinimizeButton.ToolTip = L.T("tip.minimize");
+        CloseButton.ToolTip = L.T("tip.close");
+        if (_hintIsWelcome) Hint.Text = L.T("hint.drop");
+        UpdateKeyHints();
+        UpdateWindowFrame();
+        UpdateStatus();
     }
 
     static CheckBox Check(string text, bool value, Action<bool> changed, string? tip = null, double indent = 0)
@@ -458,7 +514,7 @@ public partial class MainWindow
         if (hwnd != IntPtr.Zero) SetWindowDisplayAffinity(hwnd, _settings.HideFromCapture ? ExcludeFromCapture : None);
     }
 
-    string DisplayName(string path) => _settings.HideFileNames ? "this file" : System.IO.Path.GetFileName(path);
+    string DisplayName(string path) => _settings.HideFileNames ? L.T("name.thisfile") : System.IO.Path.GetFileName(path);
 
     /// <summary>One key to blank the window: pauses the video, covers the picture, hides the name.</summary>
     void ToggleQuickHide()
@@ -578,7 +634,7 @@ public partial class MainWindow
     {
         CancelKeyCapture();
         _capturing = action;
-        _keyButtons[action].Content = "Press a key…";
+        _keyButtons[action].Content = L.T("keys.press");
     }
 
     void CancelKeyCapture()
@@ -626,11 +682,11 @@ public partial class MainWindow
     void UpdateKeyHints()
     {
         string Name(KeyAction action) => KeyName(_settings.Keys[action]);
-        PlayButton.ToolTip = $"Play / pause ({Name(KeyAction.PlayPause)})";
-        StepBackButton.ToolTip = $"Play backward ({Name(KeyAction.PlayBackward)})";
-        StepForwardButton.ToolTip = $"Play forward ({Name(KeyAction.PlayForward)})";
-        PrevButton.ToolTip = $"Previous file (Left, {Name(KeyAction.PreviousFile)})";
-        NextButton.ToolTip = $"Next file (Right, {Name(KeyAction.NextFile)})";
+        PlayButton.ToolTip = L.T("tip.play", Name(KeyAction.PlayPause));
+        StepBackButton.ToolTip = L.T("tip.back", Name(KeyAction.PlayBackward));
+        StepForwardButton.ToolTip = L.T("tip.forward", Name(KeyAction.PlayForward));
+        PrevButton.ToolTip = L.T("tip.prev", Name(KeyAction.PreviousFile));
+        NextButton.ToolTip = L.T("tip.next", Name(KeyAction.NextFile));
     }
 
     static string KeyName(Key key) => key switch

@@ -20,7 +20,7 @@ public static unsafe class FfmpegImage
     public static Result Load(string path)
     {
         if (!FfmpegPlayer.EnsureLoaded())
-            throw new InvalidOperationException("FFmpeg is not available: " + FfmpegPlayer.LoadError);
+            throw new InvalidOperationException(L.T("err.noffmpeg", FfmpegPlayer.LoadError));
         if (AnimatedWebP.IsAnimated(path)) return AnimatedWebP.Load(path);
 
         var format = FfmpegPlayer.OpenInput(path);
@@ -107,7 +107,7 @@ public static unsafe class FfmpegImage
         }
 
         if (tooLong) return new Result(Array.Empty<BitmapSource>(), Array.Empty<TimeSpan>(), true);
-        if (frames.Count == 0) throw new InvalidOperationException("The picture could not be decoded.");
+        if (frames.Count == 0) throw new InvalidOperationException(L.T("err.decode"));
         return new Result(frames.ToArray(), delays.ToArray(), false);
     }
 

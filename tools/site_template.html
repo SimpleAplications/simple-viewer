@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{html.title}}</title>
+<meta name="description" content="{{html.description}}">
+{{alternates}}
+<link rel="icon" href="{{up}}favicon.ico">
+<style>
+  :root {
+    --bg: #0b0b0c; --panel: #151517; --line: #2a2a2e; --text: #f2f2f3; --soft: #a9a9b2;
+    --button: #f2f2f3; --button-text: #0b0b0c;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f6f7; --panel: #ffffff; --line: #dcdce1; --text: #111113; --soft: #5d5d68;
+      --button: #111113; --button-text: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; }
+  header { padding: 64px 0 36px; text-align: center; }
+  header img.icon { width: 96px; height: 96px; border-radius: 22px; }
+  h1 { font-size: 56px; line-height: 1.05; letter-spacing: -1.5px; margin: 20px 0 12px; font-weight: 650; }
+  .tagline { font-size: 22px; color: var(--soft); max-width: 640px; margin: 0 auto 30px; line-height: 1.4; }
+  .button {
+    display: inline-block; background: var(--button); color: var(--button-text); text-decoration: none;
+    font-weight: 600; font-size: 18px; padding: 14px 28px; border-radius: 10px;
+  }
+  .button:hover { opacity: .88; }
+  .under { color: var(--soft); font-size: 15px; margin-top: 16px; }
+  .under a { text-underline-offset: 3px; }
+  .shot {
+    display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+  }
+  section { padding: 44px 0; }
+  h2 { font-size: 30px; letter-spacing: -.5px; margin: 0 0 18px; font-weight: 650; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; font-weight: 650; }
+  .card p { margin: 0; color: var(--soft); font-size: 16px; }
+  .pair { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  figure { margin: 0; }
+  figcaption { color: var(--soft); font-size: 15px; margin-top: 10px; }
+  kbd {
+    font: 600 14px/1 "Segoe UI", system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel);
+    border-bottom-width: 2px; border-radius: 6px; padding: 4px 8px; white-space: nowrap;
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 16px; }
+  td { padding: 9px 0; border-top: 1px solid var(--line); vertical-align: top; }
+  td:first-child { width: 190px; color: var(--soft); padding-right: 16px; }
+  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; font-size: 16px; }
+  .note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+  .never { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px 28px; }
+  .never li { padding-left: 34px; position: relative; }
+  .never li::before {
+    content: "\2715"; position: absolute; left: 0; top: 3px; width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid var(--line); font-size: 11px; line-height: 20px; text-align: center; color: var(--soft);
+  }
+  .never strong { display: block; }
+  .never span { color: var(--soft); font-size: 16px; }
+  .lead { color: var(--soft); max-width: 720px; margin: -6px 0 22px; }
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 10px; }
+  .langs { text-align: right; padding-top: 14px; font-size: 14px; color: var(--soft); }
+  .langs a { text-underline-offset: 3px; }
+  .shotnote { color: var(--soft); font-size: 14px; margin: 0; }
+  .shotnote:empty { display: none; }
+  footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 20px; }
+  footer p { margin: 0 0 8px; }
+  @media (max-width: 600px) {
+    h1 { font-size: 42px; } .tagline { font-size: 19px; } header { padding-top: 44px; }
+    td:first-child { width: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="wrap langs">{{switcher}}</nav>
+
+<header class="wrap">
+  <img class="icon" src="{{up}}img/icon.png" alt="{{icon.alt}}" width="96" height="96">
+  <h1>{{name}}</h1>
+  <p class="tagline">{{tagline}}</p>
+  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/ReiksViewer-Setup.exe">{{download}}</a>
+  <p class="under">
+    {{under}}<br>
+    <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/ReiksViewer-portable.zip">{{portable}}</a>
+    &middot; <a href="#verify">{{checksums}}</a>
+    &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases">{{allversions}}</a>
+  </p>
+</header>
+
+<main class="wrap">
+  <img class="shot" src="{{up}}img/video.png" width="1100" height="750" alt="{{shot.video.alt}}">
+
+  <section>
+    <h2>{{never.h}}</h2>
+    <p class="lead">{{never.lead}}</p>
+    <ul class="never">
+      <li><strong>{{never.1h}}</strong><span>{{never.1}}</span></li>
+      <li><strong>{{never.2h}}</strong><span>{{never.2}}</span></li>
+      <li><strong>{{never.3h}}</strong><span>{{never.3}}</span></li>
+      <li><strong>{{never.4h}}</strong><span>{{never.4}}</span></li>
+      <li><strong>{{never.5h}}</strong><span>{{never.5}}</span></li>
+      <li><strong>{{never.6h}}</strong><span>{{never.6}}</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>{{does.h}}</h2>
+    <div class="grid">
+      <div class="card"><h3>{{does.1h}}</h3><p>{{does.1}}</p></div>
+      <div class="card"><h3>{{does.2h}}</h3><p>{{does.2}}</p></div>
+      <div class="card"><h3>{{does.3h}}</h3><p>{{does.3}}</p></div>
+      <div class="card"><h3>{{does.4h}}</h3><p>{{does.4}}</p></div>
+      <div class="card"><h3>{{does.5h}}</h3><p>{{does.5}}</p></div>
+      <div class="card"><h3>{{does.6h}}</h3><p>{{does.6}}</p></div>
+    </div>
+  </section>
+
+  <section class="pair">
+    <figure>
+      <img class="shot" src="{{up}}img/picture.png" width="1100" height="750" alt="{{shot.picture.alt}}">
+      <figcaption>{{shot.picture.cap}}</figcaption>
+    </figure>
+    <figure>
+      <img class="shot" src="{{up}}img/options.png" width="1100" height="960" alt="{{shot.options.alt}}">
+      <figcaption>{{shot.options.cap}}</figcaption>
+    </figure>
+    <p class="shotnote">{{shot.note}}</p>
+  </section>
+
+  <section>
+    <h2>{{formats.h}}</h2>
+    <table>
+      <tr><td>{{formats.pictures}}</td><td>JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, ICO, SVG</td></tr>
+      <tr><td>{{formats.animations}}</td><td>{{formats.animations.v}}</td></tr>
+      <tr><td>{{formats.video}}</td><td>{{formats.video.v}}</td></tr>
+      <tr><td>{{formats.decoding}}</td><td>{{formats.decoding.v}}</td></tr>
+      <tr><td>{{formats.languages}}</td><td>{{formats.languages.v}}</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>{{verify.h}}</h2>
+    <ol class="steps">
+      <li>{{verify.1}}</li>
+      <li>{{verify.2}}</li>
+      <li>{{verify.3}}</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>{{limits.h}}</h2>
+    <p>{{limits.1}}</p>
+    <p>{{limits.2}}</p>
+  </section>
+
+  <section id="verify">
+    <h2>{{install.h}}</h2>
+    <div class="note">
+      <p>{{install.1}}</p>
+      <p>{{install.2}}</p>
+      <p>{{install.3}}</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>{{oss.h}}</h2>
+    <p>{{oss.1}}</p>
+    <p>{{oss.2}}</p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>{{footer.credits}}</p>
+  <p>{{footer.warranty}}</p>
+</footer>
+
+</body>
+</html>

@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Reiks Viewer - picture and video viewer for Windows</title>
 <meta name="description" content="A simple, free picture and video viewer for Windows, made for private use. It never connects to the internet, keeps no history, and can hide itself from screenshots and screen sharing.">
+<link rel="alternate" hreflang="en" href="https://reiks-apps.github.io/reiks-viewer/">
+<link rel="alternate" hreflang="es" href="https://reiks-apps.github.io/reiks-viewer/es/">
+<link rel="alternate" hreflang="sv" href="https://reiks-apps.github.io/reiks-viewer/sv/">
 <link rel="icon" href="favicon.ico">
 <style>
   :root {
@@ -68,6 +71,10 @@
   .never span { color: var(--soft); font-size: 16px; }
   .lead { color: var(--soft); max-width: 720px; margin: -6px 0 22px; }
   ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 10px; }
+  .langs { text-align: right; padding-top: 14px; font-size: 14px; color: var(--soft); }
+  .langs a { text-underline-offset: 3px; }
+  .shotnote { color: var(--soft); font-size: 14px; margin: 0; }
+  .shotnote:empty { display: none; }
   footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 20px; }
   footer p { margin: 0 0 8px; }
   @media (max-width: 600px) {
@@ -77,6 +84,8 @@
 </style>
 </head>
 <body>
+
+<nav class="wrap langs"><strong>English</strong> &middot; <a href="es/" hreflang="es" lang="es">Español</a> &middot; <a href="sv/" hreflang="sv" lang="sv">Svenska</a></nav>
 
 <header class="wrap">
   <img class="icon" src="img/icon.png" alt="Reiks Viewer icon" width="96" height="96">
@@ -92,8 +101,7 @@
 </header>
 
 <main class="wrap">
-  <img class="shot" src="img/video.png" width="1100" height="750"
-       alt="Reiks Viewer showing a paused video, with the time shown to the millisecond and buttons to step one frame back or forward">
+  <img class="shot" src="img/video.png" width="1100" height="750" alt="Reiks Viewer showing a paused video, with the time shown to the millisecond and buttons to step one frame back or forward">
 
   <section>
     <h2>What Reiks Viewer never does</h2>
@@ -111,30 +119,12 @@
   <section>
     <h2>What it does</h2>
     <div class="grid">
-      <div class="card">
-        <h3>One frame at a time, both ways</h3>
-        <p>Tap <kbd>X</kbd> or <kbd>Z</kbd> to move exactly one frame forward or back. Hold to keep going, faster the longer you hold. Every frame is shown complete, with no smearing after a jump.</p>
-      </div>
-      <div class="card">
-        <h3>Pictures, GIFs and video together</h3>
-        <p>Open one file and move through everything else in the folder with the arrow keys. Zoom with the mouse wheel, drag to pan, rotate and flip.</p>
-      </div>
-      <div class="card">
-        <h3>Private on screen too</h3>
-        <p>Leave the window out of screenshots, recordings and screen sharing: they show whatever is behind it instead. Hide file names from the title bar. Press <kbd>H</kbd> to blank the window at once.</p>
-      </div>
-      <div class="card">
-        <h3>Picture controls</h3>
-        <p>Brightness, contrast, saturation, gamma and warmth for anything on screen, including paused video. Display only: your files are never changed.</p>
-      </div>
-      <div class="card">
-        <h3>Your keys, your colour</h3>
-        <p>Choose the keys for play, next, previous and frame stepping, and pick the window colour. Text switches between white and black to stay readable.</p>
-      </div>
-      <div class="card">
-        <h3>Play a whole folder</h3>
-        <p>Let it move to the next file when a video ends, in order or shuffled, once or on repeat. Or repeat a single video.</p>
-      </div>
+      <div class="card"><h3>One frame at a time, both ways</h3><p>Tap <kbd>X</kbd> or <kbd>Z</kbd> to move exactly one frame forward or back. Hold to keep going, faster the longer you hold. Every frame is shown complete, with no smearing after a jump.</p></div>
+      <div class="card"><h3>Pictures, GIFs and video together</h3><p>Open one file and move through everything else in the folder with the arrow keys. Zoom with the mouse wheel, drag to pan, rotate and flip.</p></div>
+      <div class="card"><h3>Private on screen too</h3><p>Leave the window out of screenshots, recordings and screen sharing: they show whatever is behind it instead. Hide file names from the title bar. Press <kbd>H</kbd> to blank the window at once.</p></div>
+      <div class="card"><h3>Picture controls</h3><p>Brightness, contrast, saturation, gamma and warmth for anything on screen, including paused video. Display only: your files are never changed.</p></div>
+      <div class="card"><h3>Your keys, your colour</h3><p>Choose the keys for play, next, previous and frame stepping, and pick the window colour. Text switches between white and black to stay readable.</p></div>
+      <div class="card"><h3>Play a whole folder</h3><p>Let it move to the next file when a video ends, in order or shuffled, once or on repeat. Or repeat a single video.</p></div>
     </div>
   </section>
 
@@ -144,9 +134,10 @@
       <figcaption>Picture controls apply instantly and reset with one click.</figcaption>
     </figure>
     <figure>
-      <img class="shot" src="img/options.png" width="1100" height="900" alt="The Options panel with playback choices, key assignments and window colour">
+      <img class="shot" src="img/options.png" width="1100" height="960" alt="The Options panel with playback choices, key assignments and window colour">
       <figcaption>Options: playback, keys and window colour.</figcaption>
     </figure>
+    <p class="shotnote"></p>
   </section>
 
   <section>
@@ -156,6 +147,7 @@
       <tr><td>Animations</td><td>GIF, animated PNG, animated WebP</td></tr>
       <tr><td>Video</td><td>MP4, MOV, MKV, WebM, AVI, WMV, FLV, MPEG, TS and more, with H.264, H.265, VP9, AV1 and other codecs</td></tr>
       <tr><td>Decoding</td><td>On the graphics card where it supports the format, otherwise on the processor</td></tr>
+      <tr><td>Languages</td><td>English, Spanish, Swedish, French, German, Portuguese, Italian</td></tr>
     </table>
   </section>
 
@@ -170,43 +162,28 @@
 
   <section>
     <h2>What Reiks Viewer can&rsquo;t control</h2>
-    <p>Windows itself keeps some records that no app can switch off for you. When you open a file by double-clicking it
-    in Explorer, Windows may add it to its own recent files list (Settings &rarr; Personalization &rarr; Start &rarr;
-    &ldquo;Show recently opened items&rdquo;). Windows&rsquo; diagnostic data and Recall are also Windows settings, under
-    Privacy &amp; security. Reiks Viewer&rsquo;s own Open dialog does not add to the recent list, and its
-    &ldquo;hide from screenshots&rdquo; option keeps its window out of screen captures.</p>
-    <p><strong>The one file Reiks Viewer writes</strong> is your options: your keys, window colour, playback and privacy choices,
-    in <code>%APPDATA%\ReiksViewer\settings.json</code>. It contains nothing about your files, and the uninstaller removes it.</p>
+    <p>Windows itself keeps some records that no app can switch off for you. When you open a file by double-clicking it in Explorer, Windows may add it to its own recent files list (Settings &rarr; Personalization &rarr; Start &rarr; &ldquo;Show recently opened items&rdquo;). Windows&rsquo; diagnostic data and Recall are also Windows settings, under Privacy &amp; security. Reiks Viewer&rsquo;s own Open dialog does not add to the recent list, and its &ldquo;hide from screenshots&rdquo; option keeps its window out of screen captures.</p>
+    <p><strong>The one file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback and privacy choices, in <code>%APPDATA%\ReiksViewer\settings.json</code>. It contains nothing about your files, and the uninstaller removes it.</p>
   </section>
 
   <section id="verify">
     <h2>Installing</h2>
     <div class="note">
-      <p><strong>Windows may warn you the first time.</strong> The installer is not digitally signed yet, so Windows can show
-      &ldquo;Windows protected your PC&rdquo;. Choose <em>More info</em>, then <em>Run anyway</em>.</p>
-      <p>To check that your download is genuine, compare its SHA-256 checksum with
-      <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>.
-      In PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code></p>
-      <p>The installer needs no administrator rights and can add Reiks Viewer to Explorer&rsquo;s &ldquo;Open with&rdquo; list.
-      To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.</p>
+      <p><strong>Windows may warn you the first time.</strong> The installer is not digitally signed yet, so Windows can show &ldquo;Windows protected your PC&rdquo;. Choose <em>More info</em>, then <em>Run anyway</em>.</p>
+      <p>To check that your download is genuine, compare its SHA-256 checksum with <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code></p>
+      <p>The installer needs no administrator rights and can add Reiks Viewer to Explorer&rsquo;s &ldquo;Open with&rdquo; list. To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.</p>
     </div>
   </section>
 
   <section>
     <h2>Open source inside</h2>
-    <p>Reiks Viewer decodes pictures and video with libraries from the <a href="https://ffmpeg.org">FFmpeg</a> project,
-    licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.html">GNU Lesser General Public License</a>.
-    FFmpeg is included as separate, unmodified DLL files that you may replace with your own build. The FFmpeg source
-    code for the included build is published with every
-    <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest">release</a>, and the full notices are in
-    THIRD-PARTY-NOTICES.txt inside the app&rsquo;s folder.</p>
+    <p>Reiks Viewer decodes pictures and video with libraries from the <a href="https://ffmpeg.org">FFmpeg</a> project, licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.html">GNU Lesser General Public License</a>. FFmpeg is included as separate, unmodified DLL files that you may replace with your own build. The FFmpeg source code for the included build is published with every <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest">release</a>, and the full notices are in THIRD-PARTY-NOTICES.txt inside the app&rsquo;s folder.</p>
     <p>Reiks Viewer is not affiliated with or endorsed by the FFmpeg project. FFmpeg is a trademark of Fabrice Bellard.</p>
   </section>
 </main>
 
 <footer class="wrap">
-  <p>Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0;
-  the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center.</p>
+  <p>Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center.</p>
   <p>Reiks Viewer is provided as is, without warranty.</p>
 </footer>
 

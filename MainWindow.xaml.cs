@@ -57,8 +57,9 @@ public partial class MainWindow : Window
     {
         // The colour brushes have to exist before the window's XAML asks for them.
         ApplyTheme(ParseColor(_settings.WindowColor));
+        L.Use(_settings.Language);
         InitializeComponent();
-        UpdateKeyHints();
+        ApplyLanguage();
         UpdateButtonStates();
         _saveTimer.Tick += (_, _) =>
         {
@@ -96,6 +97,15 @@ public partial class MainWindow : Window
     void OnLoaded(object sender, RoutedEventArgs e)
     {
         var args = Environment.GetCommandLineArgs();
+        int languageAt = Array.IndexOf(args, "--lang");
+        if (languageAt > 0 && languageAt + 1 < args.Length)
+        {
+            // Start in a given language for this run only, without touching the saved options.
+            _settings.Language = args[languageAt + 1];
+            L.Use(_settings.Language);
+            ApplyLanguage();
+            args = args.Where((_, i) => i != languageAt && i != languageAt + 1).ToArray();
+        }
         if (args.Contains("--software"))
         {
             // Troubleshooting switch: decode video on the processor only.
@@ -177,7 +187,7 @@ public partial class MainWindow : Window
         {
             // Keep the chosen file out of Windows' "recent files" lists.
             AddToRecent = false,
-            Filter = $"Pictures and videos|{images};{videos}|Pictures|{images}|Videos|{videos}|All files|*.*",
+            Filter = $"{L.T("dlg.all")}|{images};{videos}|{L.T("dlg.pictures")}|{images}|{L.T("dlg.videos")}|{videos}|{L.T("dlg.allfiles")}|*.*",
         };
         if (dialog.ShowDialog(this) == true) OpenPath(dialog.FileName);
     }
@@ -209,7 +219,7 @@ public partial class MainWindow : Window
 
         if (_index < 0)
         {
-            ShowMessage("No pictures or videos found in that folder.");
+            ShowMessage(L.T("msg.nofiles"));
             UpdateStatus();
             return;
         }
@@ -228,13 +238,14 @@ public partial class MainWindow : Window
                                        or InvalidOperationException)
         {
             StopMedia();
-            ShowMessage($"Can't open {DisplayName(path)}\n{ex.Message}");
+            ShowMessage(L.T("msg.cantopen", DisplayName(path)) + "\n" + ex.Message);
         }
         UpdateStatus();
     }
 
     void ShowMessage(string text)
     {
+        _hintIsWelcome = false;
         Img.Source = null;
         Hint.Text = text;
         Hint.Visibility = Visibility.Visible;
@@ -288,7 +299,7 @@ public partial class MainWindow : Window
     {
         if (!FfmpegPlayer.EnsureLoaded())
         {
-            ShowMessage("Video needs the FFmpeg libraries.\n" + FfmpegPlayer.LoadError + "\nPress F1 for details.");
+            ShowMessage(L.T("msg.noffmpeg") + "\n" + FfmpegPlayer.LoadError + "\n" + L.T("msg.pressf1"));
             return;
         }
 
@@ -298,7 +309,7 @@ public partial class MainWindow : Window
         {
             if (player != _player) return;
             StopMedia();
-            ShowMessage($"Can't play {DisplayName(path)}\n{message}");
+            ShowMessage(L.T("msg.cantplay", DisplayName(path)) + "\n" + message);
             UpdateStatus();
         };
         _player = player;
@@ -580,7 +591,7 @@ public partial class MainWindow : Window
         bool maximized = WindowState == WindowState.Maximized;
         Root.Margin = new Thickness(maximized && !_fullscreen ? 7 : 0);
         MaximizeButton.Content = maximized ? "\uE923" : "\uE922";
-        MaximizeButton.ToolTip = maximized ? "Restore" : "Maximize";
+        MaximizeButton.ToolTip = L.T(maximized ? "tip.restore" : "tip.maximize");
     }
 
     void OnMinimizeClick(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
@@ -597,14 +608,14 @@ public partial class MainWindow : Window
         if (_index < 0 || _files.Count == 0)
         {
             StatusText.Text = ModeText.Text = "";
-            Title = TitleText.Text = "Reiks Viewer";
+            Title = TitleText.Text = L.T("app.name");
             return;
         }
 
         if (_hidden)
         {
             StatusText.Text = ModeText.Text = "";
-            Title = TitleText.Text = "Reiks Viewer";
+            Title = TitleText.Text = L.T("app.name");
             return;
         }
 
@@ -630,12 +641,12 @@ public partial class MainWindow : Window
         StatusText.Text = string.Join("  ·  ", parts);
 
         var modes = new List<string>();
-        if (Zoom.ScaleX > 1) modes.Add($"zoom {Zoom.ScaleX * 100:0}%");
-        if (_settings.RepeatFile) modes.Add("repeating file");
-        else if (_settings.PlayFolder) modes.Add(_settings.Shuffle ? "playing folder, shuffled" : "playing folder");
+        if (Zoom.ScaleX > 1) modes.Add(L.T("status.zoom", (Zoom.ScaleX * 100).ToString("0")));
+        if (_settings.RepeatFile) modes.Add(L.T("status.repeat"));
+        else if (_settings.PlayFolder) modes.Add(L.T(_settings.Shuffle ? "status.shuffled" : "status.folder"));
         ModeText.Text = string.Join("  ·  ", modes);
-        TitleText.Text = _settings.HideFileNames ? "Reiks Viewer" : name;
-        Title = _settings.HideFileNames ? "Reiks Viewer" : $"{name} - Reiks Viewer";
+        TitleText.Text = _settings.HideFileNames ? L.T("app.name") : name;
+        Title = _settings.HideFileNames ? L.T("app.name") : $"{name} - {L.T("app.name")}";
     }
 
     void OnKeyDown(object sender, KeyEventArgs e)

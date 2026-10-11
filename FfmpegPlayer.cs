@@ -131,7 +131,7 @@ public sealed unsafe class FfmpegPlayer : IDisposable
 
     public FfmpegPlayer(string path, Dispatcher dispatcher)
     {
-        if (!EnsureLoaded()) throw new InvalidOperationException("FFmpeg is not available: " + LoadError);
+        if (!EnsureLoaded()) throw new InvalidOperationException(L.T("err.noffmpeg", LoadError));
         _dispatcher = dispatcher;
         try
         {
@@ -140,7 +140,7 @@ public sealed unsafe class FfmpegPlayer : IDisposable
 
             AVCodec* videoCodec = null;
             _videoIndex = ffmpeg.av_find_best_stream(_format, AVMediaType.AVMEDIA_TYPE_VIDEO, -1, -1, &videoCodec, 0);
-            Check(_videoIndex, "No playable video track");
+            Check(_videoIndex, L.T("err.novideo"));
             var videoStream = _format->streams[_videoIndex];
             _hardware = TryCreateHardware(videoCodec);
             _video = OpenCodec(videoCodec, videoStream, 0, _hardware);
@@ -219,8 +219,8 @@ public sealed unsafe class FfmpegPlayer : IDisposable
         int result = ffmpeg.avformat_open_input(&format, path, null, &options);
         ffmpeg.av_dict_free(&options);
         if (result == ffmpeg.AVERROR(ffmpeg.EINVAL))
-            throw new InvalidOperationException("This kind of file is not supported.");
-        Check(result, "Can't open the file");
+            throw new InvalidOperationException(L.T("err.unsupported"));
+        Check(result, L.T("err.open"));
         return format;
     }
 

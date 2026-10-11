@@ -28,6 +28,7 @@ What it can't control: Windows may list files you open from Explorer among its r
 - **Private on screen too.** Optionally leave the window out of screenshots, recordings and screen sharing; hide file names; press `H` to blank the window at once.
 - **Picture controls.** Brightness, contrast, saturation, gamma and warmth, for display only.
 - **Your keys, your colour.** Choose the keys for the main actions and the colour of the window.
+- **Seven languages.** English, Spanish, Swedish, French, German, Portuguese and Italian; it follows Windows, or choose one in Options.
 - **Folder playback.** Move on when a video ends, in order or shuffled, once or on repeat; or repeat one file.
 
 ## Keys
@@ -68,6 +69,8 @@ You need Windows and the [.NET 10 SDK](https://dotnet.microsoft.com/download).
 The published releases are built from this repository by GitHub Actions (`.github/workflows/release.yml`), and each file carries a build provenance attestation you can check with `gh attestation verify <file> --repo reiks-apps/reiks-viewer`.
 
 `release.ps1` builds the installer (it needs [Inno Setup 6](https://jrsoftware.org/isinfo.php)) and the portable zip into `dist`.
+
+The app's texts are in `lang/make_languages.py`, which writes the `lang/*.json` files the program embeds; the website's are in `tools/build_site.py`, which writes `docs/`. Run the script after changing a text or adding a language.
 
 The picture adjustments use a small pixel shader, `Adjust.fx`. Its compiled form `Adjust.ps` is checked in; to rebuild it, run `fxc /T ps_2_0 /E main /Fo Adjust.ps Adjust.fx` from the Windows SDK.
 

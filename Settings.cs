@@ -25,6 +25,9 @@ public sealed class Settings
     public Dictionary<KeyAction, Key> Keys { get; set; } = DefaultKeys();
     public string WindowColor { get; set; } = "#000000";
 
+    /// <summary>Two-letter language code, or empty to follow Windows.</summary>
+    public string Language { get; set; } = "";
+
     /// <summary>Open the next file when a video ends, or after a few seconds on a picture.</summary>
     public bool PlayFolder { get; set; }
     /// <summary>With <see cref="PlayFolder"/>: pick the next file at random.</summary>
@@ -79,6 +82,7 @@ public sealed class Settings
         // A file from an older version may lack actions added since.
         foreach (var (action, key) in DefaultKeys()) settings.Keys.TryAdd(action, key);
         settings.WindowColor ??= "#000000";
+        settings.Language ??= "";
         return settings;
     }
 

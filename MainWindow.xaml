@@ -57,10 +57,10 @@
                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
                         WindowChrome.IsHitTestVisibleInChrome="True">
-                <Button Content="&#xE921;" FontSize="10" Width="46" Height="32" ToolTip="Minimize" Click="OnMinimizeClick"/>
+                <Button x:Name="MinimizeButton" Content="&#xE921;" FontSize="10" Width="46" Height="32" ToolTip="Minimize" Click="OnMinimizeClick"/>
                 <Button x:Name="MaximizeButton" Content="&#xE922;" FontSize="10" Width="46" Height="32"
                         ToolTip="Maximize" Click="OnMaximizeClick"/>
-                <Button Content="&#xE8BB;" FontSize="10" Width="46" Height="32" ToolTip="Close"
+                <Button x:Name="CloseButton" Content="&#xE8BB;" FontSize="10" Width="46" Height="32" ToolTip="Close"
                         BorderBrush="#C42B1C" Click="OnCloseClick"/>
             </StackPanel>
         </Grid>
@@ -104,7 +104,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" Margin="4,2">
-                <Button Content="&#xE8E5;" ToolTip="Open (O)" Click="OnOpenClick"/>
+                <Button x:Name="OpenButton" Content="&#xE8E5;" ToolTip="Open (O)" Click="OnOpenClick"/>
                 <Button x:Name="PrevButton" Content="&#xE76B;" ToolTip="Previous file (Left, C)" Click="OnPrevClick"/>
                 <Button x:Name="NextButton" Content="&#xE76C;" ToolTip="Next file (Right, V)" Click="OnNextClick"/>
             </StackPanel>
@@ -136,7 +136,7 @@
                 <Button x:Name="OptionsButton" Content="&#xE713;" ToolTip="Options" Click="OnOptionsClick"/>
                 <Button x:Name="FormatsButton" Content="&#xE946;" ToolTip="Formats and credits (F1)" Click="OnFormatsClick"/>
                 <Button x:Name="FolderButton" Content="&#xE786;" ToolTip="Play the whole folder (S)" Click="OnSlideshowClick"/>
-                <Button Content="&#xE740;" ToolTip="Fullscreen (F11, double-click)" Click="OnFullscreenClick"/>
+                <Button x:Name="FullscreenButton" Content="&#xE740;" ToolTip="Fullscreen (F11, double-click)" Click="OnFullscreenClick"/>
             </StackPanel>
         </Grid>
     </Grid>

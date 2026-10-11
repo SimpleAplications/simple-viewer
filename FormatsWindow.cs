@@ -12,8 +12,8 @@ public sealed class FormatsWindow : Window
     public FormatsWindow(Window owner, IEnumerable<string> imageExtensions, IEnumerable<string> videoExtensions)
     {
         Owner = owner;
-        Title = "Formats and credits";
-        Width = 720;
+        Title = L.T("formats.title");
+        Width = 820;
         Height = 560;
         SetResourceReference(BackgroundProperty, "WindowBrush");
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -35,10 +35,11 @@ public sealed class FormatsWindow : Window
 
         var openFolder = new Button
         {
-            Content = "Open codecs folder",
+            Content = new TextBlock { Text = L.T("formats.codecs"), Margin = new Thickness(14, 0, 14, 0) },
             FontFamily = SystemFonts.MessageFontFamily,
             FontSize = 13,
-            Width = 160,
+            MinWidth = 160,
+            Padding = new Thickness(12, 0, 12, 0),
             Height = 32,
             Margin = new Thickness(16, 8, 16, 12),
             HorizontalAlignment = HorizontalAlignment.Left,
@@ -55,13 +56,14 @@ public sealed class FormatsWindow : Window
         // open the right Settings page.
         var defaults = new Button
         {
-            Content = "Default app settings",
+            Content = new TextBlock { Text = L.T("formats.defaults"), Margin = new Thickness(14, 0, 14, 0) },
             FontFamily = SystemFonts.MessageFontFamily,
             FontSize = 13,
-            Width = 160,
+            MinWidth = 160,
+            Padding = new Thickness(12, 0, 12, 0),
             Height = 32,
             Margin = new Thickness(0, 8, 16, 12),
-            ToolTip = "Opens Windows Settings, where you can make Reiks Viewer the default for pictures and videos",
+            ToolTip = L.T("formats.defaults.tip", L.T("app.name")),
         };
         defaults.SetResourceReference(ForegroundProperty, "TextBrush");
         defaults.SetResourceReference(BackgroundProperty, "HoverBrush");
@@ -71,13 +73,14 @@ public sealed class FormatsWindow : Window
         // The app never goes online by itself. This only hands the address to your browser.
         var updates = new Button
         {
-            Content = "Check for updates",
+            Content = new TextBlock { Text = L.T("formats.updates"), Margin = new Thickness(14, 0, 14, 0) },
             FontFamily = SystemFonts.MessageFontFamily,
             FontSize = 13,
-            Width = 160,
+            MinWidth = 160,
+            Padding = new Thickness(12, 0, 12, 0),
             Height = 32,
             Margin = new Thickness(0, 8, 16, 12),
-            ToolTip = "Opens the download page in your web browser. Reiks Viewer itself never connects to the internet.",
+            ToolTip = L.T("formats.updates.tip", L.T("app.name")),
         };
         updates.SetResourceReference(ForegroundProperty, "TextBrush");
         updates.SetResourceReference(BackgroundProperty, "HoverBrush");
@@ -102,58 +105,20 @@ public sealed class FormatsWindow : Window
             string.Join("  ", extensions.Select(e => e.TrimStart('.')).OrderBy(e => e));
 
         string decoders = FfmpegPlayer.EnsureLoaded()
-            ? $"""
-               FFmpeg {FfmpegPlayer.Version} is loaded from:
-               {FfmpegPlayer.CodecsFolder}
-               Build licence: {FfmpegPlayer.License}
-               """
-            : $"""
-               FFmpeg was not found, so nothing can be opened.
-               ({FfmpegPlayer.LoadError})
-
-               To add it: download an LGPL "shared" build of FFmpeg 8.1 for Windows from one of the
-               build sites linked at https://ffmpeg.org/download.html, and copy the DLL files from
-               its "bin" folder into:
-               {FfmpegPlayer.CodecsFolder}
-               """;
-
+            ? L.T("f.loaded", FfmpegPlayer.Version, FfmpegPlayer.CodecsFolder, FfmpegPlayer.License)
+            : L.T("f.missing", FfmpegPlayer.LoadError, FfmpegPlayer.CodecsFolder);
         string version = (typeof(FormatsWindow).Assembly.GetName().Version ?? new Version(1, 0, 0)).ToString(3);
 
-        return $"""
-                REIKS VIEWER {version}
-                Reiks Viewer never connects to the internet and keeps no record of what you open.
-                "Check for updates" below opens the download page in your web browser.
-
-                DECODERS
-                Pictures, animations and videos are all decoded by FFmpeg. Nothing is sent anywhere:
-                the app has no network code.
-
-                {decoders}
-
-                PICTURES AND ANIMATIONS
-                {List(imageExtensions)}
-                Animated: gif, apng, webp.
-
-                VIDEO
-                {List(videoExtensions)}
-                Video is decoded on the graphics card when it supports the format, otherwise on
-                the processor. Start the app with --software to always use the processor.
-                Whether a given file opens depends on the decoders in the FFmpeg build above.
-
-                CREDITS
-                This software uses libraries from the FFmpeg project (https://ffmpeg.org), licensed
-                under the GNU Lesser General Public License. The licence text is in
-                codecs\FFmpeg-LICENSE.txt, and THIRD-PARTY-NOTICES.txt says where to get the exact
-                source code of the build shipped with this app.
-
-                FFmpeg is used as separate DLL files and is not modified. You may replace the DLLs in
-                the codecs folder with your own build of FFmpeg 8.x.
-
-                FFmpeg.AutoGen (https://github.com/Ruslan-B/FFmpeg.AutoGen), MIT licence,
-                (c) Ruslan Balanukhin.
-
-                FFmpeg is a trademark of Fabrice Bellard, originator of the FFmpeg project.
-                This app is not affiliated with or endorsed by the FFmpeg project.
-                """;
+        return string.Join("\n\n", new[]
+        {
+            $"{L.T("app.name").ToUpper()} {version}\n{L.T("f.intro", L.T("app.name"))}",
+            $"{L.T("f.decoders")}\n{L.T("f.decoders.body")}\n\n{decoders}",
+            $"{L.T("f.pictures")}\n{List(imageExtensions)}\n{L.T("f.animated")}",
+            $"{L.T("f.video")}\n{List(videoExtensions)}\n{L.T("f.video.gpu")}\n{L.T("f.video.depends")}",
+            $"{L.T("f.credits")}\n{L.T("f.credits.ffmpeg")}",
+            L.T("f.credits.replace"),
+            "FFmpeg.AutoGen (https://github.com/Ruslan-B/FFmpeg.AutoGen), MIT, (c) Ruslan Balanukhin.",
+            L.T("f.credits.trademark"),
+        });
     }
 }

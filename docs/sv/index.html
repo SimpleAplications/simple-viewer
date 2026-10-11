@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reiks Visare - bild- och videovisare för Windows</title>
+<meta name="description" content="En enkel och gratis bild- och videovisare för Windows, gjord för privat bruk. Den ansluter aldrig till internet, sparar ingen historik och kan dölja sig från skärmbilder och skärmdelning.">
+<link rel="alternate" hreflang="en" href="https://reiks-apps.github.io/reiks-viewer/">
+<link rel="alternate" hreflang="es" href="https://reiks-apps.github.io/reiks-viewer/es/">
+<link rel="alternate" hreflang="sv" href="https://reiks-apps.github.io/reiks-viewer/sv/">
+<link rel="icon" href="../favicon.ico">
+<style>
+  :root {
+    --bg: #0b0b0c; --panel: #151517; --line: #2a2a2e; --text: #f2f2f3; --soft: #a9a9b2;
+    --button: #f2f2f3; --button-text: #0b0b0c;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f6f7; --panel: #ffffff; --line: #dcdce1; --text: #111113; --soft: #5d5d68;
+      --button: #111113; --button-text: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; }
+  header { padding: 64px 0 36px; text-align: center; }
+  header img.icon { width: 96px; height: 96px; border-radius: 22px; }
+  h1 { font-size: 56px; line-height: 1.05; letter-spacing: -1.5px; margin: 20px 0 12px; font-weight: 650; }
+  .tagline { font-size: 22px; color: var(--soft); max-width: 640px; margin: 0 auto 30px; line-height: 1.4; }
+  .button {
+    display: inline-block; background: var(--button); color: var(--button-text); text-decoration: none;
+    font-weight: 600; font-size: 18px; padding: 14px 28px; border-radius: 10px;
+  }
+  .button:hover { opacity: .88; }
+  .under { color: var(--soft); font-size: 15px; margin-top: 16px; }
+  .under a { text-underline-offset: 3px; }
+  .shot {
+    display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+  }
+  section { padding: 44px 0; }
+  h2 { font-size: 30px; letter-spacing: -.5px; margin: 0 0 18px; font-weight: 650; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; font-weight: 650; }
+  .card p { margin: 0; color: var(--soft); font-size: 16px; }
+  .pair { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  figure { margin: 0; }
+  figcaption { color: var(--soft); font-size: 15px; margin-top: 10px; }
+  kbd {
+    font: 600 14px/1 "Segoe UI", system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel);
+    border-bottom-width: 2px; border-radius: 6px; padding: 4px 8px; white-space: nowrap;
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 16px; }
+  td { padding: 9px 0; border-top: 1px solid var(--line); vertical-align: top; }
+  td:first-child { width: 190px; color: var(--soft); padding-right: 16px; }
+  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; font-size: 16px; }
+  .note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+  .never { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px 28px; }
+  .never li { padding-left: 34px; position: relative; }
+  .never li::before {
+    content: "\2715"; position: absolute; left: 0; top: 3px; width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid var(--line); font-size: 11px; line-height: 20px; text-align: center; color: var(--soft);
+  }
+  .never strong { display: block; }
+  .never span { color: var(--soft); font-size: 16px; }
+  .lead { color: var(--soft); max-width: 720px; margin: -6px 0 22px; }
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 10px; }
+  .langs { text-align: right; padding-top: 14px; font-size: 14px; color: var(--soft); }
+  .langs a { text-underline-offset: 3px; }
+  .shotnote { color: var(--soft); font-size: 14px; margin: 0; }
+  .shotnote:empty { display: none; }
+  footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 20px; }
+  footer p { margin: 0 0 8px; }
+  @media (max-width: 600px) {
+    h1 { font-size: 42px; } .tagline { font-size: 19px; } header { padding-top: 44px; }
+    td:first-child { width: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="wrap langs"><a href="../" hreflang="en" lang="en">English</a> &middot; <a href="../es/" hreflang="es" lang="es">Español</a> &middot; <strong>Svenska</strong></nav>
+
+<header class="wrap">
+  <img class="icon" src="../img/icon.png" alt="Ikon för Reiks Visare" width="96" height="96">
+  <h1>Reiks Visare</h1>
+  <p class="tagline">Dina bilder och videor förblir dina. Reiks Visare visar dem bara för dig, och det är allt den gör.</p>
+  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/ReiksViewer-Setup.exe">Ladda ner för Windows</a>
+  <p class="under">
+    Gratis &middot; öppen källkod &middot; ansluter aldrig till internet &middot; Windows 10 eller 11, 64-bitars<br>
+    <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/ReiksViewer-portable.zip">Portabel zip (ingen installation)</a>
+    &middot; <a href="#verify">Kontrollsummor</a>
+    &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases">Alla versioner</a>
+  </p>
+</header>
+
+<main class="wrap">
+  <img class="shot" src="../img/video.png" width="1100" height="750" alt="Reiks Visare visar en pausad video, med tiden angiven i millisekunder och knappar för att stega en bildruta bakåt eller framåt">
+
+  <section>
+    <h2>Det Reiks Visare aldrig gör</h2>
+    <p class="lead">De flesta visare och spelare gör i tysthet mer än att visa dina filer. Reiks Visare är byggd så att den inte kan det.</p>
+    <ul class="never">
+      <li><strong>Ansluta till internet</strong><span>Ingen telemetri, ingen användningsstatistik, inga kraschrapporter, inga uppdateringskontroller, inga uppslagningar på nätet. Dess avkodare är begränsade till lokala filer, så inte ens en särskilt utformad fil kan få den att ansluta.</span></li>
+      <li><strong>Spara vad du öppnar</strong><span>Ingen historik, ingen lista över senaste filer, ingen miniatyrcache, inget bibliotek eller index över dina mappar.</span></li>
+      <li><strong>Titta in i dina bilder</strong><span>Ingen ansiktsigenkänning, ingen taggning, ingen AI, ingen &rdquo;förbättring&rdquo; i molnet. Ingenting från dina filer delas någonsin med någon: allt stannar på din dator.</span></li>
+      <li><strong>Ändra dina filer</strong><span>Den skriver aldrig till dina bilder, videor eller deras mappar: inga betyg, inga taggar, inga dolda sidofiler.</span></li>
+      <li><strong>Köra i bakgrunden</strong><span>Ingen tjänst, ingen autostart, ingen ikon i meddelandefältet. När du stänger den är den borta.</span></li>
+      <li><strong>Be om någonting</strong><span>Inget konto, ingen inloggning, ingen reklam, inga medföljande extraprogram, inga administratörsrättigheter.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Vad den gör</h2>
+    <div class="grid">
+      <div class="card"><h3>En bildruta i taget, åt båda håll</h3><p>Tryck på <kbd>X</kbd> eller <kbd>Z</kbd> för att gå exakt en bildruta framåt eller bakåt. Håll nere för att fortsätta, snabbare ju längre du håller. Varje bildruta visas hel, utan utsmetad bild efter ett hopp.</p></div>
+      <div class="card"><h3>Bilder, GIF:ar och video tillsammans</h3><p>Öppna en fil och bläddra genom allt annat i mappen med piltangenterna. Zooma med mushjulet, dra för att panorera, rotera och spegla.</p></div>
+      <div class="card"><h3>Privat även på skärmen</h3><p>Håll fönstret utanför skärmbilder, inspelningar och skärmdelning: de visar det som finns bakom i stället. Dölj filnamn i namnlisten. Tryck på <kbd>H</kbd> för att tömma fönstret direkt.</p></div>
+      <div class="card"><h3>Bildreglage</h3><p>Ljusstyrka, kontrast, mättnad, gamma och värme för allt på skärmen, även pausad video. Påverkar bara visningen: dina filer ändras aldrig.</p></div>
+      <div class="card"><h3>Dina tangenter, din färg</h3><p>Välj tangenter för spela, nästa, föregående och bildrutestegning, och välj fönstrets färg. Texten växlar mellan vitt och svart för att förbli läsbar.</p></div>
+      <div class="card"><h3>Spela en hel mapp</h3><p>Låt den gå vidare till nästa fil när en video tar slut, i ordning eller blandat, en gång eller om och om igen. Eller upprepa en enda video.</p></div>
+    </div>
+  </section>
+
+  <section class="pair">
+    <figure>
+      <img class="shot" src="../img/picture.png" width="1100" height="750" alt="Panelen Bild med reglage för ljusstyrka, kontrast, mättnad, gamma och värme">
+      <figcaption>Bildreglagen verkar direkt och återställs med ett klick.</figcaption>
+    </figure>
+    <figure>
+      <img class="shot" src="../img/options.png" width="1100" height="960" alt="Panelen Alternativ med uppspelningsval, tangenttilldelning och fönsterfärg">
+      <figcaption>Alternativ: uppspelning, tangenter och fönsterfärg.</figcaption>
+    </figure>
+    <p class="shotnote">Skärmbilderna visar appen på engelska; den finns också på svenska.</p>
+  </section>
+
+  <section>
+    <h2>Format</h2>
+    <table>
+      <tr><td>Bilder</td><td>JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, ICO, SVG</td></tr>
+      <tr><td>Animationer</td><td>GIF, animerad PNG, animerad WebP</td></tr>
+      <tr><td>Video</td><td>MP4, MOV, MKV, WebM, AVI, WMV, FLV, MPEG, TS med flera, med H.264, H.265, VP9, AV1 och andra codecar</td></tr>
+      <tr><td>Avkodning</td><td>På grafikkortet när det stöder formatet, annars på processorn</td></tr>
+      <tr><td>Språk</td><td>Engelska, spanska, svenska, franska, tyska, portugisiska, italienska</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Lita inte bara på vårt ord</h2>
+    <ol class="steps">
+      <li><strong>Blockera den och se själv.</strong> Neka Reiks Visare all nätverksåtkomst i Windows-brandväggen, eller kryssa i det alternativet i installationsprogrammet när du installerar för alla användare. Allt fungerar som förut, eftersom den aldrig behövde någon anslutning.</li>
+      <li><strong>Läs koden.</strong> Reiks Visare har <a href="https://github.com/reiks-apps/reiks-viewer">öppen källkod</a>. Nedladdningarna byggs från den koden på GitHubs egna servrar, öppet, med ett signerat intyg om hur varje fil skapades.</li>
+      <li><strong>Kontrollera din nedladdning.</strong> Varje version anger SHA-256-kontrollsumman för varje fil.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Det Reiks Visare inte kan styra över</h2>
+    <p>Windows sparar själv vissa uppgifter som ingen app kan stänga av åt dig. När du öppnar en fil genom att dubbelklicka på den i Utforskaren kan Windows lägga till den i sin egen lista över senaste filer (Inställningar &rarr; Anpassning &rarr; Start &rarr; &rdquo;Visa nyligen öppnade objekt&rdquo;). Windows diagnostikdata och Recall är också Windows-inställningar, under Sekretess och säkerhet. Reiks Visares egen Öppna-dialog lägger inte till något i listan, och alternativet att dölja sig från skärmbilder håller fönstret utanför dem.</p>
+    <p><strong>Den enda fil Reiks Visare skriver</strong> är dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings- och integritetsval, i <code>%APPDATA%\ReiksViewer\settings.json</code>. Den innehåller ingenting om dina filer, och avinstallationen tar bort den.</p>
+  </section>
+
+  <section id="verify">
+    <h2>Installation</h2>
+    <div class="note">
+      <p><strong>Windows kan varna dig första gången.</strong> Installationsprogrammet är ännu inte digitalt signerat, så Windows kan visa &rdquo;Windows skyddade datorn&rdquo;. Välj <em>Mer information</em> och sedan <em>Kör ändå</em>.</p>
+      <p>För att kontrollera att din nedladdning är äkta, jämför dess SHA-256-kontrollsumma med <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup.exe</code></p>
+      <p>Installationsprogrammet kräver inga administratörsrättigheter och kan lägga till Reiks Visare i Utforskarens lista &rdquo;Öppna med&rdquo;. För att uppdatera kör du ett nyare installationsprogram över det gamla; &rdquo;Sök efter uppdateringar&rdquo; i appen (F1) öppnar nedladdningssidan i din webbläsare, och själva appen förblir offline.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Öppen källkod inuti</h2>
+    <p>Reiks Visare avkodar bilder och video med bibliotek från <a href="https://ffmpeg.org">FFmpeg</a>-projektet, licensierade under <a href="https://www.gnu.org/licenses/lgpl-3.0.html">GNU Lesser General Public License</a>. FFmpeg ingår som separata, oförändrade DLL-filer som du får ersätta med ditt eget bygge. FFmpeg-källkoden för det medföljande bygget publiceras med varje <a href="https://github.com/reiks-apps/reiks-viewer/releases/latest">version</a>, och de fullständiga upplysningarna finns i THIRD-PARTY-NOTICES.txt i appens mapp.</p>
+    <p>Reiks Visare är inte knuten till eller godkänd av FFmpeg-projektet. FFmpeg är ett varumärke som tillhör Fabrice Bellard.</p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Skärmbilderna visar trailern till <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; Carinanebulosan &rdquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA och STScI; samt Blue Marble 2012, NASA Goddard Space Flight Center.</p>
+  <p>Reiks Visare tillhandahålls i befintligt skick, utan garanti.</p>
+</footer>
+
+</body>
+</html>
