@@ -329,9 +329,7 @@ public partial class MainWindow
                 var printer = await Task.Run(() => new PrintEngine.Printer(name));
                 if (Closed || turn != _loading) return;
                 _printer = printer;
-                // The paper used last time if this printer has it, or else the driver's own choice.
-                int remembered = printer.Papers.ToList().FindIndex(paper => paper.Kind == _window._settings.PrintPaper && paper.Kind != 0);
-                ShowPapers(remembered >= 0 ? remembered : printer.ChosenPaper);
+                ShowPapers(printer.StartingPaper(_window._settings.PrintPaper));
                 Say("");
                 Refresh();
                 await Measure();

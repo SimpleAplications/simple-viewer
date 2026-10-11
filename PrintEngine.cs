@@ -112,6 +112,21 @@ static class PrintEngine
             return _sizes.Count - 1;
         }
 
+        /// <summary>
+        /// The paper to start on: the one used last time if this printer has it, or else the
+        /// driver's own choice. A driver that is set to Letter where Windows says the region
+        /// uses A4, or the other way round, starts on the region's paper instead.
+        /// </summary>
+        internal int StartingPaper(int remembered)
+        {
+            const int Letter = 1, A4 = 9;
+            int index = remembered == 0 ? -1 : _papers.FindIndex(paper => paper.Kind == remembered);
+            if (index >= 0) return index;
+            int set = _papers[ChosenPaper].Kind, usual = RegionPaper();
+            if (set != usual && set is Letter or A4 && usual is Letter or A4) index = _papers.FindIndex(paper => paper.Kind == usual);
+            return index >= 0 ? index : ChosenPaper;
+        }
+
         /// <summary>The page for this paper and orientation, with the edges this printer leaves blank.</summary>
         internal PageLayout Layout(int paper, bool landscape)
         {
@@ -272,6 +287,16 @@ static class PrintEngine
         }
         return copy;
     }
+
+    /// <summary>Windows' number for the paper size the user's region uses: 1 is Letter, 9 is A4.</summary>
+    static int RegionPaper()
+    {
+        const uint PaperSize = 0x100A, AsNumber = 0x20000000;
+        return GetLocaleInfoEx(null, PaperSize | AsNumber, out int paper, sizeof(int) / sizeof(char)) > 0 ? paper : 0;
+    }
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+    static extern int GetLocaleInfoEx(string? locale, uint type, out int value, int size);
 
     [DllImport("winspool.drv", CharSet = CharSet.Unicode)]
     static extern int DocumentProperties(IntPtr owner, IntPtr printer, string deviceName, IntPtr output, IntPtr input, int mode);

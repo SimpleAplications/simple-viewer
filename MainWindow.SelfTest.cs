@@ -346,8 +346,9 @@ public partial class MainWindow
             watch.Restart();
             view.Printers.SelectedItem = Option("printer", "Microsoft Print to PDF");
             await Settle();
+            log.Add($"{view.Printers.SelectedItem} starts on {view.Papers.SelectedItem}");
             log.Add($"switched printer in {watch.ElapsedMilliseconds} ms; papers: " + string.Join(" | ", view.Papers.Items.Cast<string>()));
-            string paper = Option("paper", "A4");
+            string paper = Option("paper", "");
             if (view.Papers.Items.Contains(paper)) view.Papers.SelectedItem = paper;
             if (options.Contains("upright")) view.Orientations.SelectedIndex = 1;
             if (options.Contains("landscape")) view.Orientations.SelectedIndex = 2;
