@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 public partial class App : Application
 {

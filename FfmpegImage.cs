@@ -4,7 +4,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FFmpeg.AutoGen;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 /// <summary>Decodes still pictures and short animations (GIF, APNG, ...) with FFmpeg.</summary>
 public static unsafe class FfmpegImage

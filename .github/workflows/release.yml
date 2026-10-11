@@ -12,7 +12,7 @@ permissions:
   attestations: write
 
 env:
-  # The unmodified FFmpeg build shipped with Simple, kept in this repository's own
+  # The unmodified FFmpeg build shipped with Reiks Viewer, kept in this repository's own
   # "ffmpeg-n8.1.3" release so that builds don't depend on a third-party download.
   FFMPEG_RELEASE: ffmpeg-n8.1.3
   FFMPEG_ZIP: ffmpeg-n8.1-latest-win64-lgpl-shared-8.1.zip
@@ -32,7 +32,7 @@ jobs:
       - name: Check that the tag matches the version in the project
         shell: pwsh
         run: |
-          $version = ([xml](Get-Content MediaViewer.csproj)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+          $version = ([xml](Get-Content ReiksViewer.csproj)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
           if ("v$version" -ne $env:GITHUB_REF_NAME) { throw "Tag $env:GITHUB_REF_NAME does not match project version $version." }
 
       - name: Get FFmpeg (checksum verified)
@@ -71,7 +71,7 @@ jobs:
         run: |
           $notes = "release-notes/$env:GITHUB_REF_NAME.md"
           $files = Get-ChildItem dist -File | ForEach-Object { $_.FullName }
-          $title = "Simple " + $env:GITHUB_REF_NAME.TrimStart("v")
+          $title = "Reiks Viewer " + $env:GITHUB_REF_NAME.TrimStart("v")
           if (Test-Path $notes) {
             gh release create $env:GITHUB_REF_NAME $files --title $title --notes-file $notes
           } else {

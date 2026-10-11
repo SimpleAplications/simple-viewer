@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 // The pop-up panels over the picture (Picture, Rotate, Options) and what they control:
 // picture adjustments, orientation, the user's keys and the window colour.
@@ -390,7 +390,7 @@ public partial class MainWindow
             _settings.HideFileNames = on;
             _settings.Save();
             UpdateStatus();
-        }, "Shows \"Simple\" instead of the file's name in the title bar and taskbar"));
+        }, "Shows \"Reiks Viewer\" instead of the file's name in the title bar and taskbar"));
 
         rows.Children.Add(Heading("Window colour"));
         var swatches = new WrapPanel();

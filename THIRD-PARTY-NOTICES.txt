@@ -1,5 +1,5 @@
-Simple - third-party notices
-============================
+Reiks Viewer - third-party notices
+==================================
 
 FFmpeg
 ------

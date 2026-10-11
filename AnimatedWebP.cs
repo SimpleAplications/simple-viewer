@@ -5,7 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using FFmpeg.AutoGen;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 /// <summary>
 /// Animated WebP. FFmpeg decodes WebP pictures but not the animation container, so this reads

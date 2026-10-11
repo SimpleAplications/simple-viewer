@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 public partial class MainWindow : Window
 {
@@ -597,14 +597,14 @@ public partial class MainWindow : Window
         if (_index < 0 || _files.Count == 0)
         {
             StatusText.Text = ModeText.Text = "";
-            Title = TitleText.Text = "Simple";
+            Title = TitleText.Text = "Reiks Viewer";
             return;
         }
 
         if (_hidden)
         {
             StatusText.Text = ModeText.Text = "";
-            Title = TitleText.Text = "Simple";
+            Title = TitleText.Text = "Reiks Viewer";
             return;
         }
 
@@ -634,8 +634,8 @@ public partial class MainWindow : Window
         if (_settings.RepeatFile) modes.Add("repeating file");
         else if (_settings.PlayFolder) modes.Add(_settings.Shuffle ? "playing folder, shuffled" : "playing folder");
         ModeText.Text = string.Join("  ·  ", modes);
-        TitleText.Text = _settings.HideFileNames ? "Simple" : name;
-        Title = _settings.HideFileNames ? "Simple" : $"{name} - Simple";
+        TitleText.Text = _settings.HideFileNames ? "Reiks Viewer" : name;
+        Title = _settings.HideFileNames ? "Reiks Viewer" : $"{name} - Reiks Viewer";
     }
 
     void OnKeyDown(object sender, KeyEventArgs e)

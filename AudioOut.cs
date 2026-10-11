@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 /// <summary>
 /// 16-bit PCM output through the Windows waveOut API. Blocks are queued without

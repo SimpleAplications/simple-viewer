@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 /// <summary>Lists what the app can open, where the video decoders come from, and the credits.</summary>
 public sealed class FormatsWindow : Window
@@ -61,12 +61,12 @@ public sealed class FormatsWindow : Window
             Width = 160,
             Height = 32,
             Margin = new Thickness(0, 8, 16, 12),
-            ToolTip = "Opens Windows Settings, where you can make Simple the default for pictures and videos",
+            ToolTip = "Opens Windows Settings, where you can make Reiks Viewer the default for pictures and videos",
         };
         defaults.SetResourceReference(ForegroundProperty, "TextBrush");
         defaults.SetResourceReference(BackgroundProperty, "HoverBrush");
         defaults.Click += (_, _) => Process.Start(
-            new ProcessStartInfo("ms-settings:defaultapps?registeredAppUser=Simple") { UseShellExecute = true });
+            new ProcessStartInfo("ms-settings:defaultapps?registeredAppUser=ReiksViewer") { UseShellExecute = true });
 
         // The app never goes online by itself. This only hands the address to your browser.
         var updates = new Button
@@ -77,12 +77,12 @@ public sealed class FormatsWindow : Window
             Width = 160,
             Height = 32,
             Margin = new Thickness(0, 8, 16, 12),
-            ToolTip = "Opens the download page in your web browser. Simple itself never connects to the internet.",
+            ToolTip = "Opens the download page in your web browser. Reiks Viewer itself never connects to the internet.",
         };
         updates.SetResourceReference(ForegroundProperty, "TextBrush");
         updates.SetResourceReference(BackgroundProperty, "HoverBrush");
         updates.Click += (_, _) => Process.Start(
-            new ProcessStartInfo("https://github.com/SimpleAplications/simple-viewer/releases/latest") { UseShellExecute = true });
+            new ProcessStartInfo("https://github.com/reiks-apps/reiks-viewer/releases/latest") { UseShellExecute = true });
 
         var buttons = new StackPanel { Orientation = Orientation.Horizontal };
         buttons.Children.Add(openFolder);
@@ -120,8 +120,8 @@ public sealed class FormatsWindow : Window
         string version = (typeof(FormatsWindow).Assembly.GetName().Version ?? new Version(1, 0, 0)).ToString(3);
 
         return $"""
-                SIMPLE {version}
-                Simple never connects to the internet and keeps no record of what you open.
+                REIKS VIEWER {version}
+                Reiks Viewer never connects to the internet and keeps no record of what you open.
                 "Check for updates" below opens the download page in your web browser.
 
                 DECODERS

@@ -1,12 +1,12 @@
-# Simple
+# Reiks Viewer
 
-A simple picture and video viewer for Windows, made for private use. Your pictures and videos stay yours: Simple shows them only to you, and that is all it does.
+A simple picture and video viewer for Windows, made for private use. Your pictures and videos stay yours: Reiks Viewer shows them only to you, and that is all it does.
 
-**[Download for Windows](https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-Setup.exe)**
- · [Portable zip](https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-portable.zip)
- · [Website](https://simpleaplications.github.io/simple-viewer/)
+**[Download for Windows](https://github.com/reiks-apps/reiks-viewer/releases/latest/download/ReiksViewer-Setup.exe)**
+ · [Portable zip](https://github.com/reiks-apps/reiks-viewer/releases/latest/download/ReiksViewer-portable.zip)
+ · [Website](https://reiks-apps.github.io/reiks-viewer/)
 
-![Simple showing a paused video](docs/img/video.png)
+![Reiks Viewer showing a paused video](docs/img/video.png)
 
 ## What it never does
 
@@ -17,7 +17,7 @@ A simple picture and video viewer for Windows, made for private use. Your pictur
 - **Run in the background.** No service, startup entry or tray icon.
 - **Ask for anything.** No account, ads, bundled extras or administrator rights.
 
-The only file it writes is your own options, `%APPDATA%\Simple\settings.json`.
+The only file it writes is your own options, `%APPDATA%\ReiksViewer\settings.json`.
 
 What it can't control: Windows may list files you open from Explorer among its recent items, and diagnostic data and Recall are Windows settings.
 
@@ -61,11 +61,11 @@ You need Windows and the [.NET 10 SDK](https://dotnet.microsoft.com/download).
 3. Build and run:
 
    ```
-   dotnet build MediaViewer.csproj -c Release
-   bin\Release\net10.0-windows\Simple.exe
+   dotnet build ReiksViewer.csproj -c Release
+   bin\Release\net10.0-windows\ReiksViewer.exe
    ```
 
-The published releases are built from this repository by GitHub Actions (`.github/workflows/release.yml`), and each file carries a build provenance attestation you can check with `gh attestation verify <file> --repo SimpleAplications/simple-viewer`.
+The published releases are built from this repository by GitHub Actions (`.github/workflows/release.yml`), and each file carries a build provenance attestation you can check with `gh attestation verify <file> --repo reiks-apps/reiks-viewer`.
 
 `release.ps1` builds the installer (it needs [Inno Setup 6](https://jrsoftware.org/isinfo.php)) and the portable zip into `dist`.
 
@@ -73,8 +73,8 @@ The picture adjustments use a small pixel shader, `Adjust.fx`. Its compiled form
 
 ## Licence and credits
 
-Simple's own code is under the [MIT licence](LICENSE).
+Reiks Viewer's own code is under the [MIT licence](LICENSE).
 
-Pictures and video are decoded by libraries from the [FFmpeg](https://ffmpeg.org) project, under the GNU Lesser General Public License. They are shipped with the releases as separate, unmodified DLLs, and the FFmpeg source for the shipped build is attached to each release. Details are in [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt). Simple is not affiliated with or endorsed by the FFmpeg project.
+Pictures and video are decoded by libraries from the [FFmpeg](https://ffmpeg.org) project, under the GNU Lesser General Public License. They are shipped with the releases as separate, unmodified DLLs, and the FFmpeg source for the shipped build is attached to each release. Details are in [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt). Reiks Viewer is not affiliated with or endorsed by the FFmpeg project.
 
 The screenshots show the *Sintel* trailer, © Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula "Cosmic Cliffs", NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center.

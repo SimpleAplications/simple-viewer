@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Input;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 /// <summary>The actions whose key the user can choose in Options.</summary>
 public enum KeyAction
@@ -18,7 +18,7 @@ public enum KeyAction
 
 /// <summary>
 /// The user's options: chosen keys, window colour and playback choices. Stored in
-/// %APPDATA%\Simple\settings.json. Nothing about opened files is ever written.
+/// %APPDATA%\ReiksViewer\settings.json. Nothing about opened files is ever written.
 /// </summary>
 public sealed class Settings
 {
@@ -36,7 +36,7 @@ public sealed class Settings
 
     /// <summary>Leave the window out of screenshots, recordings and screen sharing.</summary>
     public bool HideFromCapture { get; set; }
-    /// <summary>Show "Simple" instead of the file's name in the title bar and taskbar.</summary>
+    /// <summary>Show "Reiks Viewer" instead of the file's name in the title bar and taskbar.</summary>
     public bool HideFileNames { get; set; }
 
     public static Dictionary<KeyAction, Key> DefaultKeys() => new()
@@ -56,6 +56,10 @@ public sealed class Settings
     };
 
     static string FilePath => Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ReiksViewer", "settings.json");
+
+    // Where the options were kept when the app was still called Simple; read once, never written.
+    static string LegacyFilePath => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Simple", "settings.json");
 
     public static Settings Load()
@@ -63,7 +67,8 @@ public sealed class Settings
         Settings? settings = null;
         try
         {
-            if (File.Exists(FilePath)) settings = JsonSerializer.Deserialize<Settings>(File.ReadAllText(FilePath), Json);
+            string path = File.Exists(FilePath) ? FilePath : LegacyFilePath;
+            if (File.Exists(path)) settings = JsonSerializer.Deserialize<Settings>(File.ReadAllText(path), Json);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
         {

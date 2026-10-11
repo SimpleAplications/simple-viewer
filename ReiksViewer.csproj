@@ -8,9 +8,11 @@
     <UseWPF>true</UseWPF>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ApplicationIcon>app.ico</ApplicationIcon>
-    <AssemblyName>Simple</AssemblyName>
-    <Product>Simple</Product>
-    <Version>1.0.2</Version>
+    <AssemblyName>ReiksViewer</AssemblyName>
+    <Product>Reiks Viewer</Product>
+    <Company>Reiks Apps</Company>
+    <Copyright>Copyright (c) 2026 Reiks Apps</Copyright>
+    <Version>1.1.0</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <SatelliteResourceLanguages>en;es</SatelliteResourceLanguages>
   </PropertyGroup>

@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using FFmpeg.AutoGen;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 /// <summary>
 /// Video player built on the FFmpeg libraries in the app's codecs folder.

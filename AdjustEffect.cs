@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 /// <summary>Brightness, contrast, saturation, gamma and warmth, done by the pixel shader in Adjust.fx.</summary>
 public sealed class AdjustEffect : ShaderEffect

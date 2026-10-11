@@ -3,9 +3,9 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
-// Developer check: "Simple.exe --selftest <video> <output folder>" drives the player
+// Developer check: "ReiksViewer.exe --selftest <video> <output folder>" drives the player
 // through play, pause, stepping and seeking, and writes a log plus screenshots.
 public partial class MainWindow
 {
@@ -145,7 +145,7 @@ public partial class MainWindow
         }
     }
 
-    // "Simple.exe --imagetest <folder> <output folder>" decodes every file in the folder as a picture.
+    // "ReiksViewer.exe --imagetest <folder> <output folder>" decodes every file in the folder as a picture.
     void RunImageTest(string folder, string outputFolder)
     {
         Directory.CreateDirectory(outputFolder);
@@ -179,7 +179,7 @@ public partial class MainWindow
         Close();
     }
 
-    // "Simple.exe --screenshot <file> <png> <seconds> <none|picture|rotate|options>" opens a file,
+    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|rotate|options>" opens a file,
     // pauses a video at the given time, optionally opens a panel, and saves a picture of the window.
     async Task RunScreenshot(string file, string output, double seconds, string panel)
     {
@@ -226,7 +226,7 @@ public partial class MainWindow
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     static extern bool GetWindowRect(IntPtr hwnd, out ScreenRect rect);
 
-    // "Simple.exe --capturetest <file> <rect file> <on|off>" shows a file in a window kept on top,
+    // "ReiksViewer.exe --capturetest <file> <rect file> <on|off>" shows a file in a window kept on top,
     // with capture protection on or off, and writes the window's screen rectangle to a file so
     // that a separate screen grab can check what a capture of that area contains.
     async Task RunCaptureTest(string file, string rectFile, bool protect)

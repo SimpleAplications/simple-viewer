@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 using FFmpeg.AutoGen;
 
-namespace MediaViewer;
+namespace ReiksViewer;
 
 /// <summary>Converts decoded FFmpeg frames of any pixel format to 32-bit BGRA for display.</summary>
 internal sealed unsafe class FrameScaler : IDisposable
