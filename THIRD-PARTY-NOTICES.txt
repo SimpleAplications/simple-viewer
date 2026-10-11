@@ -20,6 +20,19 @@ Source:   ffmpeg-source-n8.1.3-17-gc389840894.tar.gz, offered alongside this
           third-party libraries compiled into these DLLs and their own
           licences, are at https://github.com/BtbN/FFmpeg-Builds.
 
+This FFmpeg build has other open source libraries compiled into its DLLs.
+According to its build configuration these are: AMF, aribb24, libaribcaption,
+libass, libaom, libbluray, Chromaprint, dav1d, ffnvcodec, Fontconfig, FreeType,
+FriBidi, Game Music Emu, GMP, HarfBuzz, libiconv, libjxl, Kvazaar, LAME,
+Little CMS, LCEVCdec, lilv (LV2), libopenmpt, liboapv, OpenAL Soft,
+OpenCL headers, opencore-amr, OpenH264, OpenJPEG, Opus, libplacebo, rav1e,
+librist, librsvg, SDL2, shaderc, Snappy, soxr, libsrt, libssh, SVT-AV1,
+libtheora, TwoLAME, uavs3d, VapourSynth, libvmaf, libvorbis, libvpl, libvpx,
+VVenC, Vulkan loader, libwebp, libxml2, XZ Utils (lzma), ZeroMQ, zimg, zlib
+and libzvbi. Each is under its own licence, all compatible with distribution
+under the LGPL version 3; their sources and licences are referenced by the
+build scripts named above.
+
 FFmpeg is linked dynamically and has not been modified. You may replace the
 DLLs in the codecs folder with your own build of FFmpeg 8.x, and you may
 reverse engineer this app as far as needed to do so.
