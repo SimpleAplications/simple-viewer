@@ -1,6 +1,6 @@
 # Simple
 
-A simple picture and video viewer for Windows, made for private use. It never connects to the internet: no telemetry, no account, no ads.
+A simple picture and video viewer for Windows, made for private use. Your pictures and videos stay yours: Simple opens them, and that is all it does.
 
 **[Download for Windows](https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-Setup.exe)**
  · [Portable zip](https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-portable.zip)
@@ -8,11 +8,24 @@ A simple picture and video viewer for Windows, made for private use. It never co
 
 ![Simple showing a paused video](docs/img/video.png)
 
+## What it never does
+
+- **Connect to the internet.** No telemetry, crash reports, update checks or online lookups. FFmpeg is restricted to the `file` protocol and to a fixed list of formats, so a crafted file can't make it open a network address.
+- **Keep a record of what you open.** No history, recent list, thumbnail cache or library.
+- **Look inside your pictures.** No face recognition, tagging or AI; location data is never read or sent.
+- **Change your files.** It never writes to your media or their folders.
+- **Run in the background.** No service, startup entry or tray icon.
+- **Ask for anything.** No account, ads, bundled extras or administrator rights.
+
+The only file it writes is your own options, `%APPDATA%\Simple\settings.json`.
+
+What it can't control: Windows may list files you open from Explorer among its recent items, and diagnostic data and Recall are Windows settings.
+
 ## What it does
 
 - **Frame stepping, both ways.** Tap `X` or `Z` to move exactly one frame forward or back; hold to keep going, faster the longer you hold. Every frame is shown complete.
 - **Pictures, GIFs and video in one window.** Open one file and move through the rest of the folder. Zoom, pan, rotate and flip.
-- **Stays on your PC.** No network code and no history of what you open. The only file it writes is your own options (`%APPDATA%\Simple\settings.json`).
+- **Private on screen too.** Optionally hide the window from screenshots, recordings, screen sharing and Windows Recall; hide file names; press `H` to blank the window at once.
 - **Picture controls.** Brightness, contrast, saturation, gamma and warmth, for display only.
 - **Your keys, your colour.** Choose the keys for the main actions and the colour of the window.
 - **Folder playback.** Move on when a video ends, in order or shuffled, once or on repeat; or repeat one file.
@@ -32,8 +45,9 @@ A simple picture and video viewer for Windows, made for private use. It never co
 | Fullscreen | `F11`, `F` or double-click |
 | Open a file | `O` |
 | Formats and credits | `F1` |
+| Hide the picture | `H` |
 
-`Space`, `C`, `V`, `Z` and `X` can be changed in Options.
+`Space`, `C`, `V`, `Z`, `X` and `H` can be changed in Options.
 
 ## Building from source
 
@@ -50,6 +64,8 @@ You need Windows and the [.NET 10 SDK](https://dotnet.microsoft.com/download).
    dotnet build MediaViewer.csproj -c Release
    bin\Release\net10.0-windows\Simple.exe
    ```
+
+The published releases are built from this repository by GitHub Actions (`.github/workflows/release.yml`), and each file carries a build provenance attestation you can check with `gh attestation verify <file> --repo SimpleAplications/simple-viewer`.
 
 `release.ps1` builds the installer (it needs [Inno Setup 6](https://jrsoftware.org/isinfo.php)) and the portable zip into `dist`.
 

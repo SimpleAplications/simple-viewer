@@ -23,8 +23,7 @@ public static unsafe class FfmpegImage
             throw new InvalidOperationException("FFmpeg is not available: " + FfmpegPlayer.LoadError);
         if (AnimatedWebP.IsAnimated(path)) return AnimatedWebP.Load(path);
 
-        AVFormatContext* format = null;
-        FfmpegPlayer.Check(ffmpeg.avformat_open_input(&format, path, null, null), "Can't open the file");
+        var format = FfmpegPlayer.OpenInput(path);
         try
         {
             FfmpegPlayer.Check(ffmpeg.avformat_find_stream_info(format, null), "Can't read the file");

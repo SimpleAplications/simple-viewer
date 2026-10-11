@@ -113,7 +113,14 @@ public partial class MainWindow
         var panel = new Border
         {
             // Scrolls when the window is too short to show the whole panel.
-            Child = new ScrollViewer { Content = rows, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, Focusable = false },
+            Child = new ScrollViewer
+            {
+                Content = rows,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                Focusable = false,
+                // Room for the scroll bar, so it never covers the right-hand column.
+                MinWidth = width + SystemParameters.VerticalScrollBarWidth + 4,
+            },
             Padding = new Thickness(16, 12, 16, 12),
             Margin = new Thickness(12),
             HorizontalAlignment = HorizontalAlignment.Right,
@@ -303,6 +310,7 @@ public partial class MainWindow
         (KeyAction.PreviousFile, "Previous file"),
         (KeyAction.PlayForward, "Play forward"),
         (KeyAction.PlayBackward, "Play backward"),
+        (KeyAction.QuickHide, "Hide the picture"),
     };
 
     static readonly string[] ColorPresets =
@@ -370,6 +378,20 @@ public partial class MainWindow
         resetKeys.Margin = new Thickness(0);
         rows.Children.Add(resetKeys);
 
+        rows.Children.Add(Heading("Privacy"));
+        rows.Children.Add(Check("Hide from screenshots and screen sharing", _settings.HideFromCapture, on =>
+        {
+            _settings.HideFromCapture = on;
+            _settings.Save();
+            ApplyCaptureProtection();
+        }, "The window appears black in screenshots, recordings, screen sharing and Windows Recall"));
+        rows.Children.Add(Check("Hide file names", _settings.HideFileNames, on =>
+        {
+            _settings.HideFileNames = on;
+            _settings.Save();
+            UpdateStatus();
+        }, "Shows \"Simple\" instead of the file's name in the title bar and taskbar"));
+
         rows.Children.Add(Heading("Window colour"));
         var swatches = new WrapPanel();
         foreach (var preset in ColorPresets)
@@ -416,6 +438,41 @@ public partial class MainWindow
         box.IsEnabledChanged += (_, _) => box.Opacity = box.IsEnabled ? 1 : 0.45;
         box.Click += (_, _) => changed(box.IsChecked == true);
         return box;
+    }
+
+    // ---------- Privacy: capture protection, hidden names, quick hide ----------
+
+    [DllImport("user32.dll")]
+    static extern bool SetWindowDisplayAffinity(IntPtr hwnd, uint affinity);
+
+    bool _hidden;
+
+    /// <summary>
+    /// Asks Windows to leave this window out of anything that captures the screen. The window
+    /// then shows as black in screenshots, recordings, screen sharing and Recall snapshots.
+    /// </summary>
+    void ApplyCaptureProtection()
+    {
+        const uint None = 0, ExcludeFromCapture = 0x11;
+        var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+        if (hwnd != IntPtr.Zero) SetWindowDisplayAffinity(hwnd, _settings.HideFromCapture ? ExcludeFromCapture : None);
+    }
+
+    string DisplayName(string path) => _settings.HideFileNames ? "this file" : System.IO.Path.GetFileName(path);
+
+    /// <summary>One key to blank the window: pauses the video, covers the picture, hides the name.</summary>
+    void ToggleQuickHide()
+    {
+        _hidden = !_hidden;
+        if (_hidden)
+        {
+            if (_videoPlaying) SetPlaying(false);
+            foreach (var panel in _panels) panel.Visibility = Visibility.Collapsed;
+            CancelKeyCapture();
+            UpdateButtonStates();
+        }
+        Cover.Visibility = _hidden ? Visibility.Visible : Visibility.Collapsed;
+        UpdateStatus();
     }
 
     // ---------- Playback: whole folder, shuffle, repeat ----------
@@ -605,6 +662,7 @@ public partial class MainWindow
                 case KeyAction.PreviousFile: Step(-1); break;
                 case KeyAction.PlayForward when _isVideo && !e.IsRepeat: StartScrub(e.Key, 1); break;
                 case KeyAction.PlayBackward when _isVideo && !e.IsRepeat: StartScrub(e.Key, -1); break;
+                case KeyAction.QuickHide when !e.IsRepeat: ToggleQuickHide(); break;
             }
             return true;
         }

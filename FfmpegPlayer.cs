@@ -135,9 +135,7 @@ public sealed unsafe class FfmpegPlayer : IDisposable
         _dispatcher = dispatcher;
         try
         {
-            AVFormatContext* format = null;
-            Check(ffmpeg.avformat_open_input(&format, path, null, null), "Can't open the file");
-            _format = format;
+            _format = OpenInput(path);
             Check(ffmpeg.avformat_find_stream_info(_format, null), "Can't read the file's streams");
 
             AVCodec* videoCodec = null;
@@ -199,6 +197,33 @@ public sealed unsafe class FfmpegPlayer : IDisposable
     /// Opens the graphics card's decoder (Direct3D 11) if FFmpeg can use it for this codec.
     /// Returns null when it can't; the video is then decoded on the processor.
     /// </summary>
+    // The only file readers FFmpeg may use. It knows hundreds more, including playlists and
+    // scripts that point at other files or addresses; refusing them keeps a crafted file away
+    // from code this app has no use for.
+    const string AllowedFormats =
+        "mov,matroska,webm,avi,asf,mpegts,mpeg,mpegvideo,m4v,flv,live_flv,ogg,mxf,h264,hevc,av1,ivf,obu," +
+        "gif,gif_pipe,apng,image2,ico,png_pipe,jpeg_pipe,bmp_pipe,tiff_pipe,webp_pipe," +
+        "jpegxl_pipe,jpegxl_anim,j2k_pipe,qoi_pipe,svg_pipe";
+
+    /// <summary>
+    /// Opens a file for reading with FFmpeg restricted to local files ("file" is the only
+    /// protocol allowed, so nothing in a file can make it open a network address) and to the
+    /// formats listed above.
+    /// </summary>
+    internal static AVFormatContext* OpenInput(string path)
+    {
+        AVDictionary* options = null;
+        ffmpeg.av_dict_set(&options, "protocol_whitelist", "file", 0);
+        ffmpeg.av_dict_set(&options, "format_whitelist", AllowedFormats, 0);
+        AVFormatContext* format = null;
+        int result = ffmpeg.avformat_open_input(&format, path, null, &options);
+        ffmpeg.av_dict_free(&options);
+        if (result == ffmpeg.AVERROR(ffmpeg.EINVAL))
+            throw new InvalidOperationException("This kind of file is not supported.");
+        Check(result, "Can't open the file");
+        return format;
+    }
+
     static AVBufferRef* TryCreateHardware(AVCodec* codec)
     {
         const int HardwareDeviceMethod = 0x01; // AV_CODEC_HW_CONFIG_METHOD_HW_DEVICE_CTX

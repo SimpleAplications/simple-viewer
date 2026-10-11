@@ -36,7 +36,11 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "openwith"; Description: "Add Simple to the ""Open with"" list for pictures and videos"; GroupDescription: "Explorer:"
+Name: "firewall"; Description: "Block Simple from the network with a Windows Firewall rule"; GroupDescription: "Privacy:"; Flags: unchecked; Check: IsAdminInstallMode
 Name: "defaults"; Description: "Let me choose Simple as the default app for pictures and videos (opens Windows Settings at the end)"; GroupDescription: "Explorer:"; Flags: unchecked
+
+[UninstallRun]
+Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=""Simple (block network)"""; Flags: runhidden; RunOnceId: "RemoveFirewallRule"; Check: IsAdminInstallMode
 
 [UninstallDelete]
 ; The options file (chosen keys and window colour).
@@ -200,6 +204,10 @@ Root: HKA; Subkey: "Software\{#AppName}\Capabilities\FileAssociations"; ValueTyp
 Root: HKA; Subkey: "Software\Classes\.divx\OpenWithProgids"; ValueType: string; ValueName: "Simple.Video"; ValueData: ""; Flags: uninsdeletevalue; Tasks: defaults
 
 [Run]
+; Optional (all-users install only, since it needs administrator rights): a firewall rule so
+; that Windows itself keeps the app off the network, whatever the app's code does.
+Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name=""Simple (block network)"" dir=out action=block program=""{app}\{#AppExe}"" enable=yes"; Flags: runhidden; Tasks: firewall
+Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name=""Simple (block network)"" dir=in action=block program=""{app}\{#AppExe}"" enable=yes"; Flags: runhidden; Tasks: firewall
 ; The Settings page for this app, where the user confirms the defaults.
 Filename: "ms-settings:defaultapps?registeredAppUser={#AppName}"; Description: "Open Windows Settings to make Simple the default app"; Flags: shellexec nowait postinstall skipifsilent; Tasks: defaults; Check: not IsAdminInstallMode
 Filename: "ms-settings:defaultapps?registeredAppMachine={#AppName}"; Description: "Open Windows Settings to make Simple the default app"; Flags: shellexec nowait postinstall skipifsilent; Tasks: defaults; Check: IsAdminInstallMode

@@ -13,7 +13,7 @@ public sealed class FormatsWindow : Window
     {
         Owner = owner;
         Title = "Formats and credits";
-        Width = 680;
+        Width = 720;
         Height = 560;
         SetResourceReference(BackgroundProperty, "WindowBrush");
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -68,9 +68,26 @@ public sealed class FormatsWindow : Window
         defaults.Click += (_, _) => Process.Start(
             new ProcessStartInfo("ms-settings:defaultapps?registeredAppUser=Simple") { UseShellExecute = true });
 
+        // The app never goes online by itself. This only hands the address to your browser.
+        var updates = new Button
+        {
+            Content = "Check for updates",
+            FontFamily = SystemFonts.MessageFontFamily,
+            FontSize = 13,
+            Width = 160,
+            Height = 32,
+            Margin = new Thickness(0, 8, 16, 12),
+            ToolTip = "Opens the download page in your web browser. Simple itself never connects to the internet.",
+        };
+        updates.SetResourceReference(ForegroundProperty, "TextBrush");
+        updates.SetResourceReference(BackgroundProperty, "HoverBrush");
+        updates.Click += (_, _) => Process.Start(
+            new ProcessStartInfo("https://github.com/SimpleAplications/simple-viewer/releases/latest") { UseShellExecute = true });
+
         var buttons = new StackPanel { Orientation = Orientation.Horizontal };
         buttons.Children.Add(openFolder);
         buttons.Children.Add(defaults);
+        buttons.Children.Add(updates);
 
         var layout = new DockPanel();
         DockPanel.SetDock(buttons, Dock.Bottom);
@@ -100,7 +117,13 @@ public sealed class FormatsWindow : Window
                {FfmpegPlayer.CodecsFolder}
                """;
 
+        string version = (typeof(FormatsWindow).Assembly.GetName().Version ?? new Version(1, 0, 0)).ToString(3);
+
         return $"""
+                SIMPLE {version}
+                Simple never connects to the internet and keeps no record of what you open.
+                "Check for updates" below opens the download page in your web browser.
+
                 DECODERS
                 Pictures, animations and videos are all decoded by FFmpeg. Nothing is sent anywhere:
                 the app has no network code.

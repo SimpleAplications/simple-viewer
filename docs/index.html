@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simple - picture and video viewer for Windows</title>
-<meta name="description" content="A simple, free picture and video viewer for Windows, made for private use. It never connects to the internet: no telemetry, no account, no ads.">
+<meta name="description" content="A simple, free picture and video viewer for Windows, made for private use. It never connects to the internet, keeps no history, and can hide itself from screenshots and screen sharing.">
 <link rel="icon" href="favicon.ico">
 <style>
   :root {
@@ -58,6 +58,16 @@
   td:first-child { width: 190px; color: var(--soft); padding-right: 16px; }
   .note { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; font-size: 16px; }
   .note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+  .never { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px 28px; }
+  .never li { padding-left: 34px; position: relative; }
+  .never li::before {
+    content: "\2715"; position: absolute; left: 0; top: 3px; width: 22px; height: 22px; border-radius: 50%;
+    border: 1px solid var(--line); font-size: 11px; line-height: 20px; text-align: center; color: var(--soft);
+  }
+  .never strong { display: block; }
+  .never span { color: var(--soft); font-size: 16px; }
+  .lead { color: var(--soft); max-width: 720px; margin: -6px 0 22px; }
+  ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 10px; }
   footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 20px; }
   footer p { margin: 0 0 8px; }
   @media (max-width: 600px) {
@@ -71,10 +81,10 @@
 <header class="wrap">
   <img class="icon" src="img/icon.png" alt="Simple icon" width="96" height="96">
   <h1>Simple</h1>
-  <p class="tagline">A simple picture and video viewer for your private use. It never connects to the internet: no telemetry, no account, no ads.</p>
+  <p class="tagline">Your pictures and videos stay yours. Simple opens them, and that is all it does.</p>
   <a class="button" href="https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-Setup.exe">Download for Windows</a>
   <p class="under">
-    Free &middot; Windows 10 or 11, 64-bit &middot; open source<br>
+    Free &middot; open source &middot; never connects to the internet &middot; Windows 10 or 11, 64-bit<br>
     <a href="https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-portable.zip">Portable zip (no install)</a>
     &middot; <a href="#verify">Checksums</a>
     &middot; <a href="https://github.com/SimpleAplications/simple-viewer/releases">All versions</a>
@@ -84,6 +94,19 @@
 <main class="wrap">
   <img class="shot" src="img/video.png" width="1100" height="750"
        alt="Simple showing a paused video, with the time shown to the millisecond and buttons to step one frame back or forward">
+
+  <section>
+    <h2>What Simple never does</h2>
+    <p class="lead">Most viewers and players quietly do more than show your files. Simple is built so that it can&rsquo;t.</p>
+    <ul class="never">
+      <li><strong>Connect to the internet</strong><span>No telemetry, no usage statistics, no crash reports, no update checks, no online lookups. Its decoders are restricted to local files, so not even a specially made file can make it reach out.</span></li>
+      <li><strong>Keep a record of what you open</strong><span>No history, no recent list, no thumbnail cache, no library or index of your folders.</span></li>
+      <li><strong>Look inside your pictures</strong><span>No face recognition, no tagging, no AI, no &ldquo;enhancing&rdquo; in the cloud. Location data in your photos is never read or sent anywhere.</span></li>
+      <li><strong>Change your files</strong><span>It never writes to your pictures, videos or their folders: no ratings, no tags, no hidden side files.</span></li>
+      <li><strong>Run in the background</strong><span>No service, no startup entry, no tray icon. When you close it, it is gone.</span></li>
+      <li><strong>Ask for anything</strong><span>No account, no sign-in, no ads, no bundled extras, no administrator rights.</span></li>
+    </ul>
+  </section>
 
   <section>
     <h2>What it does</h2>
@@ -97,8 +120,8 @@
         <p>Open one file and move through everything else in the folder with the arrow keys. Zoom with the mouse wheel, drag to pan, rotate and flip.</p>
       </div>
       <div class="card">
-        <h3>Stays on your PC</h3>
-        <p>The app has no network code and keeps no history of what you open. The only thing it saves is your own options: keys, window colour and playback choices.</p>
+        <h3>Private on screen too</h3>
+        <p>Make the window show as black in screenshots, recordings, screen sharing and Windows Recall. Hide file names from the title bar. Press <kbd>H</kbd> to blank the window at once.</p>
       </div>
       <div class="card">
         <h3>Picture controls</h3>
@@ -121,7 +144,7 @@
       <figcaption>Picture controls apply instantly and reset with one click.</figcaption>
     </figure>
     <figure>
-      <img class="shot" src="img/options.png" width="1100" height="750" alt="The Options panel with playback choices, key assignments and window colour">
+      <img class="shot" src="img/options.png" width="1100" height="900" alt="The Options panel with playback choices, key assignments and window colour">
       <figcaption>Options: playback, keys and window colour.</figcaption>
     </figure>
   </section>
@@ -136,6 +159,26 @@
     </table>
   </section>
 
+  <section>
+    <h2>Don&rsquo;t take our word for it</h2>
+    <ol class="steps">
+      <li><strong>Block it and see.</strong> Deny Simple all network access in Windows Firewall, or tick that option in the installer when installing for all users. Everything keeps working, because it never needed a connection.</li>
+      <li><strong>Read the code.</strong> Simple is <a href="https://github.com/SimpleAplications/simple-viewer">open source</a>. The downloads are built from that code on GitHub&rsquo;s own servers, in public, with a signed record of how each file was made.</li>
+      <li><strong>Check your download.</strong> Every release lists the SHA-256 checksum of each file.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>What Simple can&rsquo;t control</h2>
+    <p>Windows itself keeps some records that no app can switch off for you. When you open a file by double-clicking it
+    in Explorer, Windows may add it to its own recent files list (Settings &rarr; Personalization &rarr; Start &rarr;
+    &ldquo;Show recently opened items&rdquo;). Windows&rsquo; diagnostic data and Recall are also Windows settings, under
+    Privacy &amp; security. Simple&rsquo;s own Open dialog does not add to the recent list, and its
+    &ldquo;hide from screenshots&rdquo; option keeps its window out of screen captures.</p>
+    <p><strong>The one file Simple writes</strong> is your options: your keys, window colour, playback and privacy choices,
+    in <code>%APPDATA%\Simple\settings.json</code>. It contains nothing about your files, and the uninstaller removes it.</p>
+  </section>
+
   <section id="verify">
     <h2>Installing</h2>
     <div class="note">
@@ -145,7 +188,7 @@
       <a href="https://github.com/SimpleAplications/simple-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>.
       In PowerShell: <code>Get-FileHash Simple-Setup.exe</code></p>
       <p>The installer needs no administrator rights and can add Simple to Explorer&rsquo;s &ldquo;Open with&rdquo; list.
-      To update, run a newer installer over the old one.</p>
+      To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.</p>
     </div>
   </section>
 

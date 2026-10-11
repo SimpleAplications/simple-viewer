@@ -4,7 +4,12 @@
 $ErrorActionPreference = "Stop"
 $root = $PSScriptRoot
 $app = Join-Path $root "dist\Simple"
-$iscc = Join-Path $env:LOCALAPPDATA "Programs\Inno Setup 6\ISCC.exe"
+$iscc = @(
+    (Join-Path $env:LOCALAPPDATA "Programs\Inno Setup 6\ISCC.exe"),
+    (Join-Path ${env:ProgramFiles(x86)} "Inno Setup 6\ISCC.exe"),
+    (Join-Path $env:ProgramFiles "Inno Setup 6\ISCC.exe")
+) | Where-Object { Test-Path $_ } | Select-Object -First 1
+if (-not $iscc) { throw "Inno Setup 6 was not found." }
 
 if (Test-Path $app) { Remove-Item -LiteralPath $app -Recurse -Force }
 dotnet publish (Join-Path $root "MediaViewer.csproj") -c Release -r win-x64 --self-contained true -o $app -p:DebugType=none -nologo -v q

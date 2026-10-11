@@ -208,7 +208,12 @@ public partial class MainWindow
                 sliders[4].Value = 25;   // warmth
             }
             else if (panel == "rotate") ToggleRotatePanel();
-            else if (panel == "options") ToggleOptionsPanel();
+            else if (panel == "options")
+            {
+                Height = 900;
+                ToggleOptionsPanel();
+            }
+            else if (panel == "hide") ToggleQuickHide();
             await Task.Delay(500);
             Snapshot(output);
         }

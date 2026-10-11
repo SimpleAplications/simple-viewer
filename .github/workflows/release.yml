@@ -1,0 +1,79 @@
+# Builds the installer and portable zip from this repository, in public, whenever a
+# version tag (v1.2.3) is pushed, and publishes them as a release with provenance.
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+env:
+  # The unmodified FFmpeg build shipped with Simple, kept in this repository's own
+  # "ffmpeg-n8.1.3" release so that builds don't depend on a third-party download.
+  FFMPEG_RELEASE: ffmpeg-n8.1.3
+  FFMPEG_ZIP: ffmpeg-n8.1-latest-win64-lgpl-shared-8.1.zip
+  FFMPEG_SHA256: cd4fd7a1a03d71022c4be81af1a2aeb03a6507bd993b41ee8c6c55dc31f8b105
+  GH_TOKEN: ${{ github.token }}
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Check that the tag matches the version in the project
+        shell: pwsh
+        run: |
+          $version = ([xml](Get-Content MediaViewer.csproj)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+          if ("v$version" -ne $env:GITHUB_REF_NAME) { throw "Tag $env:GITHUB_REF_NAME does not match project version $version." }
+
+      - name: Get FFmpeg (checksum verified)
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          gh release download $env:FFMPEG_RELEASE --repo $env:GITHUB_REPOSITORY --pattern $env:FFMPEG_ZIP --dir .
+          $hash = (Get-FileHash $env:FFMPEG_ZIP -Algorithm SHA256).Hash.ToLower()
+          if ($hash -ne $env:FFMPEG_SHA256) { throw "FFmpeg archive checksum mismatch: $hash" }
+          Expand-Archive $env:FFMPEG_ZIP -DestinationPath ffmpeg
+          $bin = Get-ChildItem ffmpeg -Recurse -Directory -Filter bin | Select-Object -First 1
+          foreach ($name in "avcodec-62", "avformat-62", "avutil-60", "swresample-6", "swscale-9") {
+            Copy-Item (Join-Path $bin.FullName "$name.dll") codecs
+          }
+          # The matching FFmpeg source goes out with every release.
+          gh release download $env:FFMPEG_RELEASE --repo $env:GITHUB_REPOSITORY --pattern "ffmpeg-source-*.tar.gz" --dir dist
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe")) { choco install innosetup -y --no-progress }
+
+      - name: Build installer and portable zip
+        shell: pwsh
+        run: ./release.ps1
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: |
+            dist/*.exe
+            dist/*.zip
+
+      - name: Publish the release
+        shell: pwsh
+        run: |
+          $notes = "release-notes/$env:GITHUB_REF_NAME.md"
+          $files = Get-ChildItem dist -File | ForEach-Object { $_.FullName }
+          $title = "Simple " + $env:GITHUB_REF_NAME.TrimStart("v")
+          if (Test-Path $notes) {
+            gh release create $env:GITHUB_REF_NAME $files --title $title --notes-file $notes
+          } else {
+            gh release create $env:GITHUB_REF_NAME $files --title $title --generate-notes
+          }

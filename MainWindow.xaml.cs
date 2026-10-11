@@ -90,6 +90,7 @@ public partial class MainWindow : Window
     {
         base.OnSourceInitialized(e);
         ApplyTitleBarColors(this);
+        ApplyCaptureProtection();
     }
 
     void OnLoaded(object sender, RoutedEventArgs e)
@@ -173,6 +174,8 @@ public partial class MainWindow : Window
         var videos = string.Join(";", VideoExtensions.Select(e => "*" + e));
         var dialog = new Microsoft.Win32.OpenFileDialog
         {
+            // Keep the chosen file out of Windows' "recent files" lists.
+            AddToRecent = false,
             Filter = $"Pictures and videos|{images};{videos}|Pictures|{images}|Videos|{videos}|All files|*.*",
         };
         if (dialog.ShowDialog(this) == true) OpenPath(dialog.FileName);
@@ -188,6 +191,9 @@ public partial class MainWindow : Window
 
     void ShowCurrent()
     {
+        // Moving to another file ends quick hide.
+        _hidden = false;
+        Cover.Visibility = Visibility.Collapsed;
         // Every picture gets the full interval, whenever it was opened.
         if (_slideTimer.IsEnabled)
         {
@@ -221,7 +227,7 @@ public partial class MainWindow : Window
                                        or InvalidOperationException)
         {
             StopMedia();
-            ShowMessage($"Can't open {Path.GetFileName(path)}\n{ex.Message}");
+            ShowMessage($"Can't open {DisplayName(path)}\n{ex.Message}");
         }
         UpdateStatus();
     }
@@ -291,7 +297,7 @@ public partial class MainWindow : Window
         {
             if (player != _player) return;
             StopMedia();
-            ShowMessage($"Can't play {Path.GetFileName(path)}\n{message}");
+            ShowMessage($"Can't play {DisplayName(path)}\n{message}");
             UpdateStatus();
         };
         _player = player;
@@ -594,7 +600,14 @@ public partial class MainWindow : Window
             return;
         }
 
-        var name = Path.GetFileName(_files[_index]);
+        if (_hidden)
+        {
+            StatusText.Text = ModeText.Text = "";
+            Title = TitleText.Text = "Simple";
+            return;
+        }
+
+        var name = DisplayName(_files[_index]);
         var parts = new List<string> { $"{_index + 1} / {_files.Count}" };
         if (_player != null)
             parts.Add($"{_player.Width} × {_player.Height}");
@@ -620,8 +633,8 @@ public partial class MainWindow : Window
         if (_settings.RepeatFile) modes.Add("repeating file");
         else if (_settings.PlayFolder) modes.Add(_settings.Shuffle ? "playing folder, shuffled" : "playing folder");
         ModeText.Text = string.Join("  ·  ", modes);
-        TitleText.Text = name;
-        Title = $"{name} - Simple";
+        TitleText.Text = _settings.HideFileNames ? "Simple" : name;
+        Title = _settings.HideFileNames ? "Simple" : $"{name} - Simple";
     }
 
     void OnKeyDown(object sender, KeyEventArgs e)

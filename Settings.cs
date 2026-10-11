@@ -13,6 +13,7 @@ public enum KeyAction
     PreviousFile,
     PlayForward,
     PlayBackward,
+    QuickHide,
 }
 
 /// <summary>
@@ -33,6 +34,11 @@ public sealed class Settings
     /// <summary>Play the current video again when it ends, and stay on the current file.</summary>
     public bool RepeatFile { get; set; }
 
+    /// <summary>Make the window appear black in screenshots, recordings and screen sharing.</summary>
+    public bool HideFromCapture { get; set; }
+    /// <summary>Show "Simple" instead of the file's name in the title bar and taskbar.</summary>
+    public bool HideFileNames { get; set; }
+
     public static Dictionary<KeyAction, Key> DefaultKeys() => new()
     {
         [KeyAction.PlayPause] = Key.Space,
@@ -40,6 +46,7 @@ public sealed class Settings
         [KeyAction.PreviousFile] = Key.C,
         [KeyAction.PlayForward] = Key.X,
         [KeyAction.PlayBackward] = Key.Z,
+        [KeyAction.QuickHide] = Key.H,
     };
 
     static readonly JsonSerializerOptions Json = new()
