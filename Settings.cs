@@ -34,7 +34,7 @@ public sealed class Settings
     /// <summary>Play the current video again when it ends, and stay on the current file.</summary>
     public bool RepeatFile { get; set; }
 
-    /// <summary>Make the window appear black in screenshots, recordings and screen sharing.</summary>
+    /// <summary>Leave the window out of screenshots, recordings and screen sharing.</summary>
     public bool HideFromCapture { get; set; }
     /// <summary>Show "Simple" instead of the file's name in the title bar and taskbar.</summary>
     public bool HideFileNames { get; set; }

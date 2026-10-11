@@ -384,7 +384,7 @@ public partial class MainWindow
             _settings.HideFromCapture = on;
             _settings.Save();
             ApplyCaptureProtection();
-        }, "The window appears black in screenshots, recordings, screen sharing and Windows Recall"));
+        }, "Leaves this window out of screenshots, recordings and screen sharing; they show what is behind it"));
         rows.Children.Add(Check("Hide file names", _settings.HideFileNames, on =>
         {
             _settings.HideFileNames = on;
@@ -449,7 +449,7 @@ public partial class MainWindow
 
     /// <summary>
     /// Asks Windows to leave this window out of anything that captures the screen. The window
-    /// then shows as black in screenshots, recordings, screen sharing and Recall snapshots.
+    /// then shows whatever is behind it instead, as if this window were not there.
     /// </summary>
     void ApplyCaptureProtection()
     {
