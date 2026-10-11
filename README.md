@@ -12,7 +12,7 @@ A simple picture and video viewer for Windows, made for private use. Your pictur
 
 - **Connect to the internet.** No telemetry, crash reports, update checks or online lookups. FFmpeg is restricted to the `file` protocol and to a fixed list of formats, so a crafted file can't make it open a network address.
 - **Keep a record of what you open.** No history, recent list, thumbnail cache or library.
-- **Look inside your pictures.** No face recognition, tagging or AI; location data is never read or sent.
+- **Look inside your pictures.** No face recognition, tagging or AI. Nothing from your files is ever shared with anyone: it all stays on your PC.
 - **Change your files.** It never writes to your media or their folders.
 - **Run in the background.** No service, startup entry or tray icon.
 - **Ask for anything.** No account, ads, bundled extras or administrator rights.
