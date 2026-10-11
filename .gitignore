@@ -1,0 +1,10 @@
+# Build output
+bin/
+obj/
+dist/
+.vs/
+*.user
+
+# The FFmpeg DLLs are large binaries: they ship in the releases, not in the repository.
+# See README.md for where to get them when building from source.
+codecs/*.dll

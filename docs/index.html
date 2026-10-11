@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simple - picture and video viewer for Windows</title>
+<meta name="description" content="A free picture, GIF and video viewer for Windows that steps through video one clean frame at a time. No account, no ads, no network access.">
+<link rel="icon" href="favicon.ico">
+<style>
+  :root {
+    --bg: #0b0b0c; --panel: #151517; --line: #2a2a2e; --text: #f2f2f3; --soft: #a9a9b2;
+    --button: #f2f2f3; --button-text: #0b0b0c;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f6f7; --panel: #ffffff; --line: #dcdce1; --text: #111113; --soft: #5d5d68;
+      --button: #111113; --button-text: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; }
+  header { padding: 64px 0 36px; text-align: center; }
+  header img.icon { width: 96px; height: 96px; border-radius: 22px; }
+  h1 { font-size: 56px; line-height: 1.05; letter-spacing: -1.5px; margin: 20px 0 12px; font-weight: 650; }
+  .tagline { font-size: 22px; color: var(--soft); max-width: 640px; margin: 0 auto 30px; line-height: 1.4; }
+  .button {
+    display: inline-block; background: var(--button); color: var(--button-text); text-decoration: none;
+    font-weight: 600; font-size: 18px; padding: 14px 28px; border-radius: 10px;
+  }
+  .button:hover { opacity: .88; }
+  .under { color: var(--soft); font-size: 15px; margin-top: 16px; }
+  .under a { text-underline-offset: 3px; }
+  .shot {
+    display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+  }
+  section { padding: 44px 0; }
+  h2 { font-size: 30px; letter-spacing: -.5px; margin: 0 0 18px; font-weight: 650; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 18px; font-weight: 650; }
+  .card p { margin: 0; color: var(--soft); font-size: 16px; }
+  .pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  figure { margin: 0; }
+  figcaption { color: var(--soft); font-size: 15px; margin-top: 10px; }
+  kbd {
+    font: 600 14px/1 "Segoe UI", system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel);
+    border-bottom-width: 2px; border-radius: 6px; padding: 4px 8px; white-space: nowrap;
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 16px; }
+  td { padding: 9px 0; border-top: 1px solid var(--line); vertical-align: top; }
+  td:first-child { width: 190px; color: var(--soft); padding-right: 16px; }
+  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 22px; font-size: 16px; }
+  .note p { margin: 0 0 8px; } .note p:last-child { margin: 0; }
+  footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 20px; }
+  footer p { margin: 0 0 8px; }
+  @media (max-width: 600px) {
+    h1 { font-size: 42px; } .tagline { font-size: 19px; } header { padding-top: 44px; }
+    td:first-child { width: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <img class="icon" src="img/icon.png" alt="Simple icon" width="96" height="96">
+  <h1>Simple</h1>
+  <p class="tagline">A picture and video viewer for Windows that steps through video one clean frame at a time.</p>
+  <a class="button" href="https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-Setup.exe">Download for Windows</a>
+  <p class="under">
+    Free &middot; Windows 10 or 11, 64-bit &middot; no account, no ads<br>
+    <a href="https://github.com/SimpleAplications/simple-viewer/releases/latest/download/Simple-portable.zip">Portable zip (no install)</a>
+    &middot; <a href="#verify">Checksums</a>
+    &middot; <a href="https://github.com/SimpleAplications/simple-viewer/releases">All versions</a>
+  </p>
+</header>
+
+<main class="wrap">
+  <img class="shot" src="img/video.png" width="1100" height="750"
+       alt="Simple showing a paused video, with the time shown to the millisecond and buttons to step one frame back or forward">
+
+  <section>
+    <h2>What it does</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>One frame at a time, both ways</h3>
+        <p>Tap <kbd>X</kbd> or <kbd>Z</kbd> to move exactly one frame forward or back. Hold to keep going, faster the longer you hold. Every frame is shown complete, with no smearing after a jump.</p>
+      </div>
+      <div class="card">
+        <h3>Pictures, GIFs and video together</h3>
+        <p>Open one file and move through everything else in the folder with the arrow keys. Zoom with the mouse wheel, drag to pan, rotate and flip.</p>
+      </div>
+      <div class="card">
+        <h3>Stays on your PC</h3>
+        <p>The app has no network code and keeps no history of what you open. The only thing it saves is your own options: keys, window colour and playback choices.</p>
+      </div>
+      <div class="card">
+        <h3>Picture controls</h3>
+        <p>Brightness, contrast, saturation, gamma and warmth for anything on screen, including paused video. Display only: your files are never changed.</p>
+      </div>
+      <div class="card">
+        <h3>Your keys, your colour</h3>
+        <p>Choose the keys for play, next, previous and frame stepping, and pick the window colour. Text switches between white and black to stay readable.</p>
+      </div>
+      <div class="card">
+        <h3>Play a whole folder</h3>
+        <p>Let it move to the next file when a video ends, in order or shuffled, once or on repeat. Or repeat a single video.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pair">
+    <figure>
+      <img class="shot" src="img/picture.png" width="1100" height="750" alt="The Picture panel with sliders for brightness, contrast, saturation, gamma and warmth">
+      <figcaption>Picture controls apply instantly and reset with one click.</figcaption>
+    </figure>
+    <figure>
+      <img class="shot" src="img/options.png" width="1100" height="750" alt="The Options panel with playback choices, key assignments and window colour">
+      <figcaption>Options: playback, keys and window colour.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>Formats</h2>
+    <table>
+      <tr><td>Pictures</td><td>JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, ICO, SVG</td></tr>
+      <tr><td>Animations</td><td>GIF, animated PNG, animated WebP</td></tr>
+      <tr><td>Video</td><td>MP4, MOV, MKV, WebM, AVI, WMV, FLV, MPEG, TS and more, with H.264, H.265, VP9, AV1 and other codecs</td></tr>
+      <tr><td>Decoding</td><td>On the graphics card where it supports the format, otherwise on the processor</td></tr>
+    </table>
+  </section>
+
+  <section id="verify">
+    <h2>Installing</h2>
+    <div class="note">
+      <p><strong>Windows may warn you the first time.</strong> The installer is not digitally signed yet, so Windows can show
+      &ldquo;Windows protected your PC&rdquo;. Choose <em>More info</em>, then <em>Run anyway</em>.</p>
+      <p>To check that your download is genuine, compare its SHA-256 checksum with
+      <a href="https://github.com/SimpleAplications/simple-viewer/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a>.
+      In PowerShell: <code>Get-FileHash Simple-Setup.exe</code></p>
+      <p>The installer needs no administrator rights and can add Simple to Explorer&rsquo;s &ldquo;Open with&rdquo; list.
+      To update, run a newer installer over the old one.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Open source inside</h2>
+    <p>Simple decodes pictures and video with libraries from the <a href="https://ffmpeg.org">FFmpeg</a> project,
+    licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.html">GNU Lesser General Public License</a>.
+    FFmpeg is included as separate, unmodified DLL files that you may replace with your own build. The FFmpeg source
+    code for the included build is published with every
+    <a href="https://github.com/SimpleAplications/simple-viewer/releases/latest">release</a>, and the full notices are in
+    THIRD-PARTY-NOTICES.txt inside the app&rsquo;s folder.</p>
+    <p>Simple is not affiliated with or endorsed by the FFmpeg project. FFmpeg is a trademark of Fabrice Bellard.</p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0;
+  the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center.</p>
+  <p>Simple is provided as is, without warranty.</p>
+</footer>
+
+</body>
+</html>
