@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace ReiksViewer;
 
@@ -67,8 +68,7 @@ public sealed class FormatsWindow : Window
         };
         defaults.SetResourceReference(ForegroundProperty, "TextBrush");
         defaults.SetResourceReference(BackgroundProperty, "HoverBrush");
-        defaults.Click += (_, _) => Process.Start(
-            new ProcessStartInfo("ms-settings:defaultapps?registeredAppUser=ReiksViewer") { UseShellExecute = true });
+        defaults.Click += (_, _) => Process.Start(new ProcessStartInfo(DefaultAppsPage()) { UseShellExecute = true });
 
         // The app never goes online by itself. This only hands the address to your browser.
         var updates = new Button
@@ -97,6 +97,22 @@ public sealed class FormatsWindow : Window
         layout.Children.Add(buttons);
         layout.Children.Add(text);
         Content = layout;
+    }
+
+    /// <summary>
+    /// The app's own page in Settings when the installer has registered it, for this user or
+    /// for everyone; otherwise (the portable zip) the general default apps page.
+    /// </summary>
+    static string DefaultAppsPage()
+    {
+        static bool Registered(RegistryKey root)
+        {
+            using var key = root.OpenSubKey(@"Software\RegisteredApplications");
+            return key?.GetValue("ReiksViewer") != null;
+        }
+        if (Registered(Registry.CurrentUser)) return "ms-settings:defaultapps?registeredAppUser=ReiksViewer";
+        if (Registered(Registry.LocalMachine)) return "ms-settings:defaultapps?registeredAppMachine=ReiksViewer";
+        return "ms-settings:defaultapps";
     }
 
     static string Describe(IEnumerable<string> imageExtensions, IEnumerable<string> videoExtensions)
