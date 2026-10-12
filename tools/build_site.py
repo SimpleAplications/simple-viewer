@@ -18,6 +18,7 @@ T = {
  "Your pictures and videos stay yours. Reiks Viewer shows them only to you, and that is all it does.",
  "Tus imágenes y vídeos siguen siendo tuyos. Reiks Visor te los muestra solo a ti, y eso es todo lo que hace.",
  "Dina bilder och videor förblir dina. Reiks Visare visar dem bara för dig, och det är allt den gör."),
+"github.title": ("Source code on GitHub", "Código fuente en GitHub", "Källkod på GitHub"),
 "version": ("Version {v}", "Versión {v}", "Version {v}"),
 "whatsnew": ("What&rsquo;s new", "Novedades", "Nyheter"),
 "download": ("Download for Windows", "Descargar para Windows", "Ladda ner för Windows"),
@@ -198,6 +199,10 @@ T = {
  "Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center. Their use here does not imply any endorsement.",
  "Las capturas muestran el tráiler de <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; la nebulosa de Carina &laquo;Cosmic Cliffs&raquo;, NASA, ESA, CSA y STScI; y Blue Marble 2012, NASA Goddard Space Flight Center. Su uso aquí no implica ningún respaldo.",
  "Skärmbilderna visar trailern till <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; Carinanebulosan &rdquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA och STScI; samt Blue Marble 2012, NASA Goddard Space Flight Center. Att de används här innebär inte att upphovsmännen står bakom Reiks Visare."),
+"footer.marks": (
+ "The GitHub name and logo are trademarks of GitHub, Inc., used here only to link to this project&rsquo;s page there.",
+ "El nombre y el logotipo de GitHub son marcas de GitHub, Inc., y se usan aquí solo para enlazar a la página de este proyecto.",
+ "Namnet GitHub och dess logotyp är varumärken som tillhör GitHub, Inc. och används här endast för att länka till projektets sida där."),
 "footer.warranty": ("Reiks Viewer is provided as is, without warranty.", "Reiks Visor se ofrece tal cual, sin garantía.", "Reiks Visare tillhandahålls i befintligt skick, utan garanti."),
 }
 

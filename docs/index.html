@@ -71,8 +71,14 @@
   .never span { color: var(--soft); font-size: 16px; }
   .lead { color: var(--soft); max-width: 720px; margin: -6px 0 22px; }
   ol.steps { margin: 0; padding-left: 22px; } ol.steps li { margin-bottom: 10px; }
-  .langs { text-align: right; padding-top: 14px; font-size: 14px; color: var(--soft); }
-  .langs a { text-underline-offset: 3px; }
+  .top {
+    display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 6px 24px;
+    padding-top: 14px; font-size: 14px; color: var(--soft);
+  }
+  .top a { text-underline-offset: 3px; }
+  .github { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; }
+  .github:hover { color: var(--text); }
+  .github svg { width: 18px; height: 18px; fill: currentColor; }
   .tablenote { color: var(--soft); font-size: 14px; margin: 12px 0 0; }
   .shotnote { color: var(--soft); font-size: 14px; margin: 0; }
   .shotnote:empty { display: none; }
@@ -86,7 +92,11 @@
 </head>
 <body>
 
-<nav class="wrap langs"><strong>English</strong> &middot; <a href="es/" hreflang="es" lang="es">Español</a> &middot; <a href="sv/" hreflang="sv" lang="sv">Svenska</a></nav>
+<nav class="wrap top">
+  <span><strong>English</strong> &middot; <a href="es/" hreflang="es" lang="es">Español</a> &middot; <a href="sv/" hreflang="sv" lang="sv">Svenska</a></span>
+  <a class="github" href="https://github.com/reiks-apps/reiks-viewer" title="Source code on GitHub">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>GitHub</a>
+</nav>
 
 <header class="wrap">
   <img class="icon" src="img/icon.png" alt="Reiks Viewer icon" width="96" height="96">
@@ -190,6 +200,7 @@
 
 <footer class="wrap">
   <p>Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center. Their use here does not imply any endorsement.</p>
+  <p>The GitHub name and logo are trademarks of GitHub, Inc., used here only to link to this project&rsquo;s page there.</p>
   <p>Reiks Viewer is provided as is, without warranty.</p>
 </footer>
 
