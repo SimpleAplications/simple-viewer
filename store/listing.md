@@ -1,7 +1,7 @@
 # Reiks Viewer in the Microsoft Store: listing texts
 
 The texts for Partner Center's Store listings, one section per language. The product name
-is "Reiks Viewer" in every language. Screenshots come from `dist\store\screenshots\<language>`;
+is "Reiks Viewer" in every language, and the texts call the app that too. Screenshots come from `dist\store-screenshots\<language>`;
 upload them in the order of the captions. The 300 × 300 logo is `store\images\logo-300.png`.
 
 The same claims as the website, no more: if a claim changes there, change it here too.
@@ -83,7 +83,7 @@ Un visor de imágenes y vídeos privado. Nunca se conecta a internet, no guarda 
 **Descripción**
 
 ```
-Reiks Visor muestra tus imágenes, GIF y vídeos, y eso es todo lo que hace. Está pensado para uso privado.
+Reiks Viewer muestra tus imágenes, GIF y vídeos, y eso es todo lo que hace. Está pensado para uso privado.
 
 LO QUE NUNCA HACE
 • Conectarse a internet. Su propio código no tiene ninguna función de red: sin telemetría, sin estadísticas de uso, sin informes de errores propios, sin comprobación de actualizaciones. Sus decodificadores están limitados a archivos locales.
@@ -107,7 +107,7 @@ Imágenes: JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, 
 CONVIENE SABER
 «Ocultar de capturas» se basa en una función de Windows: no puede impedir una cámara que apunte a tu pantalla ni un programa hecho para saltárselo. Los archivos de unidades de red o carpetas sincronizadas con la nube los mueve Windows o tu programa de sincronización, y la impresión pasa por el sistema de impresión de Windows. Microsoft Store instala las actualizaciones de la aplicación.
 
-Reiks Visor es gratuito y de código abierto. Las imágenes y el vídeo se decodifican con bibliotecas del proyecto FFmpeg, con licencia LGPL. Código fuente: github.com/reiks-apps/reiks-viewer
+Reiks Viewer es gratuito y de código abierto. Las imágenes y el vídeo se decodifican con bibliotecas del proyecto FFmpeg, con licencia LGPL. Código fuente: github.com/reiks-apps/reiks-viewer
 ```
 
 **Novedades de esta versión**
@@ -149,7 +149,7 @@ En privat bild- och videovisare. Den ansluter aldrig till internet, sparar ingen
 **Beskrivning**
 
 ```
-Reiks Visare visar dina bilder, GIF-filer och videor, och det är allt den gör. Den är gjord för privat bruk.
+Reiks Viewer visar dina bilder, GIF-filer och videor, och det är allt den gör. Den är gjord för privat bruk.
 
 DET DEN ALDRIG GÖR
 • Ansluter till internet. Dess egen kod har inga nätverksfunktioner: ingen telemetri, ingen användningsstatistik, inga egna kraschrapporter, inga uppdateringskontroller. Dess avkodare är begränsade till lokala filer.
@@ -173,7 +173,7 @@ Bilder: JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, ICO
 BRA ATT VETA
 "Dölj från skärmbilder" bygger på en funktion i Windows: den kan inte stoppa en kamera som riktas mot skärmen eller program som är gjorda för att kringgå den. Filer på nätverksenheter eller i molnsynkroniserade mappar flyttas av Windows eller ditt synkprogram, och utskrifter går via Windows eget utskriftssystem. Microsoft Store installerar appens uppdateringar.
 
-Reiks Visare är gratis och har öppen källkod. Bilder och video avkodas med bibliotek från FFmpeg-projektet, under LGPL. Källkod: github.com/reiks-apps/reiks-viewer
+Reiks Viewer är gratis och har öppen källkod. Bilder och video avkodas med bibliotek från FFmpeg-projektet, under LGPL. Källkod: github.com/reiks-apps/reiks-viewer
 ```
 
 **Nyheter i den här versionen**
@@ -215,7 +215,7 @@ Une visionneuse d'images et de vidéos privée. Elle ne se connecte jamais à in
 **Description**
 
 ```
-Reiks Visionneuse affiche vos images, GIF et vidéos, et c'est tout ce qu'elle fait. Elle est conçue pour un usage privé.
+L'application Reiks Viewer affiche vos images, GIF et vidéos, et c'est tout ce qu'elle fait. Elle est conçue pour un usage privé.
 
 CE QU'ELLE NE FAIT JAMAIS
 • Se connecter à internet. Son propre code n'a aucune fonction réseau : pas de télémétrie, pas de statistiques d'utilisation, pas de rapports de plantage à elle, pas de recherche de mises à jour. Ses décodeurs sont limités aux fichiers locaux.
@@ -239,7 +239,7 @@ Images : JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, IC
 BON À SAVOIR
 « Masquer des captures d'écran » repose sur une fonction de Windows : elle ne peut pas empêcher une caméra pointée sur votre écran ni un logiciel conçu pour la contourner. Les fichiers sur des lecteurs réseau ou dans des dossiers synchronisés avec le cloud sont transférés par Windows ou votre logiciel de synchronisation, et l'impression passe par le système d'impression de Windows. Le Microsoft Store installe les mises à jour de l'application.
 
-Reiks Visionneuse est gratuite et open source. Les images et la vidéo sont décodées avec des bibliothèques du projet FFmpeg, sous licence LGPL. Code source : github.com/reiks-apps/reiks-viewer
+Reiks Viewer est gratuit et open source. Les images et la vidéo sont décodées avec des bibliothèques du projet FFmpeg, sous licence LGPL. Code source : github.com/reiks-apps/reiks-viewer
 ```
 
 **Nouveautés de cette version**
@@ -281,7 +281,7 @@ Ein privater Bild- und Videobetrachter. Er verbindet sich nie mit dem Internet, 
 **Beschreibung**
 
 ```
-Reiks Betrachter zeigt Ihre Bilder, GIFs und Videos, und das ist alles, was er tut. Er ist für den privaten Gebrauch gemacht.
+Reiks Viewer zeigt Ihre Bilder, GIFs und Videos, und das ist alles, was er tut. Er ist für den privaten Gebrauch gemacht.
 
 WAS ER NIE TUT
 • Sich mit dem Internet verbinden. Sein eigener Code hat keine Netzwerkfunktionen: keine Telemetrie, keine Nutzungsstatistiken, keine eigenen Absturzberichte, keine Suche nach Updates. Seine Decoder sind auf lokale Dateien beschränkt.
@@ -305,7 +305,7 @@ Bilder: JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, ICO
 GUT ZU WISSEN
 „Vor Bildschirmfotos verbergen" beruht auf einer Windows-Funktion: Sie kann keine Kamera aufhalten, die auf Ihren Bildschirm gerichtet ist, und keine Software, die dafür gemacht ist, sie zu umgehen. Dateien auf Netzlaufwerken oder in Cloud-synchronisierten Ordnern werden von Windows oder Ihrem Synchronisierungsprogramm übertragen, und das Drucken läuft über das Drucksystem von Windows. Der Microsoft Store installiert die Updates der App.
 
-Reiks Betrachter ist kostenlos und quelloffen. Bilder und Videos werden mit Bibliotheken des FFmpeg-Projekts unter der LGPL dekodiert. Quellcode: github.com/reiks-apps/reiks-viewer
+Reiks Viewer ist kostenlos und quelloffen. Bilder und Videos werden mit Bibliotheken des FFmpeg-Projekts unter der LGPL dekodiert. Quellcode: github.com/reiks-apps/reiks-viewer
 ```
 
 **Neuerungen in dieser Version**
@@ -347,7 +347,7 @@ Um visualizador de imagens e vídeos privado. Nunca se liga à internet, não gu
 **Descrição**
 
 ```
-O Reiks Visualizador mostra as suas imagens, GIF e vídeos, e é tudo o que faz. Foi feito para uso privado.
+O Reiks Viewer mostra as suas imagens, GIF e vídeos, e é tudo o que faz. Foi feito para uso privado.
 
 O QUE NUNCA FAZ
 • Ligar-se à internet. O seu próprio código não tem funções de rede: sem telemetria, sem estatísticas de utilização, sem relatórios de falhas próprios, sem procura de atualizações. Os seus descodificadores estão limitados a ficheiros locais.
@@ -371,7 +371,7 @@ Imagens: JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, IC
 É BOM SABER
 "Ocultar de capturas de ecrã" baseia-se numa função do Windows: não consegue impedir uma câmara apontada ao ecrã nem software feito para a contornar. Os ficheiros em unidades de rede ou em pastas sincronizadas com a nuvem são transferidos pelo Windows ou pelo seu programa de sincronização, e a impressão passa pelo sistema de impressão do Windows. A Microsoft Store instala as atualizações da aplicação.
 
-O Reiks Visualizador é gratuito e de código aberto. As imagens e o vídeo são descodificados com bibliotecas do projeto FFmpeg, sob a licença LGPL. Código-fonte: github.com/reiks-apps/reiks-viewer
+O Reiks Viewer é gratuito e de código aberto. As imagens e o vídeo são descodificados com bibliotecas do projeto FFmpeg, sob a licença LGPL. Código-fonte: github.com/reiks-apps/reiks-viewer
 ```
 
 **Novidades desta versão**
@@ -413,7 +413,7 @@ Un visualizzatore di immagini e video privato. Non si connette mai a internet, n
 **Descrizione**
 
 ```
-Reiks Visualizzatore mostra le tue immagini, GIF e video, ed è tutto ciò che fa. È pensato per l'uso privato.
+Reiks Viewer mostra le tue immagini, GIF e video, ed è tutto ciò che fa. È pensato per l'uso privato.
 
 COSA NON FA MAI
 • Connettersi a internet. Il suo codice non ha alcuna funzione di rete: niente telemetria, niente statistiche d'uso, niente segnalazioni di arresti anomali proprie, niente ricerca di aggiornamenti. I suoi decodificatori sono limitati ai file locali.
@@ -437,7 +437,7 @@ Immagini: JPG, PNG, BMP, TIFF, WebP, AVIF, HEIC, JPEG XL, JPEG 2000, TGA, QOI, I
 BUONO A SAPERSI
 "Nascondi dagli screenshot" si basa su una funzione di Windows: non può fermare una fotocamera puntata sullo schermo né un software fatto per aggirarla. I file su unità di rete o in cartelle sincronizzate con il cloud vengono trasferiti da Windows o dal tuo programma di sincronizzazione, e la stampa passa per il sistema di stampa di Windows. Il Microsoft Store installa gli aggiornamenti dell'app.
 
-Reiks Visualizzatore è gratuito e open source. Immagini e video sono decodificati con librerie del progetto FFmpeg, sotto licenza LGPL. Codice sorgente: github.com/reiks-apps/reiks-viewer
+Reiks Viewer è gratuito e open source. Immagini e video sono decodificati con librerie del progetto FFmpeg, sotto licenza LGPL. Codice sorgente: github.com/reiks-apps/reiks-viewer
 ```
 
 **Novità di questa versione**

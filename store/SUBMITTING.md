@@ -30,7 +30,15 @@ Store ID: `9N4D3NC940GD`. Once the app is live, its Store page is
 
 ## Partner Center, first submission
 
-**Pricing and availability**: Free; all markets; public. No free trial.
+The sections below appear once a submission is started: **Application overview → Start
+submission**.
+
+The first submission goes to a **private audience** (a group holding only the developer's own
+Microsoft account). After it passes review, the developer installs it from the Store and checks
+it; a second submission then makes it public.
+
+**Pricing and availability**: Free; all markets; no free trial. Visibility: Private audience
+for the first submission, Public audience after the check.
 
 **Properties**
 - Category: Photo & video.
@@ -49,7 +57,7 @@ share content. No location sharing. No digital purchases. No unrestricted intern
 desktop.
 
 **Store listings**: from `store\listing.md`, one listing per language. Screenshots from
-`dist\store\screenshots\<language>`, 1600 × 900, in the order of the captions. Store logo
+`dist\store-screenshots\<language>`, 1600 × 900, in the order of the captions. Store logo
 (1:1, 300 × 300): `store\images\logo-300.png`.
 - Copyright and trademark info: `© 2026 Reiks Apps`
 - Developed by: `Reiks Apps`

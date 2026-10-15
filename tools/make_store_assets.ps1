@@ -1,5 +1,5 @@
 # Draws the app's icon at every size the Microsoft Store package asks for, into
-# installer\store\Assets, and a 300 x 300 logo for the Store listing into store\images.
+# installer\store\Assets, and the 300 x 300 and 1080 x 1080 logos for the Store listing into store\images.
 #   powershell -ExecutionPolicy Bypass -File tools\make_store_assets.ps1
 # The drawing is the same as app.ico's: a black tile with a picture frame around a
 # "step forward" mark; below 48 pixels only the mark, as large as fits.
@@ -67,4 +67,5 @@ foreach ($scale in $scales.Keys) {
     Save-Icon (Join-Path $assets "StoreLogo.scale-$scale.png") $size $size
 }
 Save-Icon (Join-Path $images "logo-300.png") 300 300
-"wrote " + (Get-ChildItem $assets).Count + " files to $assets, and store\images\logo-300.png"
+Save-Icon (Join-Path $images "logo-1080.png") 1080 1080
+"wrote " + (Get-ChildItem $assets).Count + " files to $assets, and the logos in store\images"
