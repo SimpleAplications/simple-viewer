@@ -25,6 +25,9 @@ from the package manifest instead.
 **Product management → Product identity**. The icons are drawn by
 `tools\make_store_assets.ps1`.
 
+Store ID: `9N4D3NC940GD`. Once the app is live, its Store page is
+`https://apps.microsoft.com/detail/9N4D3NC940GD`.
+
 ## Partner Center, first submission
 
 **Pricing and availability**: Free; all markets; public. No free trial.
