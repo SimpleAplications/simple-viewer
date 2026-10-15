@@ -163,9 +163,9 @@ T = {
  "Si abres un archivo desde una unidad de red o una carpeta sincronizada con la nube, es Windows o tu programa de sincronización quien mueve esos datos por la red, como con cualquier aplicación. La impresión pasa por el sistema de impresión de Windows: son Windows y el controlador de la impresora quienes se comunican con ella, por tu red si es una impresora de red, y pueden guardar un registro del trabajo. Y, como todo reproductor, Reiks Visor tiene que decodificar lo que contenga un archivo: un archivo dañado a propósito podría hacer que falle o se comporte de forma inesperada, así que mantenlo actualizado y ten cuidado con los archivos de origen dudoso.",
  "Om du öppnar en fil från en nätverksenhet eller en molnsynkad mapp är det Windows eller ditt synkprogram som flyttar datan över nätverket, precis som för andra appar. Utskrifter går via Windows eget utskriftssystem: det är Windows och skrivarens drivrutin som talar med skrivaren, över ditt nätverk om det är en nätverksskrivare, och de kan spara uppgifter om utskriften. Och som alla mediespelare måste Reiks Visare avkoda det en fil innehåller: en avsiktligt skadad fil kan få den att krascha eller bete sig oväntat, så håll den uppdaterad och var försiktig med filer från källor du inte litar på."),
 "limits.2": (
- "<strong>In normal use, the only file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback and privacy choices, in <code>%APPDATA%\\ReiksViewer\\settings.json</code>. It contains nothing about your files. Uninstalling removes it; if you use the portable zip, delete that folder yourself.",
- "<strong>En el uso normal, el único archivo que escribe Reiks Visor</strong> son tus opciones: tus teclas, el color de la ventana, el idioma y tus preferencias de reproducción y privacidad, en <code>%APPDATA%\\ReiksViewer\\settings.json</code>. No contiene nada sobre tus archivos. Al desinstalar se elimina; si usas el zip portátil, borra tú esa carpeta.",
- "<strong>Vid normal användning är den enda fil Reiks Visare skriver</strong> dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings- och integritetsval, i <code>%APPDATA%\\ReiksViewer\\settings.json</code>. Den innehåller ingenting om dina filer. Avinstallationen tar bort den; om du använder den portabla zip-filen tar du själv bort den mappen."),
+ "<strong>In normal use, the only file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback, privacy and print choices, in <code>%APPDATA%\\ReiksViewer\\settings.json</code>. It contains nothing about your files. Uninstalling removes it; if you use the portable zip, delete that folder yourself.",
+ "<strong>En el uso normal, el único archivo que escribe Reiks Visor</strong> son tus opciones: tus teclas, el color de la ventana, el idioma y tus preferencias de reproducción, privacidad e impresión, en <code>%APPDATA%\\ReiksViewer\\settings.json</code>. No contiene nada sobre tus archivos. Al desinstalar se elimina; si usas el zip portátil, borra tú esa carpeta.",
+ "<strong>Vid normal användning är den enda fil Reiks Visare skriver</strong> dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings-, integritets- och utskriftsval, i <code>%APPDATA%\\ReiksViewer\\settings.json</code>. Den innehåller ingenting om dina filer. Avinstallationen tar bort den; om du använder den portabla zip-filen tar du själv bort den mappen."),
 
 "install.h": ("Installing", "Instalación", "Installation"),
 "install.1": (
@@ -203,12 +203,63 @@ T = {
  "The GitHub name and logo are trademarks of GitHub, Inc., used here only to link to this project&rsquo;s page there.",
  "El nombre y el logotipo de GitHub son marcas de GitHub, Inc., y se usan aquí solo para enlazar a la página de este proyecto.",
  "Namnet GitHub och dess logotyp är varumärken som tillhör GitHub, Inc. och används här endast för att länka till projektets sida där."),
+"footer.privacy": ("Privacy policy", "Política de privacidad", "Integritetspolicy"),
 "footer.warranty": ("Reiks Viewer is provided as is, without warranty.", "Reiks Visor se ofrece tal cual, sin garantía.", "Reiks Visare tillhandahålls i befintligt skick, utan garanti."),
+}
+
+# The privacy policy, a page of its own (docs/privacy/, docs/es/privacy/, docs/sv/privacy/).
+P = {
+"p.title": ("Privacy policy - Reiks Viewer", "Política de privacidad - Reiks Visor", "Integritetspolicy - Reiks Visare"),
+"p.description": (
+ "Reiks Viewer does not collect, store or send personal data.",
+ "Reiks Visor no recoge, guarda ni envía datos personales.",
+ "Reiks Visare samlar inte in, sparar inte och skickar inte personuppgifter."),
+"p.back": ("&larr; Reiks Viewer", "&larr; Reiks Visor", "&larr; Reiks Visare"),
+"p.h1": ("Privacy policy", "Política de privacidad", "Integritetspolicy"),
+"p.updated": (
+ "Reiks Viewer, by Reiks Apps. Last updated 15 October 2026.",
+ "Reiks Visor, de Reiks Apps. Última actualización: 15 de octubre de 2026.",
+ "Reiks Visare, från Reiks Apps. Senast uppdaterad 15 oktober 2026."),
+"p.short.h": ("In short", "En resumen", "Kort sagt"),
+"p.short": (
+ "Reiks Viewer does not collect, store or send personal data. It has no account, no ads, no analytics and no crash reporting of its own.",
+ "Reiks Visor no recoge, guarda ni envía datos personales. No tiene cuenta, ni anuncios, ni analíticas, ni informes de errores propios.",
+ "Reiks Visare samlar inte in, sparar inte och skickar inte personuppgifter. Den har inget konto, ingen reklam, ingen analys och ingen egen kraschrapportering."),
+"p.local.h": ("What stays on your computer", "Lo que se queda en tu ordenador", "Det som stannar på din dator"),
+"p.local": (
+ "Reiks Viewer writes one file: your options (keys, window colour, language, playback choices, and the printer, paper size and size choice you last printed with). It is kept in <code>%APPDATA%\\ReiksViewer\\settings.json</code>, or in the app&rsquo;s own data folder when it was installed from the Microsoft Store. Nothing about the files you open is written: no history, no recent list, no thumbnails.",
+ "Reiks Visor escribe un solo archivo: tus opciones (teclas, color de la ventana, idioma, opciones de reproducción, y la impresora, el tamaño de papel y el tamaño de imagen que usaste la última vez que imprimiste). Se guarda en <code>%APPDATA%\\ReiksViewer\\settings.json</code>, o en la carpeta de datos propia de la aplicación si la instalaste desde Microsoft Store. No se escribe nada sobre los archivos que abres: ni historial, ni lista de recientes, ni miniaturas.",
+ "Reiks Visare skriver en enda fil: dina inställningar (tangenter, fönsterfärg, språk, uppspelningsval, samt skrivaren, pappersstorleken och storleksvalet du senast skrev ut med). Den sparas i <code>%APPDATA%\\ReiksViewer\\settings.json</code>, eller i appens egen datamapp om den installerades från Microsoft Store. Ingenting om filerna du öppnar skrivs ner: ingen historik, ingen lista över senaste filer, inga miniatyrer."),
+"p.network.h": ("What goes over the network", "Lo que pasa por la red", "Det som går över nätverket"),
+"p.network.1": (
+ "The app&rsquo;s own code has no networking, and its decoders are limited to local files. The &ldquo;Check for updates&rdquo; button in the Formats window (F1) opens the download page in your web browser, or the app&rsquo;s page in the Microsoft Store, and only when you click it.",
+ "El propio código de la aplicación no tiene ninguna función de red, y sus decodificadores están limitados a archivos locales. El botón &laquo;Buscar actualizaciones&raquo; de la ventana Formatos (F1) abre la página de descarga en tu navegador, o la página de la aplicación en Microsoft Store, y solo cuando lo pulsas.",
+ "Appens egen kod har inga nätverksfunktioner, och dess avkodare är begränsade till lokala filer. Knappen &rdquo;Sök efter uppdateringar&rdquo; i fönstret Format (F1) öppnar nedladdningssidan i din webbläsare, eller appens sida i Microsoft Store, och bara när du klickar på den."),
+"p.network.2": (
+ "If you open a file from a network drive or a cloud-synced folder, Windows or your sync program moves that data. Printing goes through Windows&rsquo; own print system, which talks to your printer, over your network if it is a network printer.",
+ "Si abres un archivo desde una unidad de red o una carpeta sincronizada con la nube, es Windows o tu programa de sincronización quien mueve esos datos. La impresión pasa por el sistema de impresión de Windows, que se comunica con tu impresora, por tu red si es una impresora de red.",
+ "Om du öppnar en fil från en nätverksenhet eller en molnsynkroniserad mapp är det Windows eller ditt synkprogram som flyttar datan. Utskrifter går via Windows eget utskriftssystem, som talar med din skrivare, över ditt nätverk om det är en nätverksskrivare."),
+"p.store.h": ("Installing from the Microsoft Store", "Instalar desde Microsoft Store", "Installera från Microsoft Store"),
+"p.store": (
+ "When you install Reiks Viewer from the Microsoft Store, Microsoft handles the download, installation and updates under its own <a href=\"https://privacy.microsoft.com/privacystatement\">privacy statement</a>. Microsoft gives developers aggregated reports, such as how many people installed the app and summaries of crashes that Windows has reported to Microsoft under your Windows diagnostic settings.",
+ "Si instalas Reiks Visor desde Microsoft Store, Microsoft se encarga de la descarga, la instalación y las actualizaciones según su propia <a href=\"https://privacy.microsoft.com/privacystatement\">declaración de privacidad</a>. Microsoft ofrece a los desarrolladores informes agregados, como cuántas personas instalaron la aplicación y resúmenes de los bloqueos que Windows ha comunicado a Microsoft según tu configuración de diagnóstico de Windows.",
+ "När du installerar Reiks Visare från Microsoft Store sköter Microsoft nedladdning, installation och uppdateringar enligt sin egen <a href=\"https://privacy.microsoft.com/privacystatement\">sekretesspolicy</a>. Microsoft ger utvecklare sammanställda rapporter, till exempel hur många som installerat appen och sammanfattningar av krascher som Windows har rapporterat till Microsoft enligt dina diagnostikinställningar i Windows."),
+"p.contact.h": ("Questions", "Preguntas", "Frågor"),
+"p.contact": (
+ "For questions about privacy, open an issue at <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">github.com/reiks-apps/reiks-viewer/issues</a>. Issues there are public.",
+ "Para preguntas sobre privacidad, abre una incidencia en <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">github.com/reiks-apps/reiks-viewer/issues</a>. Las incidencias son públicas.",
+ "Frågor om integritet kan du ställa genom att öppna ett ärende på <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">github.com/reiks-apps/reiks-viewer/issues</a>. Ärendena där är offentliga."),
+"p.changes": (
+ "If this policy changes, the new version is published on this page with a new date.",
+ "Si esta política cambia, la nueva versión se publica en esta página con una fecha nueva.",
+ "Om policyn ändras publiceras den nya versionen på den här sidan med ett nytt datum."),
+"p.footer": ("Reiks Viewer is provided as is, without warranty.", "Reiks Visor se ofrece tal cual, sin garantía.", "Reiks Visare tillhandahålls i befintligt skick, utan garanti."),
 }
 
 here = os.path.dirname(os.path.abspath(__file__))
 docs = os.path.join(here, "..", "docs")
 template = io.open(os.path.join(here, "site_template.html"), encoding="utf-8").read()
+privacy_template = io.open(os.path.join(here, "privacy_template.html"), encoding="utf-8").read()
 # The version comes from the project file, so it is set in one place. The page links to that
 # version's own files: publish the release before the website, or the links lead nowhere.
 project = io.open(os.path.join(here, "..", "ReiksViewer.csproj"), encoding="utf-8").read()
@@ -234,3 +285,18 @@ for index, (code, _, folder) in enumerate(LANGUAGES):
     os.makedirs(target, exist_ok=True)
     io.open(os.path.join(target, "index.html"), "w", encoding="utf-8", newline="\n").write(page)
     print("wrote", os.path.join("docs", folder, "index.html"))
+
+    # The privacy policy in the same language, one folder further down.
+    page = privacy_template
+    switcher = " &middot; ".join(
+        f'<strong>{name}</strong>' if other == code else f'<a href="../{up}{other_folder}privacy/" hreflang="{other}" lang="{other}">{name}</a>'
+        for other, name, other_folder in LANGUAGES)
+    page = page.replace("{{lang}}", code).replace("{{up}}", "../" + up).replace("{{home}}", "../").replace("{{switcher}}", switcher)
+    for key, values in P.items():
+        assert len(values) == len(LANGUAGES), key
+        assert "{{" + key + "}}" in privacy_template, "unused text: " + key
+        page = page.replace("{{" + key + "}}", values[index])
+    assert "{{" not in page, page[page.index("{{"):][:60]
+    os.makedirs(os.path.join(target, "privacy"), exist_ok=True)
+    io.open(os.path.join(target, "privacy", "index.html"), "w", encoding="utf-8", newline="\n").write(page)
+    print("wrote", os.path.join("docs", folder, "privacy", "index.html"))

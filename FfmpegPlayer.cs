@@ -19,7 +19,24 @@ public sealed unsafe class FfmpegPlayer : IDisposable
 {
     // ---------- Library loading ----------
 
-    public static string CodecsFolder => Path.Combine(AppContext.BaseDirectory, "codecs");
+    /// <summary>The FFmpeg that came with the app.</summary>
+    public static string ShippedCodecsFolder => Path.Combine(AppContext.BaseDirectory, "codecs");
+
+    /// <summary>
+    /// Where the user can put a build of FFmpeg of their own. A Store copy is installed in a
+    /// folder nobody may change, so it looks in its own data folder first; any other copy has
+    /// its FFmpeg files next to it, where they can be replaced.
+    /// </summary>
+    public static string OwnCodecsFolder =>
+        StorePackage.Installed ? Path.Combine(StorePackage.DataFolder, "codecs") : ShippedCodecsFolder;
+
+    /// <summary>The folder FFmpeg is loaded from: the user's own build if there is one there.</summary>
+    public static string CodecsFolder => _loadedFrom
+        ?? (File.Exists(Path.Combine(OwnCodecsFolder, AvcodecFile)) ? OwnCodecsFolder : ShippedCodecsFolder);
+
+    static string AvcodecFile => $"avcodec-{ffmpeg.LibraryVersionMap["avcodec"]}.dll";
+    static string? _loadedFrom;
+
     public static bool Available { get; private set; }
     public static string Version { get; private set; } = "";
     public static string License { get; private set; } = "";
@@ -33,13 +50,13 @@ public sealed unsafe class FfmpegPlayer : IDisposable
         _loadAttempted = true;
         try
         {
-            var probe = Path.Combine(CodecsFolder, $"avcodec-{ffmpeg.LibraryVersionMap["avcodec"]}.dll");
-            if (!File.Exists(probe))
+            string folder = _loadedFrom = CodecsFolder;
+            if (!File.Exists(Path.Combine(folder, AvcodecFile)))
             {
-                LoadError = $"{Path.GetFileName(probe)} was not found in {CodecsFolder}";
+                LoadError = $"{AvcodecFile} was not found in {folder}";
                 return false;
             }
-            ffmpeg.RootPath = CodecsFolder;
+            ffmpeg.RootPath = folder;
             Version = ffmpeg.av_version_info();
             License = ffmpeg.avutil_license();
             Available = true;

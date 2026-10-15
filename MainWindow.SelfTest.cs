@@ -235,12 +235,19 @@ public partial class MainWindow
         Close();
     }
 
-    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|more|options|hide>" opens a file,
-    // pauses a video at the given time, optionally opens a panel, and saves a picture of the window.
-    async Task RunScreenshot(string file, string output, double seconds, string panel)
+    // "ReiksViewer.exe --screenshot <file> <png> <seconds> <none|picture|more|options|print|hide> [WxH]"
+    // opens a file, pauses a video at the given time, optionally opens a panel or the print view,
+    // and saves a picture of the window, at the given size if one is named.
+    async Task RunScreenshot(string file, string output, double seconds, string panel, string? size)
     {
         try
         {
+            if (size?.Split('x') is [var width, var height])
+            {
+                WindowState = WindowState.Normal;
+                Width = double.Parse(width, System.Globalization.CultureInfo.InvariantCulture);
+                Height = double.Parse(height, System.Globalization.CultureInfo.InvariantCulture);
+            }
             _settings.PlayFolder = _settings.Shuffle = _settings.RepeatFolder = _settings.RepeatFile = false;
             _settings.HideFromCapture = _settings.HideFileNames = false;
             _slideTimer.Stop();
@@ -267,6 +274,16 @@ public partial class MainWindow
             else if (panel == "options") ToggleOptionsPanel();
             else if (panel == "more") ToggleMorePanel();
             else if (panel == "hide") ToggleQuickHide();
+            else if (panel == "print")
+            {
+                PrintCurrent();
+                var view = _printView!;
+                for (int waited = 0; !view.Idle && waited < 20000; waited += 50) await Task.Delay(50);
+                // A printer everyone has, rather than whatever this computer's printers are called.
+                if (view.Printers.Items.Contains("Microsoft Print to PDF")) view.Printers.SelectedItem = "Microsoft Print to PDF";
+                await Task.Delay(100);
+                for (int waited = 0; !view.Idle && waited < 20000; waited += 50) await Task.Delay(50);
+            }
             await Task.Delay(500);
             Snapshot(output);
         }

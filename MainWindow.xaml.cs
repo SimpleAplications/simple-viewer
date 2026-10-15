@@ -115,8 +115,9 @@ public partial class MainWindow : Window
         if (args.Length == 4 && args[1] == "--selftest") _ = RunSelfTest(args[2], args[3]);
         else if (args.Length == 4 && args[1] == "--imagetest") RunImageTest(args[2], args[3]);
         else if (args.Length == 5 && args[1] == "--capturetest") _ = RunCaptureTest(args[2], args[3], args[4] == "on");
-        else if (args.Length == 6 && args[1] == "--screenshot")
-            _ = RunScreenshot(args[2], args[3], double.Parse(args[4], System.Globalization.CultureInfo.InvariantCulture), args[5]);
+        else if (args.Length is 6 or 7 && args[1] == "--screenshot")
+            _ = RunScreenshot(args[2], args[3], double.Parse(args[4], System.Globalization.CultureInfo.InvariantCulture), args[5],
+                              args.Length == 7 ? args[6] : null);
         else if (args.Length == 6 && args[1] == "--printtest")
             _ = RunPrintTest(args[2], args[3], double.Parse(args[4], System.Globalization.CultureInfo.InvariantCulture), args[5]);
         else if (args.Length > 1) OpenPath(args[1]);

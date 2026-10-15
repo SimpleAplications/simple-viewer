@@ -189,6 +189,14 @@ T = {
  "Öffnet die Download-Seite in Ihrem Browser. {0} selbst verbindet sich nie mit dem Internet.",
  "Abre a página de transferência no seu navegador. {0} nunca se liga à internet.",
  "Apre la pagina di download nel browser. {0} non si connette mai a Internet."],
+"formats.updates.store.tip": [
+ "Opens this app's page in the Microsoft Store, which installs its updates. {0} itself never connects to the internet.",
+ "Abre la página de esta aplicación en Microsoft Store, que es la que instala sus actualizaciones. {0} nunca se conecta a internet por sí mismo.",
+ "Öppnar appens sida i Microsoft Store, som installerar dess uppdateringar. {0} ansluter aldrig till internet på egen hand.",
+ "Ouvre la page de cette application dans le Microsoft Store, qui installe ses mises à jour. {0} ne se connecte jamais à internet de lui-même.",
+ "Öffnet die Seite dieser App im Microsoft Store, der ihre Updates installiert. {0} selbst verbindet sich nie mit dem Internet.",
+ "Abre a página desta aplicação na Microsoft Store, que instala as atualizações. O {0} nunca se liga à internet por si só.",
+ "Apre la pagina di questa app nel Microsoft Store, che ne installa gli aggiornamenti. {0} non si connette mai a internet da solo."],
 
 "f.intro": [
  "{0} never connects to the internet and keeps no record of what you open.\n\"Check for updates\" below opens the download page in your web browser.",
@@ -259,6 +267,14 @@ T = {
  "FFmpeg wird in Form separater DLL-Dateien verwendet und ist unverändert. Sie dürfen die DLLs im Ordner codecs durch Ihren eigenen Build von FFmpeg 8.x ersetzen.",
  "O FFmpeg é utilizado como ficheiros DLL separados e não foi modificado. Pode substituir os DLL da pasta codecs pela sua própria compilação do FFmpeg 8.x.",
  "FFmpeg è usato come file DLL separati e non è stato modificato. Puoi sostituire i DLL nella cartella codecs con una tua build di FFmpeg 8.x."],
+"f.credits.replace.store": [
+ "FFmpeg is used as separate DLL files and is not modified. To use your own build of FFmpeg 8.x, copy its DLL files into the folder that \"Open codecs folder\" opens; the app then uses them instead of the ones it came with.",
+ "FFmpeg se utiliza como archivos DLL independientes y no se ha modificado. Para usar tu propia compilación de FFmpeg 8.x, copia sus archivos DLL en la carpeta que abre «Abrir carpeta de códecs»; la aplicación los usará en lugar de los que trae.",
+ "FFmpeg används som separata DLL-filer och är inte ändrat. Om du vill använda en egen version av FFmpeg 8.x kopierar du dess DLL-filer till mappen som \"Öppna codec-mappen\" öppnar; appen använder dem då i stället för de som följde med.",
+ "FFmpeg est utilisé sous forme de fichiers DLL séparés et n'est pas modifié. Pour utiliser votre propre compilation de FFmpeg 8.x, copiez ses fichiers DLL dans le dossier qu'ouvre « Ouvrir le dossier des codecs » ; l'application les utilise alors à la place de ceux fournis.",
+ "FFmpeg wird als separate DLL-Dateien verwendet und ist nicht verändert. Um einen eigenen Build von FFmpeg 8.x zu verwenden, kopieren Sie dessen DLL-Dateien in den Ordner, den \"Codec-Ordner öffnen\" öffnet; die App verwendet sie dann anstelle der mitgelieferten.",
+ "O FFmpeg é usado como ficheiros DLL separados e não foi modificado. Para usar a sua própria compilação do FFmpeg 8.x, copie os ficheiros DLL para a pasta que \"Abrir pasta de codecs\" abre; a aplicação passa a usá-los em vez dos que trouxe.",
+ "FFmpeg è usato come file DLL separati e non è modificato. Per usare una tua compilazione di FFmpeg 8.x, copia i suoi file DLL nella cartella che apre \"Apri cartella dei codec\"; l'app userà quelli al posto dei propri."],
 "f.credits.trademark": [
  "FFmpeg is a trademark of Fabrice Bellard, originator of the FFmpeg project. This app is not affiliated with or endorsed by the FFmpeg project.",
  "FFmpeg es una marca de Fabrice Bellard, creador del proyecto FFmpeg. Esta aplicación no está afiliada al proyecto FFmpeg ni cuenta con su respaldo.",

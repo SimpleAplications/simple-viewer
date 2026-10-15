@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy - Reiks Viewer</title>
+<meta name="description" content="Reiks Viewer does not collect, store or send personal data.">
+<link rel="icon" href="../favicon.ico">
+<style>
+  :root { --bg: #0b0b0c; --line: #2a2a2e; --text: #f2f2f3; --soft: #a9a9b2; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f6f6f7; --line: #dcdce1; --text: #111113; --soft: #5d5d68; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; text-underline-offset: 3px; }
+  .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-top: 14px; font-size: 14px; color: var(--soft); }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -1px; margin: 44px 0 6px; font-weight: 650; }
+  .updated { color: var(--soft); margin: 0 0 30px; font-size: 15px; }
+  h2 { font-size: 21px; margin: 30px 0 8px; font-weight: 650; }
+  p { margin: 0 0 12px; }
+  code { font-size: 15px; }
+  footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<nav class="wrap top">
+  <a href="../">&larr; Reiks Viewer</a>
+  <span><strong>English</strong> &middot; <a href="../es/privacy/" hreflang="es" lang="es">Español</a> &middot; <a href="../sv/privacy/" hreflang="sv" lang="sv">Svenska</a></span>
+</nav>
+
+<main class="wrap">
+  <h1>Privacy policy</h1>
+  <p class="updated">Reiks Viewer, by Reiks Apps. Last updated 15 October 2026.</p>
+
+  <h2>In short</h2>
+  <p>Reiks Viewer does not collect, store or send personal data. It has no account, no ads, no analytics and no crash reporting of its own.</p>
+
+  <h2>What stays on your computer</h2>
+  <p>Reiks Viewer writes one file: your options (keys, window colour, language, playback choices, and the printer, paper size and size choice you last printed with). It is kept in <code>%APPDATA%\ReiksViewer\settings.json</code>, or in the app&rsquo;s own data folder when it was installed from the Microsoft Store. Nothing about the files you open is written: no history, no recent list, no thumbnails.</p>
+
+  <h2>What goes over the network</h2>
+  <p>The app&rsquo;s own code has no networking, and its decoders are limited to local files. The &ldquo;Check for updates&rdquo; button in the Formats window (F1) opens the download page in your web browser, or the app&rsquo;s page in the Microsoft Store, and only when you click it.</p>
+  <p>If you open a file from a network drive or a cloud-synced folder, Windows or your sync program moves that data. Printing goes through Windows&rsquo; own print system, which talks to your printer, over your network if it is a network printer.</p>
+
+  <h2>Installing from the Microsoft Store</h2>
+  <p>When you install Reiks Viewer from the Microsoft Store, Microsoft handles the download, installation and updates under its own <a href="https://privacy.microsoft.com/privacystatement">privacy statement</a>. Microsoft gives developers aggregated reports, such as how many people installed the app and summaries of crashes that Windows has reported to Microsoft under your Windows diagnostic settings.</p>
+
+  <h2>Questions</h2>
+  <p>For questions about privacy, open an issue at <a href="https://github.com/reiks-apps/reiks-viewer/issues">github.com/reiks-apps/reiks-viewer/issues</a>. Issues there are public.</p>
+  <p>If this policy changes, the new version is published on this page with a new date.</p>
+</main>
+
+<footer class="wrap">
+  <p>Reiks Viewer is provided as is, without warranty.</p>
+</footer>
+
+</body>
+</html>

@@ -102,11 +102,11 @@
   <img class="icon" src="../img/icon.png" alt="Ikon för Reiks Visare" width="96" height="96">
   <h1>Reiks Visare</h1>
   <p class="tagline">Dina bilder och videor förblir dina. Reiks Visare visar dem bara för dig, och det är allt den gör.</p>
-  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/ReiksViewer-Setup-1.4.0.exe">Ladda ner för Windows</a>
+  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/ReiksViewer-Setup-1.5.0.exe">Ladda ner för Windows</a>
   <p class="under">
-    <strong>Version 1.4.0</strong> &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases/tag/v1.4.0">Nyheter</a><br>
+    <strong>Version 1.5.0</strong> &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases/tag/v1.5.0">Nyheter</a><br>
     Gratis &middot; öppen källkod &middot; ansluter aldrig till internet &middot; Windows 10 eller 11, 64-bitars<br>
-    <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/ReiksViewer-1.4.0-portable.zip">Portabel zip (ingen installation)</a>
+    <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/ReiksViewer-1.5.0-portable.zip">Portabel zip (ingen installation)</a>
     &middot; <a href="#verify">Kontrollsummor</a>
     &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases">Alla versioner</a>
   </p>
@@ -178,14 +178,14 @@
     <p>Windows sparar vissa uppgifter på egen hand, och dem kan Reiks Visare inte påverka. När du öppnar en fil genom att dubbelklicka på den i Utforskaren kan Windows lägga till den i sin lista över senaste filer (Inställningar &rarr; Anpassning &rarr; Start &rarr; &rdquo;Visa nyligen öppnade objekt&rdquo;). Reiks Visare ber Windows att inte lägga till filer som öppnas via dess egen Öppna-dialog i den listan, men Windows kan ändå komma ihåg vilken mapp dialogen senast visade. Om Reiks Visare skulle krascha kan Windows felrapportering registrera kraschen, precis som för andra appar. Windows diagnostikdata och Recall är också Windows-inställningar, under Sekretess och säkerhet.</p>
     <p><strong>&rdquo;Dölj från skärmbilder&rdquo; bygger på en funktion i Windows.</strong> Windows tillämpar den på de vanliga sätten att fånga skärmen: Print Screen, Skärmklippverktyget, skärminspelare och skärmdelning i mötesappar. Den kan inte hindra en kamera som riktas mot skärmen eller program som är gjorda för att kringgå den, och vi har inte testat den mot Windows Recall.</p>
     <p>Om du öppnar en fil från en nätverksenhet eller en molnsynkad mapp är det Windows eller ditt synkprogram som flyttar datan över nätverket, precis som för andra appar. Utskrifter går via Windows eget utskriftssystem: det är Windows och skrivarens drivrutin som talar med skrivaren, över ditt nätverk om det är en nätverksskrivare, och de kan spara uppgifter om utskriften. Och som alla mediespelare måste Reiks Visare avkoda det en fil innehåller: en avsiktligt skadad fil kan få den att krascha eller bete sig oväntat, så håll den uppdaterad och var försiktig med filer från källor du inte litar på.</p>
-    <p><strong>Vid normal användning är den enda fil Reiks Visare skriver</strong> dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings- och integritetsval, i <code>%APPDATA%\ReiksViewer\settings.json</code>. Den innehåller ingenting om dina filer. Avinstallationen tar bort den; om du använder den portabla zip-filen tar du själv bort den mappen.</p>
+    <p><strong>Vid normal användning är den enda fil Reiks Visare skriver</strong> dina alternativ: dina tangenter, fönsterfärg, språk samt uppspelnings-, integritets- och utskriftsval, i <code>%APPDATA%\ReiksViewer\settings.json</code>. Den innehåller ingenting om dina filer. Avinstallationen tar bort den; om du använder den portabla zip-filen tar du själv bort den mappen.</p>
   </section>
 
   <section id="verify">
     <h2>Installation</h2>
     <div class="note">
       <p><strong>Windows kan varna dig första gången.</strong> Installationsprogrammet är ännu inte digitalt signerat, så Windows kan visa &rdquo;Windows skyddade datorn&rdquo;. Välj <em>Mer information</em> och sedan <em>Kör ändå</em>.</p>
-      <p>För att kontrollera att din nedladdning är hel och stämmer med den publicerade filen, jämför dess SHA-256-kontrollsumma med <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/SHA256SUMS.txt">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup-1.4.0.exe</code></p>
+      <p>För att kontrollera att din nedladdning är hel och stämmer med den publicerade filen, jämför dess SHA-256-kontrollsumma med <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/SHA256SUMS.txt">SHA256SUMS.txt</a>. I PowerShell: <code>Get-FileHash ReiksViewer-Setup-1.5.0.exe</code></p>
       <p>Att installera bara för dig själv kräver inga administratörsrättigheter; att installera för alla användare gör det. Installationsprogrammet kan lägga till Reiks Visare i Utforskarens lista &rdquo;Öppna med&rdquo;. För att uppdatera kör du ett nyare installationsprogram över det gamla; &rdquo;Sök efter uppdateringar&rdquo; i appen (F1) öppnar nedladdningssidan i din webbläsare, och själva appen förblir offline.</p>
       <p>Reiks Visare är testad på Windows 11. Den bör även fungera på Windows 10, men det har ännu inte testats.</p>
     </div>
@@ -200,6 +200,7 @@
 
 <footer class="wrap">
   <p>Skärmbilderna visar trailern till <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; Carinanebulosan &rdquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA och STScI; samt Blue Marble 2012, NASA Goddard Space Flight Center. Att de används här innebär inte att upphovsmännen står bakom Reiks Visare.</p>
+  <p><a href="privacy/">Integritetspolicy</a></p>
   <p>Namnet GitHub och dess logotyp är varumärken som tillhör GitHub, Inc. och används här endast för att länka till projektets sida där.</p>
   <p>Reiks Visare tillhandahålls i befintligt skick, utan garanti.</p>
 </footer>

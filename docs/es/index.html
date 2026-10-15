@@ -102,11 +102,11 @@
   <img class="icon" src="../img/icon.png" alt="Icono de Reiks Visor" width="96" height="96">
   <h1>Reiks Visor</h1>
   <p class="tagline">Tus imágenes y vídeos siguen siendo tuyos. Reiks Visor te los muestra solo a ti, y eso es todo lo que hace.</p>
-  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/ReiksViewer-Setup-1.4.0.exe">Descargar para Windows</a>
+  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/ReiksViewer-Setup-1.5.0.exe">Descargar para Windows</a>
   <p class="under">
-    <strong>Versión 1.4.0</strong> &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases/tag/v1.4.0">Novedades</a><br>
+    <strong>Versión 1.5.0</strong> &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases/tag/v1.5.0">Novedades</a><br>
     Gratis &middot; código abierto &middot; nunca se conecta a internet &middot; Windows 10 u 11, 64 bits<br>
-    <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/ReiksViewer-1.4.0-portable.zip">Zip portátil (sin instalar)</a>
+    <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/ReiksViewer-1.5.0-portable.zip">Zip portátil (sin instalar)</a>
     &middot; <a href="#verify">Sumas de comprobación</a>
     &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases">Todas las versiones</a>
   </p>
@@ -178,14 +178,14 @@
     <p>Windows guarda algunos registros por su cuenta, y Reiks Visor no tiene control sobre ellos. Cuando abres un archivo con doble clic en el Explorador, Windows puede añadirlo a su lista de archivos recientes (Configuración &rarr; Personalización &rarr; Inicio &rarr; &laquo;Mostrar elementos abiertos recientemente&raquo;). Reiks Visor pide a Windows que no añada a esa lista los archivos abiertos desde su propio cuadro Abrir, pero Windows puede seguir recordando en qué carpeta estuvo ese cuadro por última vez. Si Reiks Visor llegara a fallar, el Informe de errores de Windows puede registrar el fallo, como con cualquier aplicación. Los datos de diagnóstico de Windows y Recall también son ajustes de Windows, en Privacidad y seguridad.</p>
     <p><strong>&laquo;Ocultar en capturas&raquo; se apoya en una función de Windows.</strong> Windows la aplica a las formas habituales de capturar la pantalla: Impr Pant, la Herramienta Recortes, los grabadores de pantalla y la pantalla compartida de las aplicaciones de reuniones. No puede impedir que una cámara apunte a tu pantalla ni detener un programa hecho para saltársela, y no la hemos probado con Windows Recall.</p>
     <p>Si abres un archivo desde una unidad de red o una carpeta sincronizada con la nube, es Windows o tu programa de sincronización quien mueve esos datos por la red, como con cualquier aplicación. La impresión pasa por el sistema de impresión de Windows: son Windows y el controlador de la impresora quienes se comunican con ella, por tu red si es una impresora de red, y pueden guardar un registro del trabajo. Y, como todo reproductor, Reiks Visor tiene que decodificar lo que contenga un archivo: un archivo dañado a propósito podría hacer que falle o se comporte de forma inesperada, así que mantenlo actualizado y ten cuidado con los archivos de origen dudoso.</p>
-    <p><strong>En el uso normal, el único archivo que escribe Reiks Visor</strong> son tus opciones: tus teclas, el color de la ventana, el idioma y tus preferencias de reproducción y privacidad, en <code>%APPDATA%\ReiksViewer\settings.json</code>. No contiene nada sobre tus archivos. Al desinstalar se elimina; si usas el zip portátil, borra tú esa carpeta.</p>
+    <p><strong>En el uso normal, el único archivo que escribe Reiks Visor</strong> son tus opciones: tus teclas, el color de la ventana, el idioma y tus preferencias de reproducción, privacidad e impresión, en <code>%APPDATA%\ReiksViewer\settings.json</code>. No contiene nada sobre tus archivos. Al desinstalar se elimina; si usas el zip portátil, borra tú esa carpeta.</p>
   </section>
 
   <section id="verify">
     <h2>Instalación</h2>
     <div class="note">
       <p><strong>Windows puede avisarte la primera vez.</strong> El instalador aún no está firmado digitalmente, así que Windows puede mostrar &laquo;Windows protegió su PC&raquo;. Elige <em>Más información</em> y luego <em>Ejecutar de todas formas</em>.</p>
-      <p>Para comprobar que tu descarga está completa y coincide con el archivo publicado, compara su suma SHA-256 con <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/SHA256SUMS.txt">SHA256SUMS.txt</a>. En PowerShell: <code>Get-FileHash ReiksViewer-Setup-1.4.0.exe</code></p>
+      <p>Para comprobar que tu descarga está completa y coincide con el archivo publicado, compara su suma SHA-256 con <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/SHA256SUMS.txt">SHA256SUMS.txt</a>. En PowerShell: <code>Get-FileHash ReiksViewer-Setup-1.5.0.exe</code></p>
       <p>Instalar solo para ti no requiere permisos de administrador; instalar para todos los usuarios, sí. El instalador puede añadir Reiks Visor a la lista &laquo;Abrir con&raquo; del Explorador. Para actualizar, ejecuta un instalador más reciente sobre el anterior; &laquo;Buscar actualizaciones&raquo; en la aplicación (F1) abre la página de descarga en tu navegador, y la aplicación en sí sigue sin conexión.</p>
       <p>Reiks Visor está probado en Windows 11. También debería funcionar en Windows 10, pero eso aún no se ha probado.</p>
     </div>
@@ -200,6 +200,7 @@
 
 <footer class="wrap">
   <p>Las capturas muestran el tráiler de <em>Sintel</em>, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; la nebulosa de Carina &laquo;Cosmic Cliffs&raquo;, NASA, ESA, CSA y STScI; y Blue Marble 2012, NASA Goddard Space Flight Center. Su uso aquí no implica ningún respaldo.</p>
+  <p><a href="privacy/">Política de privacidad</a></p>
   <p>El nombre y el logotipo de GitHub son marcas de GitHub, Inc., y se usan aquí solo para enlazar a la página de este proyecto.</p>
   <p>Reiks Visor se ofrece tal cual, sin garantía.</p>
 </footer>

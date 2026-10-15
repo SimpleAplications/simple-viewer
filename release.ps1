@@ -19,6 +19,30 @@ $version = (Get-Item (Join-Path $app "ReiksViewer.exe")).VersionInfo.ProductVers
 & $iscc /Q (Join-Path $root "installer\ReiksViewer.iss")
 if ($LASTEXITCODE -ne 0) { throw "Installer build failed." }
 
+# The Microsoft Store package, in dist\store: it goes to Partner Center, not into the GitHub
+# release. Microsoft signs it after its review, so it is left unsigned here. Needs the
+# Windows SDK; without it this step is skipped.
+$makeappx = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\10.*\x64\makeappx.exe" -ErrorAction SilentlyContinue |
+    Sort-Object FullName | Select-Object -Last 1
+if ($makeappx) {
+    $kit = Split-Path $makeappx.FullName
+    $store = Join-Path $root "dist\store"
+    $layout = Join-Path $store "layout"
+    $icons = Join-Path $store "icons"
+    if (Test-Path $store) { Remove-Item -LiteralPath $store -Recurse -Force }
+    Copy-Item $app $layout -Recurse
+    Copy-Item (Join-Path $root "installer\store\Assets") (Join-Path $layout "Assets") -Recurse
+    $manifest = (Get-Content (Join-Path $root "installer\store\AppxManifest.xml") -Raw).Replace("{{version}}", "$version.0")
+    [System.IO.File]::WriteAllText((Join-Path $layout "AppxManifest.xml"), $manifest)
+    # The index that lets Windows pick the right icon for each size and display scale.
+    New-Item -ItemType Directory $icons | Out-Null
+    Copy-Item (Join-Path $root "installer\store\Assets") (Join-Path $icons "Assets") -Recurse
+    & (Join-Path $kit "makepri.exe") new /pr $icons /cf (Join-Path $root "installer\store\priconfig.xml") /mn (Join-Path $layout "AppxManifest.xml") /of (Join-Path $layout "resources.pri") /o | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "Icon index build failed." }
+    & $makeappx.FullName pack /d $layout /p (Join-Path $store "ReiksViewer-$version.msix") /o | Out-Null
+    if ($LASTEXITCODE -ne 0) { throw "Store package build failed." }
+}
+
 $zip = Join-Path $root "dist\ReiksViewer-$version-portable.zip"
 Compress-Archive -Path $app -DestinationPath $zip -Force
 

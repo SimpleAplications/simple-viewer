@@ -102,11 +102,11 @@
   <img class="icon" src="img/icon.png" alt="Reiks Viewer icon" width="96" height="96">
   <h1>Reiks Viewer</h1>
   <p class="tagline">Your pictures and videos stay yours. Reiks Viewer shows them only to you, and that is all it does.</p>
-  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/ReiksViewer-Setup-1.4.0.exe">Download for Windows</a>
+  <a class="button" href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/ReiksViewer-Setup-1.5.0.exe">Download for Windows</a>
   <p class="under">
-    <strong>Version 1.4.0</strong> &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases/tag/v1.4.0">What&rsquo;s new</a><br>
+    <strong>Version 1.5.0</strong> &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases/tag/v1.5.0">What&rsquo;s new</a><br>
     Free &middot; open source &middot; never connects to the internet &middot; Windows 10 or 11, 64-bit<br>
-    <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/ReiksViewer-1.4.0-portable.zip">Portable zip (no install)</a>
+    <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/ReiksViewer-1.5.0-portable.zip">Portable zip (no install)</a>
     &middot; <a href="#verify">Checksums</a>
     &middot; <a href="https://github.com/reiks-apps/reiks-viewer/releases">All versions</a>
   </p>
@@ -178,14 +178,14 @@
     <p>Windows keeps some records of its own, and Reiks Viewer has no say over them. When you open a file by double-clicking it in Explorer, Windows may add it to its recent files list (Settings &rarr; Personalization &rarr; Start &rarr; &ldquo;Show recently opened items&rdquo;). Reiks Viewer asks Windows to keep files opened through its own Open dialog off that list, but Windows may still remember which folder that dialog was last in. If Reiks Viewer ever crashes, Windows Error Reporting may record the crash, as it does for any app. Windows&rsquo; diagnostic data and Recall are Windows settings too, under Privacy &amp; security.</p>
     <p><strong>&ldquo;Hide from screenshots&rdquo; relies on a Windows feature.</strong> Windows applies it to the usual ways of capturing a screen: Print Screen, the Snipping Tool, screen recorders and screen sharing in meeting apps. It cannot stop a camera pointed at your screen or software made to get around it, and we have not tested it against Windows Recall.</p>
     <p>If you open a file from a network drive or a cloud-synced folder, Windows or your sync program carries that data over the network, as with any app. Printing goes through Windows&rsquo; own print system: Windows and the printer&rsquo;s driver talk to the printer, over your network if it is a network printer, and they may keep a record of the job. And like every media player, Reiks Viewer has to decode whatever a file contains: a deliberately damaged file could make it crash or misbehave, so keep it up to date and take care with files from sources you don&rsquo;t trust.</p>
-    <p><strong>In normal use, the only file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback and privacy choices, in <code>%APPDATA%\ReiksViewer\settings.json</code>. It contains nothing about your files. Uninstalling removes it; if you use the portable zip, delete that folder yourself.</p>
+    <p><strong>In normal use, the only file Reiks Viewer writes</strong> is your options: your keys, window colour, language, playback, privacy and print choices, in <code>%APPDATA%\ReiksViewer\settings.json</code>. It contains nothing about your files. Uninstalling removes it; if you use the portable zip, delete that folder yourself.</p>
   </section>
 
   <section id="verify">
     <h2>Installing</h2>
     <div class="note">
       <p><strong>Windows may warn you the first time.</strong> The installer is not digitally signed yet, so Windows can show &ldquo;Windows protected your PC&rdquo;. Choose <em>More info</em>, then <em>Run anyway</em>.</p>
-      <p>To check that your download is complete and matches the published file, compare its SHA-256 checksum with <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.4.0/SHA256SUMS.txt">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup-1.4.0.exe</code></p>
+      <p>To check that your download is complete and matches the published file, compare its SHA-256 checksum with <a href="https://github.com/reiks-apps/reiks-viewer/releases/download/v1.5.0/SHA256SUMS.txt">SHA256SUMS.txt</a>. In PowerShell: <code>Get-FileHash ReiksViewer-Setup-1.5.0.exe</code></p>
       <p>Installing for yourself needs no administrator rights; installing for all users does. The installer can add Reiks Viewer to Explorer&rsquo;s &ldquo;Open with&rdquo; list. To update, run a newer installer over the old one; &ldquo;Check for updates&rdquo; in the app (F1) opens the download page in your browser, and the app itself stays offline.</p>
       <p>Reiks Viewer is tested on Windows 11. It should also run on Windows 10, but that has not been tested yet.</p>
     </div>
@@ -200,6 +200,7 @@
 
 <footer class="wrap">
   <p>Screenshots show the <em>Sintel</em> trailer, &copy; Blender Foundation (durian.blender.org), CC BY 3.0; the Carina Nebula &ldquo;Cosmic Cliffs&rdquo;, NASA, ESA, CSA and STScI; and Blue Marble 2012, NASA Goddard Space Flight Center. Their use here does not imply any endorsement.</p>
+  <p><a href="privacy/">Privacy policy</a></p>
   <p>The GitHub name and logo are trademarks of GitHub, Inc., used here only to link to this project&rsquo;s page there.</p>
   <p>Reiks Viewer is provided as is, without warranty.</p>
 </footer>

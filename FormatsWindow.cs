@@ -49,8 +49,8 @@ public sealed class FormatsWindow : Window
         openFolder.SetResourceReference(BackgroundProperty, "HoverBrush");
         openFolder.Click += (_, _) =>
         {
-            Directory.CreateDirectory(FfmpegPlayer.CodecsFolder);
-            Process.Start(new ProcessStartInfo("explorer.exe", $"\"{FfmpegPlayer.CodecsFolder}\""));
+            Directory.CreateDirectory(FfmpegPlayer.OwnCodecsFolder);
+            Process.Start(new ProcessStartInfo("explorer.exe", $"\"{FfmpegPlayer.OwnCodecsFolder}\""));
         };
 
         // Windows only lets the user choose default apps, so the most the app can do is
@@ -70,7 +70,8 @@ public sealed class FormatsWindow : Window
         defaults.SetResourceReference(BackgroundProperty, "HoverBrush");
         defaults.Click += (_, _) => Process.Start(new ProcessStartInfo(DefaultAppsPage()) { UseShellExecute = true });
 
-        // The app never goes online by itself. This only hands the address to your browser.
+        // The app never goes online by itself. This only hands the address to your browser, or
+        // for a Store copy opens its page in the Store, which is where its updates come from.
         var updates = new Button
         {
             Content = new TextBlock { Text = L.T("formats.updates"), Margin = new Thickness(14, 0, 14, 0) },
@@ -80,12 +81,13 @@ public sealed class FormatsWindow : Window
             Padding = new Thickness(12, 0, 12, 0),
             Height = 32,
             Margin = new Thickness(0, 8, 16, 12),
-            ToolTip = L.T("formats.updates.tip", L.T("app.name")),
+            ToolTip = L.T(StorePackage.Installed ? "formats.updates.store.tip" : "formats.updates.tip", L.T("app.name")),
         };
         updates.SetResourceReference(ForegroundProperty, "TextBrush");
         updates.SetResourceReference(BackgroundProperty, "HoverBrush");
-        updates.Click += (_, _) => Process.Start(
-            new ProcessStartInfo("https://github.com/reiks-apps/reiks-viewer/releases/latest") { UseShellExecute = true });
+        updates.Click += (_, _) => Process.Start(new ProcessStartInfo(StorePackage.Installed
+            ? $"ms-windows-store://pdp/?PFN={StorePackage.FamilyName}"
+            : "https://github.com/reiks-apps/reiks-viewer/releases/latest") { UseShellExecute = true });
 
         var buttons = new StackPanel { Orientation = Orientation.Horizontal };
         buttons.Children.Add(openFolder);
@@ -100,11 +102,12 @@ public sealed class FormatsWindow : Window
     }
 
     /// <summary>
-    /// The app's own page in Settings when the installer has registered it, for this user or
-    /// for everyone; otherwise (the portable zip) the general default apps page.
+    /// The app's own page in Settings when the Store or the installer has registered it, for
+    /// this user or for everyone; otherwise (the portable zip) the general default apps page.
     /// </summary>
     static string DefaultAppsPage()
     {
+        if (StorePackage.Installed) return "ms-settings:defaultapps?registeredAUMID=" + StorePackage.AppUserModelId;
         static bool Registered(RegistryKey root)
         {
             using var key = root.OpenSubKey(@"Software\RegisteredApplications");
@@ -132,7 +135,7 @@ public sealed class FormatsWindow : Window
             $"{L.T("f.pictures")}\n{List(imageExtensions)}\n{L.T("f.animated")}",
             $"{L.T("f.video")}\n{List(videoExtensions)}\n{L.T("f.video.gpu")}\n{L.T("f.video.depends")}",
             $"{L.T("f.credits")}\n{L.T("f.credits.ffmpeg")}",
-            L.T("f.credits.replace"),
+            L.T(StorePackage.Installed ? "f.credits.replace.store" : "f.credits.replace"),
             "FFmpeg.AutoGen (https://github.com/Ruslan-B/FFmpeg.AutoGen), MIT, (c) Ruslan Balanukhin.",
             L.T("f.credits.trademark"),
         });
