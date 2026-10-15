@@ -114,6 +114,7 @@ public partial class MainWindow : Window
         }
         if (args.Length == 4 && args[1] == "--selftest") _ = RunSelfTest(args[2], args[3]);
         else if (args.Length == 4 && args[1] == "--imagetest") RunImageTest(args[2], args[3]);
+        else if (args.Length == 3 && args[1] == "--storecheck") _ = RunStoreCheck(args[2]);
         else if (args.Length == 5 && args[1] == "--capturetest") _ = RunCaptureTest(args[2], args[3], args[4] == "on");
         else if (args.Length is 6 or 7 && args[1] == "--screenshot")
             _ = RunScreenshot(args[2], args[3], double.Parse(args[4], System.Globalization.CultureInfo.InvariantCulture), args[5],

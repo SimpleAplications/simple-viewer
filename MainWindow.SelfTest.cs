@@ -405,6 +405,46 @@ public partial class MainWindow
         }
     }
 
+    // "ReiksViewer.exe --storecheck <output folder>" writes what the app sees of its Store package
+    // (storecheck.log) and a picture of the Formats window (formats.png). Run it inside the
+    // package to see the Store copy's behaviour, and outside it to see the others'.
+    async Task RunStoreCheck(string outputFolder)
+    {
+        Directory.CreateDirectory(outputFolder);
+        var log = new List<string>();
+        try
+        {
+            log.Add($"store copy: {StorePackage.Installed}");
+            log.Add($"family name: {StorePackage.FamilyName}");
+            log.Add($"app id: {StorePackage.AppUserModelId}");
+            log.Add($"data folder: {StorePackage.DataFolder} exists={Directory.Exists(StorePackage.DataFolder)}");
+            log.Add($"own codecs folder: {FfmpegPlayer.OwnCodecsFolder}");
+            log.Add($"ffmpeg loaded: {FfmpegPlayer.EnsureLoaded()} from {FfmpegPlayer.CodecsFolder} {FfmpegPlayer.Version} {FfmpegPlayer.LoadError}");
+            var formats = new FormatsWindow(this, ImageExtensions, VideoExtensions);
+            formats.Show();
+            await Task.Delay(800);
+            var bitmap = new RenderTargetBitmap((int)formats.ActualWidth, (int)formats.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            bitmap.Render(formats);
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitmap));
+            using (var stream = File.Create(Path.Combine(outputFolder, "formats.png"))) encoder.Save(stream);
+            formats.Close();
+            // Where the options file really goes: the Store keeps it in the package's own folder.
+            _settings.Save();
+            string options = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ReiksViewer", "settings.json");
+            log.Add($"options file as the app sees it: {options} exists={File.Exists(options)}");
+        }
+        catch (Exception ex)
+        {
+            log.Add("EXCEPTION: " + ex);
+        }
+        finally
+        {
+            File.WriteAllLines(Path.Combine(outputFolder, "storecheck.log"), log);
+            Close();
+        }
+    }
+
     [System.Runtime.InteropServices.DllImport("user32.dll")]
     static extern bool GetWindowRect(IntPtr hwnd, out ScreenRect rect);
 
