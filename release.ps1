@@ -21,10 +21,10 @@ if ($LASTEXITCODE -ne 0) { throw "Installer build failed." }
 
 # The Microsoft Store package, in dist\store: it goes to Partner Center, not into the GitHub
 # release. Microsoft signs it after its review, so it is left unsigned here. Needs the
-# Windows SDK; without it this step is skipped.
+# Windows SDK; without it this step is skipped, and the GitHub release build skips it too.
 $makeappx = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\10.*\x64\makeappx.exe" -ErrorAction SilentlyContinue |
     Sort-Object FullName | Select-Object -Last 1
-if ($makeappx) {
+if ($makeappx -and -not $env:GITHUB_ACTIONS) {
     $kit = Split-Path $makeappx.FullName
     $store = Join-Path $root "dist\store"
     $layout = Join-Path $store "layout"
