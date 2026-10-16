@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help and support - Reiks Viewer</title>
+<meta name="description" content="How to get help with Reiks Viewer and how to report a problem.">
+<link rel="icon" href="../favicon.ico">
+<style>
+  :root { --bg: #0b0b0c; --line: #2a2a2e; --text: #f2f2f3; --soft: #a9a9b2; --panel: #151517; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f6f6f7; --line: #dcdce1; --text: #111113; --soft: #5d5d68; --panel: #ffffff; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; text-underline-offset: 3px; }
+  .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-top: 14px; font-size: 14px; color: var(--soft); }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -1px; margin: 44px 0 10px; font-weight: 650; }
+  .intro { color: var(--soft); margin: 0 0 30px; }
+  h2 { font-size: 21px; margin: 30px 0 8px; font-weight: 650; }
+  p { margin: 0 0 12px; }
+  kbd {
+    font: 600 14px/1 "Segoe UI", system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel);
+    border-bottom-width: 2px; border-radius: 6px; padding: 3px 7px; white-space: nowrap;
+  }
+  footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<nav class="wrap top">
+  <a href="../">&larr; Reiks Viewer</a>
+  <span><strong>English</strong> &middot; <a href="../es/support/" hreflang="es" lang="es">Español</a> &middot; <a href="../sv/support/" hreflang="sv" lang="sv">Svenska</a></span>
+</nav>
+
+<main class="wrap">
+  <h1>Help and support</h1>
+  <p class="intro">Reiks Viewer is made by Reiks Apps. This page answers the common questions and says how to reach us.</p>
+
+  <h2>Report a problem or ask a question</h2>
+  <p>Open an issue on <a href="https://github.com/reiks-apps/reiks-viewer/issues">GitHub</a>; a free GitHub account is needed. Say which version you use (it is shown in the <kbd>F1</kbd> window), what you did and what happened. Issues are public, so don&rsquo;t attach private pictures or personal details.</p>
+
+  <h2>A file doesn&rsquo;t open</h2>
+  <p>Press <kbd>F1</kbd> in Reiks Viewer to see every format it opens. Whether a particular file opens also depends on what is inside it: a damaged file, or one made with a rare codec, may not.</p>
+
+  <h2>Windows warns when I install it</h2>
+  <p>The installer from GitHub is not digitally signed yet, so Windows may show &ldquo;Windows protected your PC&rdquo;: choose <em>More info</em>, then <em>Run anyway</em>. The copy from the Microsoft Store does not show this warning.</p>
+
+  <h2>Updates</h2>
+  <p>The Microsoft Store installs the updates of the copy from the Store. For the installer from GitHub, &ldquo;Check for updates&rdquo; in the <kbd>F1</kbd> window opens the download page; run the new installer over the old one. Reiks Viewer itself never connects to the internet, so it does not tell you about updates by itself.</p>
+
+  <h2>Security problems</h2>
+  <p>Please don&rsquo;t report a security problem in a public issue. The <a href="https://github.com/reiks-apps/reiks-viewer/security/policy">security policy</a> describes how to report it privately.</p>
+
+  <p>What Reiks Viewer keeps and what goes over the network: see the <a href="../privacy/">privacy policy</a>.</p>
+</main>
+
+<footer class="wrap">
+  <p>Reiks Viewer is provided as is, without warranty.</p>
+</footer>
+
+</body>
+</html>

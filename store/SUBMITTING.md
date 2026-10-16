@@ -70,7 +70,9 @@ Partner Center: Apps and games → Reiks Viewer. A submission's sections appear 
   computer. Then the privacy policy URL: `https://reiks-apps.github.io/reiks-viewer/privacy/`
   (the link next to the question is Microsoft's App Developer Agreement, not a template).
 - Website: `https://reiks-apps.github.io/reiks-viewer/`
-- Support contact: the Reiks Apps email address, or `https://github.com/reiks-apps/reiks-viewer/issues`
+- Support contact: `https://reiks-apps.github.io/reiks-viewer/support/`. Not the GitHub issues
+  page: with no issues open it shows "No results", and certification rejected it under policy
+  10.1.2.7 as a link that does not resolve to a functional website.
 - **Display mode: PC and HoloLens both unticked.** Ticking PC means "a Windows Mixed Reality
   app" and then demands headset requirements.
 - Product declarations: untick "Windows can include this product's data in automatic backups to

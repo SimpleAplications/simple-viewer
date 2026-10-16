@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ayuda y soporte - Reiks Visor</title>
+<meta name="description" content="Cómo obtener ayuda con Reiks Visor y cómo comunicar un problema.">
+<link rel="icon" href="../../favicon.ico">
+<style>
+  :root { --bg: #0b0b0c; --line: #2a2a2e; --text: #f2f2f3; --soft: #a9a9b2; --panel: #151517; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f6f6f7; --line: #dcdce1; --text: #111113; --soft: #5d5d68; --panel: #ffffff; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; text-underline-offset: 3px; }
+  .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-top: 14px; font-size: 14px; color: var(--soft); }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -1px; margin: 44px 0 10px; font-weight: 650; }
+  .intro { color: var(--soft); margin: 0 0 30px; }
+  h2 { font-size: 21px; margin: 30px 0 8px; font-weight: 650; }
+  p { margin: 0 0 12px; }
+  kbd {
+    font: 600 14px/1 "Segoe UI", system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel);
+    border-bottom-width: 2px; border-radius: 6px; padding: 3px 7px; white-space: nowrap;
+  }
+  footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<nav class="wrap top">
+  <a href="../">&larr; Reiks Visor</a>
+  <span><a href="../../support/" hreflang="en" lang="en">English</a> &middot; <strong>Español</strong> &middot; <a href="../../sv/support/" hreflang="sv" lang="sv">Svenska</a></span>
+</nav>
+
+<main class="wrap">
+  <h1>Ayuda y soporte</h1>
+  <p class="intro">Reiks Visor lo hace Reiks Apps. Esta página responde a las preguntas habituales y explica cómo contactarnos.</p>
+
+  <h2>Comunicar un problema o hacer una pregunta</h2>
+  <p>Abre una incidencia en <a href="https://github.com/reiks-apps/reiks-viewer/issues">GitHub</a>; hace falta una cuenta gratuita de GitHub. Indica qué versión usas (aparece en la ventana <kbd>F1</kbd>), qué hiciste y qué pasó. Las incidencias son públicas, así que no adjuntes imágenes privadas ni datos personales.</p>
+
+  <h2>Un archivo no se abre</h2>
+  <p>Pulsa <kbd>F1</kbd> en Reiks Visor para ver todos los formatos que abre. Que un archivo concreto se abra depende también de su contenido: un archivo dañado, o uno hecho con un códec poco común, puede no abrirse.</p>
+
+  <h2>Windows avisa al instalarlo</h2>
+  <p>El instalador de GitHub aún no está firmado digitalmente, así que Windows puede mostrar &laquo;Windows protegió su PC&raquo;: elige <em>Más información</em> y luego <em>Ejecutar de todas formas</em>. La copia de Microsoft Store no muestra este aviso.</p>
+
+  <h2>Actualizaciones</h2>
+  <p>Microsoft Store instala las actualizaciones de la copia de la Store. Para el instalador de GitHub, &laquo;Buscar actualizaciones&raquo; en la ventana <kbd>F1</kbd> abre la página de descarga; ejecuta el nuevo instalador sobre el anterior. Reiks Visor nunca se conecta a internet por sí mismo, así que no te avisa de las actualizaciones.</p>
+
+  <h2>Problemas de seguridad</h2>
+  <p>Por favor, no comuniques un problema de seguridad en una incidencia pública. La <a href="https://github.com/reiks-apps/reiks-viewer/security/policy">política de seguridad</a> explica cómo comunicarlo de forma privada.</p>
+
+  <p>Lo que Reiks Visor guarda y lo que pasa por la red: consulta la <a href="../privacy/">política de privacidad</a>.</p>
+</main>
+
+<footer class="wrap">
+  <p>Reiks Visor se ofrece tal cual, sin garantía.</p>
+</footer>
+
+</body>
+</html>

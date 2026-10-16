@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{s.title}}</title>
+<meta name="description" content="{{s.description}}">
+<link rel="icon" href="{{up}}favicon.ico">
+<style>
+  :root { --bg: #0b0b0c; --line: #2a2a2e; --text: #f2f2f3; --soft: #a9a9b2; --panel: #151517; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f6f6f7; --line: #dcdce1; --text: #111113; --soft: #5d5d68; --panel: #ffffff; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; text-underline-offset: 3px; }
+  .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-top: 14px; font-size: 14px; color: var(--soft); }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -1px; margin: 44px 0 10px; font-weight: 650; }
+  .intro { color: var(--soft); margin: 0 0 30px; }
+  h2 { font-size: 21px; margin: 30px 0 8px; font-weight: 650; }
+  p { margin: 0 0 12px; }
+  kbd {
+    font: 600 14px/1 "Segoe UI", system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel);
+    border-bottom-width: 2px; border-radius: 6px; padding: 3px 7px; white-space: nowrap;
+  }
+  footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<nav class="wrap top">
+  <a href="{{home}}">{{s.back}}</a>
+  <span>{{switcher}}</span>
+</nav>
+
+<main class="wrap">
+  <h1>{{s.h1}}</h1>
+  <p class="intro">{{s.intro}}</p>
+
+  <h2>{{s.report.h}}</h2>
+  <p>{{s.report}}</p>
+
+  <h2>{{s.open.h}}</h2>
+  <p>{{s.open}}</p>
+
+  <h2>{{s.warn.h}}</h2>
+  <p>{{s.warn}}</p>
+
+  <h2>{{s.update.h}}</h2>
+  <p>{{s.update}}</p>
+
+  <h2>{{s.security.h}}</h2>
+  <p>{{s.security}}</p>
+
+  <p>{{s.privacy}}</p>
+</main>
+
+<footer class="wrap">
+  <p>{{s.footer}}</p>
+</footer>
+
+</body>
+</html>

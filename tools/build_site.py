@@ -204,6 +204,7 @@ T = {
  "El nombre y el logotipo de GitHub son marcas de GitHub, Inc., y se usan aquí solo para enlazar a la página de este proyecto.",
  "Namnet GitHub och dess logotyp är varumärken som tillhör GitHub, Inc. och används här endast för att länka till projektets sida där."),
 "footer.privacy": ("Privacy policy", "Política de privacidad", "Integritetspolicy"),
+"footer.support": ("Help and support", "Ayuda y soporte", "Hjälp och support"),
 "footer.warranty": ("Reiks Viewer is provided as is, without warranty.", "Reiks Visor se ofrece tal cual, sin garantía.", "Reiks Visare tillhandahålls i befintligt skick, utan garanti."),
 }
 
@@ -246,9 +247,9 @@ P = {
  "När du installerar Reiks Visare från Microsoft Store sköter Microsoft nedladdning, installation och uppdateringar enligt sin egen <a href=\"https://privacy.microsoft.com/privacystatement\">sekretesspolicy</a>. Microsoft ger utvecklare sammanställda rapporter, till exempel hur många som installerat appen och sammanfattningar av krascher som Windows har rapporterat till Microsoft enligt dina diagnostikinställningar i Windows."),
 "p.contact.h": ("Questions", "Preguntas", "Frågor"),
 "p.contact": (
- "For questions about privacy, open an issue at <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">github.com/reiks-apps/reiks-viewer/issues</a>. Issues there are public.",
- "Para preguntas sobre privacidad, abre una incidencia en <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">github.com/reiks-apps/reiks-viewer/issues</a>. Las incidencias son públicas.",
- "Frågor om integritet kan du ställa genom att öppna ett ärende på <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">github.com/reiks-apps/reiks-viewer/issues</a>. Ärendena där är offentliga."),
+ "For questions about privacy, see <a href=\"../support/\">Help and support</a>.",
+ "Para preguntas sobre privacidad, consulta <a href=\"../support/\">Ayuda y soporte</a>.",
+ "För frågor om integritet, se <a href=\"../support/\">Hjälp och support</a>."),
 "p.changes": (
  "If this policy changes, the new version is published on this page with a new date.",
  "Si esta política cambia, la nueva versión se publica en esta página con una fecha nueva.",
@@ -256,10 +257,56 @@ P = {
 "p.footer": ("Reiks Viewer is provided as is, without warranty.", "Reiks Visor se ofrece tal cual, sin garantía.", "Reiks Visare tillhandahålls i befintligt skick, utan garanti."),
 }
 
+# Help and support, a page of its own (docs/support/ and so on). The Store listing links to it.
+S = {
+"s.title": ("Help and support - Reiks Viewer", "Ayuda y soporte - Reiks Visor", "Hjälp och support - Reiks Visare"),
+"s.description": (
+ "How to get help with Reiks Viewer and how to report a problem.",
+ "Cómo obtener ayuda con Reiks Visor y cómo comunicar un problema.",
+ "Hur du får hjälp med Reiks Visare och hur du rapporterar ett problem."),
+"s.back": ("&larr; Reiks Viewer", "&larr; Reiks Visor", "&larr; Reiks Visare"),
+"s.h1": ("Help and support", "Ayuda y soporte", "Hjälp och support"),
+"s.intro": (
+ "Reiks Viewer is made by Reiks Apps. This page answers the common questions and says how to reach us.",
+ "Reiks Visor lo hace Reiks Apps. Esta página responde a las preguntas habituales y explica cómo contactarnos.",
+ "Reiks Visare görs av Reiks Apps. Den här sidan svarar på vanliga frågor och berättar hur du når oss."),
+"s.report.h": ("Report a problem or ask a question", "Comunicar un problema o hacer una pregunta", "Rapportera ett problem eller ställ en fråga"),
+"s.report": (
+ "Open an issue on <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">GitHub</a>; a free GitHub account is needed. Say which version you use (it is shown in the <kbd>F1</kbd> window), what you did and what happened. Issues are public, so don&rsquo;t attach private pictures or personal details.",
+ "Abre una incidencia en <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">GitHub</a>; hace falta una cuenta gratuita de GitHub. Indica qué versión usas (aparece en la ventana <kbd>F1</kbd>), qué hiciste y qué pasó. Las incidencias son públicas, así que no adjuntes imágenes privadas ni datos personales.",
+ "Öppna ett ärende på <a href=\"https://github.com/reiks-apps/reiks-viewer/issues\">GitHub</a>; du behöver ett gratis GitHub-konto. Skriv vilken version du använder (den visas i fönstret <kbd>F1</kbd>), vad du gjorde och vad som hände. Ärendena är offentliga, så bifoga inga privata bilder eller personuppgifter."),
+"s.open.h": ("A file doesn&rsquo;t open", "Un archivo no se abre", "En fil går inte att öppna"),
+"s.open": (
+ "Press <kbd>F1</kbd> in Reiks Viewer to see every format it opens. Whether a particular file opens also depends on what is inside it: a damaged file, or one made with a rare codec, may not.",
+ "Pulsa <kbd>F1</kbd> en Reiks Visor para ver todos los formatos que abre. Que un archivo concreto se abra depende también de su contenido: un archivo dañado, o uno hecho con un códec poco común, puede no abrirse.",
+ "Tryck på <kbd>F1</kbd> i Reiks Visare för att se alla format den öppnar. Om en viss fil går att öppna beror också på vad den innehåller: en skadad fil, eller en som gjorts med en ovanlig codec, kanske inte öppnas."),
+"s.warn.h": ("Windows warns when I install it", "Windows avisa al instalarlo", "Windows varnar när jag installerar"),
+"s.warn": (
+ "The installer from GitHub is not digitally signed yet, so Windows may show &ldquo;Windows protected your PC&rdquo;: choose <em>More info</em>, then <em>Run anyway</em>. The copy from the Microsoft Store does not show this warning.",
+ "El instalador de GitHub aún no está firmado digitalmente, así que Windows puede mostrar &laquo;Windows protegió su PC&raquo;: elige <em>Más información</em> y luego <em>Ejecutar de todas formas</em>. La copia de Microsoft Store no muestra este aviso.",
+ "Installationsprogrammet från GitHub är ännu inte digitalt signerat, så Windows kan visa &rdquo;Windows skyddade datorn&rdquo;: välj <em>Mer information</em> och sedan <em>Kör ändå</em>. Kopian från Microsoft Store visar inte den här varningen."),
+"s.update.h": ("Updates", "Actualizaciones", "Uppdateringar"),
+"s.update": (
+ "The Microsoft Store installs the updates of the copy from the Store. For the installer from GitHub, &ldquo;Check for updates&rdquo; in the <kbd>F1</kbd> window opens the download page; run the new installer over the old one. Reiks Viewer itself never connects to the internet, so it does not tell you about updates by itself.",
+ "Microsoft Store instala las actualizaciones de la copia de la Store. Para el instalador de GitHub, &laquo;Buscar actualizaciones&raquo; en la ventana <kbd>F1</kbd> abre la página de descarga; ejecuta el nuevo instalador sobre el anterior. Reiks Visor nunca se conecta a internet por sí mismo, así que no te avisa de las actualizaciones.",
+ "Microsoft Store installerar uppdateringarna för kopian från Store. För installationsprogrammet från GitHub öppnar &rdquo;Sök efter uppdateringar&rdquo; i fönstret <kbd>F1</kbd> nedladdningssidan; kör det nya installationsprogrammet över det gamla. Reiks Visare ansluter aldrig till internet på egen hand, så den säger inte till om uppdateringar."),
+"s.security.h": ("Security problems", "Problemas de seguridad", "Säkerhetsproblem"),
+"s.security": (
+ "Please don&rsquo;t report a security problem in a public issue. The <a href=\"https://github.com/reiks-apps/reiks-viewer/security/policy\">security policy</a> describes how to report it privately.",
+ "Por favor, no comuniques un problema de seguridad en una incidencia pública. La <a href=\"https://github.com/reiks-apps/reiks-viewer/security/policy\">política de seguridad</a> explica cómo comunicarlo de forma privada.",
+ "Rapportera inte ett säkerhetsproblem i ett offentligt ärende. <a href=\"https://github.com/reiks-apps/reiks-viewer/security/policy\">Säkerhetspolicyn</a> beskriver hur du rapporterar det privat."),
+"s.privacy": (
+ "What Reiks Viewer keeps and what goes over the network: see the <a href=\"../privacy/\">privacy policy</a>.",
+ "Lo que Reiks Visor guarda y lo que pasa por la red: consulta la <a href=\"../privacy/\">política de privacidad</a>.",
+ "Vad Reiks Visare sparar och vad som går över nätverket: se <a href=\"../privacy/\">integritetspolicyn</a>."),
+"s.footer": ("Reiks Viewer is provided as is, without warranty.", "Reiks Visor se ofrece tal cual, sin garantía.", "Reiks Visare tillhandahålls i befintligt skick, utan garanti."),
+}
+
 here = os.path.dirname(os.path.abspath(__file__))
 docs = os.path.join(here, "..", "docs")
 template = io.open(os.path.join(here, "site_template.html"), encoding="utf-8").read()
 privacy_template = io.open(os.path.join(here, "privacy_template.html"), encoding="utf-8").read()
+support_template = io.open(os.path.join(here, "support_template.html"), encoding="utf-8").read()
 # The version comes from the project file, so it is set in one place. The page links to that
 # version's own files: publish the release before the website, or the links lead nowhere.
 project = io.open(os.path.join(here, "..", "ReiksViewer.csproj"), encoding="utf-8").read()
@@ -286,17 +333,18 @@ for index, (code, _, folder) in enumerate(LANGUAGES):
     io.open(os.path.join(target, "index.html"), "w", encoding="utf-8", newline="\n").write(page)
     print("wrote", os.path.join("docs", folder, "index.html"))
 
-    # The privacy policy in the same language, one folder further down.
-    page = privacy_template
-    switcher = " &middot; ".join(
-        f'<strong>{name}</strong>' if other == code else f'<a href="../{up}{other_folder}privacy/" hreflang="{other}" lang="{other}">{name}</a>'
-        for other, name, other_folder in LANGUAGES)
-    page = page.replace("{{lang}}", code).replace("{{up}}", "../" + up).replace("{{home}}", "../").replace("{{switcher}}", switcher)
-    for key, values in P.items():
-        assert len(values) == len(LANGUAGES), key
-        assert "{{" + key + "}}" in privacy_template, "unused text: " + key
-        page = page.replace("{{" + key + "}}", values[index])
-    assert "{{" not in page, page[page.index("{{"):][:60]
-    os.makedirs(os.path.join(target, "privacy"), exist_ok=True)
-    io.open(os.path.join(target, "privacy", "index.html"), "w", encoding="utf-8", newline="\n").write(page)
-    print("wrote", os.path.join("docs", folder, "privacy", "index.html"))
+    # The privacy policy and the support page in the same language, one folder further down.
+    for name, texts, page_template in (("privacy", P, privacy_template), ("support", S, support_template)):
+        page = page_template
+        switcher = " &middot; ".join(
+            f'<strong>{label}</strong>' if other == code else f'<a href="../{up}{other_folder}{name}/" hreflang="{other}" lang="{other}">{label}</a>'
+            for other, label, other_folder in LANGUAGES)
+        page = page.replace("{{lang}}", code).replace("{{up}}", "../" + up).replace("{{home}}", "../").replace("{{switcher}}", switcher)
+        for key, values in texts.items():
+            assert len(values) == len(LANGUAGES), key
+            assert "{{" + key + "}}" in page_template, "unused text: " + key
+            page = page.replace("{{" + key + "}}", values[index])
+        assert "{{" not in page, page[page.index("{{"):][:60]
+        os.makedirs(os.path.join(target, name), exist_ok=True)
+        io.open(os.path.join(target, name, "index.html"), "w", encoding="utf-8", newline="\n").write(page)
+        print("wrote", os.path.join("docs", folder, name, "index.html"))

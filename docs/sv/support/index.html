@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hjälp och support - Reiks Visare</title>
+<meta name="description" content="Hur du får hjälp med Reiks Visare och hur du rapporterar ett problem.">
+<link rel="icon" href="../../favicon.ico">
+<style>
+  :root { --bg: #0b0b0c; --line: #2a2a2e; --text: #f2f2f3; --soft: #a9a9b2; --panel: #151517; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f6f6f7; --line: #dcdce1; --text: #111113; --soft: #5d5d68; --panel: #ffffff; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+  a { color: inherit; text-underline-offset: 3px; }
+  .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-top: 14px; font-size: 14px; color: var(--soft); }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -1px; margin: 44px 0 10px; font-weight: 650; }
+  .intro { color: var(--soft); margin: 0 0 30px; }
+  h2 { font-size: 21px; margin: 30px 0 8px; font-weight: 650; }
+  p { margin: 0 0 12px; }
+  kbd {
+    font: 600 14px/1 "Segoe UI", system-ui, sans-serif; border: 1px solid var(--line); background: var(--panel);
+    border-bottom-width: 2px; border-radius: 6px; padding: 3px 7px; white-space: nowrap;
+  }
+  footer { padding: 30px 0 60px; color: var(--soft); font-size: 14px; border-top: 1px solid var(--line); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<nav class="wrap top">
+  <a href="../">&larr; Reiks Visare</a>
+  <span><a href="../../support/" hreflang="en" lang="en">English</a> &middot; <a href="../../es/support/" hreflang="es" lang="es">Español</a> &middot; <strong>Svenska</strong></span>
+</nav>
+
+<main class="wrap">
+  <h1>Hjälp och support</h1>
+  <p class="intro">Reiks Visare görs av Reiks Apps. Den här sidan svarar på vanliga frågor och berättar hur du når oss.</p>
+
+  <h2>Rapportera ett problem eller ställ en fråga</h2>
+  <p>Öppna ett ärende på <a href="https://github.com/reiks-apps/reiks-viewer/issues">GitHub</a>; du behöver ett gratis GitHub-konto. Skriv vilken version du använder (den visas i fönstret <kbd>F1</kbd>), vad du gjorde och vad som hände. Ärendena är offentliga, så bifoga inga privata bilder eller personuppgifter.</p>
+
+  <h2>En fil går inte att öppna</h2>
+  <p>Tryck på <kbd>F1</kbd> i Reiks Visare för att se alla format den öppnar. Om en viss fil går att öppna beror också på vad den innehåller: en skadad fil, eller en som gjorts med en ovanlig codec, kanske inte öppnas.</p>
+
+  <h2>Windows varnar när jag installerar</h2>
+  <p>Installationsprogrammet från GitHub är ännu inte digitalt signerat, så Windows kan visa &rdquo;Windows skyddade datorn&rdquo;: välj <em>Mer information</em> och sedan <em>Kör ändå</em>. Kopian från Microsoft Store visar inte den här varningen.</p>
+
+  <h2>Uppdateringar</h2>
+  <p>Microsoft Store installerar uppdateringarna för kopian från Store. För installationsprogrammet från GitHub öppnar &rdquo;Sök efter uppdateringar&rdquo; i fönstret <kbd>F1</kbd> nedladdningssidan; kör det nya installationsprogrammet över det gamla. Reiks Visare ansluter aldrig till internet på egen hand, så den säger inte till om uppdateringar.</p>
+
+  <h2>Säkerhetsproblem</h2>
+  <p>Rapportera inte ett säkerhetsproblem i ett offentligt ärende. <a href="https://github.com/reiks-apps/reiks-viewer/security/policy">Säkerhetspolicyn</a> beskriver hur du rapporterar det privat.</p>
+
+  <p>Vad Reiks Visare sparar och vad som går över nätverket: se <a href="../privacy/">integritetspolicyn</a>.</p>
+</main>
+
+<footer class="wrap">
+  <p>Reiks Visare tillhandahålls i befintligt skick, utan garanti.</p>
+</footer>
+
+</body>
+</html>
